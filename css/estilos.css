@@ -1,9 +1,10 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
 html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"Baloo 2","Comic Sans MS","Chalkboard SE",system-ui,sans-serif}
 :root{--W:100vw;--H:100vh}
-#app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
-/* teléfono vertical: el juego se gira por dentro (ver ajustarGiro en nucleo.js) */
-html.girado #app{inset:auto;left:50%;top:50%;width:var(--W);height:var(--H)}
+/* #app siempre mide lo mismo que la pantalla y recorta lo que sobresale: si algo se sale, iOS achica la página y queda con zoom */
+#app{position:fixed;inset:0;overflow:hidden;display:flex;align-items:center;justify-content:center}
+/* teléfono vertical: solo el escenario se gira, centrado (ver ajustarGiro en nucleo.js) */
+html.girado .stage{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(var(--giro,0deg))}
 .stage{container-type:size;position:relative;width:min(var(--W),calc(var(--H)*16/9));aspect-ratio:16/9;overflow:hidden;border-radius:14px;background:#ffe8b8}
 .screen{position:absolute;inset:0;display:none}
 .screen.on{display:block}
