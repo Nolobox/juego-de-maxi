@@ -1,6 +1,7 @@
 // Arranque: pantalla de inicio, service worker y modos de prueba.
-// Por ahora hay un solo minijuego; cuando haya más, ¡Jugar! abrirá un menú para elegir.
-$("play").onclick=()=>{ actx(); sfx.tap(); goFull(); precargarVoces(); musicaIniciar(); MINIJUEGOS[0].abrir() };
+// ¡Jugar! abre el menú de minijuegos (si hay uno solo, lo abre directo).
+$("play").onclick=()=>{ actx(); sfx.tap(); goFull(); precargarVoces(); musicaIniciar(); irAlMenu() };
+$("menuHome").onclick=()=>{ sfx.tap(); callar(); show("home") };
 
 if("serviceWorker" in navigator){ try{ navigator.serviceWorker.register("sw.js").catch(()=>{}) }catch(e){} }
 // modo prueba: ?debug muestra los escondites

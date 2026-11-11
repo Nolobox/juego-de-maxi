@@ -40,7 +40,7 @@ VARIANTES.nivel_ok=3; VARIANTES.no=3;
 WORLDS.slice(1).forEach(W=>FRASES[`abre_${W.id}`]=`¡Se abrió ${W.name}, ya podemos entrar a jugar!`);
 
 // ---------- mapa ----------
-$("mapHome").onclick=()=>{ sfx.tap(); show("home") };
+$("mapHome").onclick=()=>{ sfx.tap(); callar(); irAlMenu() };
 $("gameBack").onclick=()=>{ sfx.tap(); clearTimeout(hintT); cur=null; callar(); renderMap(); show("map") };
 
 function renderMap(){
@@ -185,8 +185,9 @@ function levelDone(){
 // precarga: juguetes, Gruñi y el primer escenario (los demás se precargan al jugar y se ven en el mapa)
 TOYS.forEach(t=>precargar(`assets/t_${t[0]}.png`)); precargar(PERSONAJES.gruni.recorte); precargar(WORLDS[0].bg);
 
+registrarFrases({ menu_juguetes:"¡Vamos a buscar los juguetes!" });
 registrarMinijuego({
-  id:"juguetes", nombre:"¿Dónde está el juguete?",
+  id:"juguetes", nombre:"¿Dónde está el juguete?", icono:PERSONAJES.maxi.img, iconoCubre:true, color:"#ffd166", frase:"menu_juguetes",
   abrir(){ say("intro"); renderMap(); show("map") },
   pausar(){ clearTimeout(hintT) },
   reanudar(){ if(cur&&$("game").classList.contains("on")) resetHint() },

@@ -14,11 +14,33 @@ function precargar(url){ if(precargado.has(url)) return; precargado.add(url);
 // ---------- minijuegos ----------
 // Cada minijuego es un archivo en js/minijuegos/ que llama a registrarMinijuego({...}):
 //   id, nombre, abrir()            -> obligatorio: muestra su primera pantalla
+//   icono, color, frase            -> su botón en el menú principal (imagen, color de fondo e id de voz al tocarlo)
+//   iconoCubre                     -> true si la imagen trae fondo propio y debe llenar el botón
 //   pausar(), reanudar()           -> opcional: al abrir/cerrar el rincón de los papás
 //   progresoCambio()               -> opcional: cuando los papás reinician o abren todo
 const MINIJUEGOS = [];
 function registrarMinijuego(m){ MINIJUEGOS.push(m) }
 function avisar(evento){ MINIJUEGOS.forEach(m=>{ try{ m[evento]&&m[evento]() }catch(e){ console.error(e) } }) }
+
+// Menú principal: un botón grande por minijuego. Al tocarlo dice su frase y lo abre.
+let menuTurno=0;
+function irAlMenu(){
+  if(MINIJUEGOS.length===1) return MINIJUEGOS[0].abrir();
+  const box=$("menuJuegos"); box.innerHTML="";
+  MINIJUEGOS.forEach((m,i)=>{
+    const b=document.createElement("button"); b.className="menu-j"+(m.iconoCubre?" cubre":""); b.style.setProperty("--c",m.color||"#fff");
+    b.style.animationDelay=(i*.4)+"s"; b.setAttribute("aria-label",m.nombre);
+    b.innerHTML=`<img src="${m.icono}" alt=""><span class="lbl">${m.nombre}</span>`;
+    b.onclick=async()=>{ const t=++menuTurno; sfx.pop(); b.classList.remove("toque"); void b.offsetWidth; b.classList.add("toque");
+      if(m.frase) await Promise.race([say(m.frase),espera(2500)]); if(t===menuTurno) m.abrir() };
+    box.appendChild(b);
+  });
+  show("menu");
+}
+
+// Pista por inactividad, compartida: crearPista(ms, mostrar) -> {reiniciar(), parar()}
+function crearPista(ms,mostrar){ let t=null;
+  return { reiniciar(){ clearTimeout(t); t=setTimeout(mostrar,ms) }, parar(){ clearTimeout(t) } } }
 
 function playVideo(src,done){
   const box=$("vid"), v=$("video"); v.src=src; box.classList.add("on"); v.currentTime=0; musicaPausa(true);

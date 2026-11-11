@@ -430,5 +430,14 @@
   "accuracy": 0.909,
   "heard": "Uy, Gruny cambió un juguete de lugar. ¿Viste dónde lo dejó?",
   "passed": true
+ },
+ {
+  "id": "menu_juguetes",
+  "text": "¡Vamos a buscar los juguetes!",
+  "file": "menu_juguetes.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "Vamos a buscar los juguetes.",
+  "passed": true
  }
 ]

@@ -46,5 +46,6 @@
   {"id": "abre_playa", "text": "¡Se abrió la playa, ya podemos entrar a jugar!"},
   {"id": "abre_taller", "text": "¡Se abrió el Taller de Bip, ya podemos entrar a jugar!"},
   {"id": "bloqueado", "text": "Primero vamos a terminar este otro mundo."},
-  {"id": "gruni_cambio", "text": "¡Uy! Gruñi cambió un juguete de lugar. ¿Viste dónde lo dejó?"}
+  {"id": "gruni_cambio", "text": "¡Uy! Gruñi cambió un juguete de lugar. ¿Viste dónde lo dejó?"},
+  {"id": "menu_juguetes", "text": "¡Vamos a buscar los juguetes!"}
 ]}

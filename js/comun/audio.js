@@ -19,6 +19,15 @@ const sfx = {
     g.gain.setValueAtTime(.2,a.currentTime); g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3); o.connect(g).connect(bus.sfx); o.start(); o.stop(a.currentTime+.3) },
   win(){ [523,659,784,1047].forEach((f,i)=>tone(f,.25,"triangle",i*.12)) },
   tap(){ tone(660,.08,"sine",0,.15) },
+  // "uy" suave y chistoso para un error: dos notas que bajan con vibrato
+  uy(){ const a=actx(); if(!a) return;
+    [[440,370],[349,277]].forEach(([f1,f2],i)=>{ const t=a.currentTime+i*.2, o=a.createOscillator(), g=a.createGain(), l=a.createOscillator(), lg=a.createGain();
+      o.type="triangle"; o.frequency.setValueAtTime(f1,t); o.frequency.exponentialRampToValueAtTime(f2,t+.18);
+      l.frequency.value=14; lg.gain.value=10; l.connect(lg).connect(o.frequency);
+      g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(.16,t+.02); g.gain.exponentialRampToValueAtTime(.0001,t+.22);
+      o.connect(g).connect(bus.sfx); o.start(t); l.start(t); o.stop(t+.24); l.stop(t+.24) }) },
+  // nota que sube con cada luz encendida (n = 1..5)
+  luz(n=1){ tone(440*Math.pow(2,(n*2)/12),.35,"sine",0,.18); tone(880*Math.pow(2,(n*2)/12),.25,"triangle",.05,.06) },
   // viento al volar Gruñi: ruido filtrado que sube y baja
   whoosh(ms=700){ const a=actx(); if(!a) return; const d=ms/1000, n=a.createBufferSource(), b=a.createBuffer(1,a.sampleRate*d,a.sampleRate), ch=b.getChannelData(0);
     for(let i=0;i<ch.length;i++) ch[i]=Math.random()*2-1; n.buffer=b;

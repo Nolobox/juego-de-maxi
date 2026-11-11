@@ -16,5 +16,356 @@
   "accuracy": 1.0,
   "heard": "¡Jijiji! ¡Jijiji! ¡Qué divertido!",
   "passed": true
+ },
+ {
+  "id": "col_pide1_rojo",
+  "text": "¿Me ayudas a encender mi antena? ¡Busca algo rojo!",
+  "file": "col_pide1_rojo.mp3",
+  "seconds": 3.04,
+  "accuracy": 1.0,
+  "heard": "¿Me ayudas a encender mi antena? Busca algo rojo.",
+  "passed": true
+ },
+ {
+  "id": "col_pide1_azul",
+  "text": "¿Me ayudas a encender mi antena? ¡Busca algo azul!",
+  "file": "col_pide1_azul.mp3",
+  "seconds": 2.88,
+  "accuracy": 1.0,
+  "heard": "¿Me ayudas a encender mi antena? Busca algo azul.",
+  "passed": true
+ },
+ {
+  "id": "col_pide1_amarillo",
+  "text": "¿Me ayudas a encender mi antena? ¡Busca algo amarillo!",
+  "file": "col_pide1_amarillo.mp3",
+  "seconds": 3.28,
+  "accuracy": 1.0,
+  "heard": "¿Me ayudas a encender mi antena? Busca algo amarillo.",
+  "passed": true
+ },
+ {
+  "id": "col_pide1_verde",
+  "text": "¿Me ayudas a encender mi antena? ¡Busca algo verde!",
+  "file": "col_pide1_verde.mp3",
+  "seconds": 3.04,
+  "accuracy": 1.0,
+  "heard": "Me ayudas a encender mi antena. Busca algo verde.",
+  "passed": true
+ },
+ {
+  "id": "col_pide_rojo",
+  "text": "¡Ahora busca algo rojo!",
+  "file": "col_pide_rojo.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Ahora busca algo rojo.",
+  "passed": true
+ },
+ {
+  "id": "col_pide_azul",
+  "text": "¡Ahora busca algo azul!",
+  "file": "col_pide_azul.mp3",
+  "seconds": 1.28,
+  "accuracy": 1.0,
+  "heard": "Ahora busca algo azul.",
+  "passed": true
+ },
+ {
+  "id": "col_pide_amarillo",
+  "text": "¡Ahora busca algo amarillo!",
+  "file": "col_pide_amarillo.mp3",
+  "seconds": 1.36,
+  "accuracy": 1.0,
+  "heard": "Ahora busca algo amarillo.",
+  "passed": true
+ },
+ {
+  "id": "col_pide_verde",
+  "text": "¡Ahora busca algo verde!",
+  "file": "col_pide_verde.mp3",
+  "seconds": 1.28,
+  "accuracy": 1.0,
+  "heard": "Ahora busca algo verde.",
+  "passed": true
+ },
+ {
+  "id": "col_si_manzana",
+  "text": "¡Sí, la manzana es roja!",
+  "file": "col_si_manzana.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Sí, la manzana es roja.",
+  "passed": true
+ },
+ {
+  "id": "col_si_frutilla",
+  "text": "¡Sí, la frutilla es roja!",
+  "file": "col_si_frutilla.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Sí, la frutilla es roja.",
+  "passed": true
+ },
+ {
+  "id": "col_si_carro",
+  "text": "¡Sí, el carro de bomberos es rojo!",
+  "file": "col_si_carro.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "Sí, el carro de bomberos es rojo.",
+  "passed": true
+ },
+ {
+  "id": "col_si_corazon",
+  "text": "¡Sí, el corazón es rojo!",
+  "file": "col_si_corazon.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "¡Sí! ¡El corazón es rojo!",
+  "passed": true
+ },
+ {
+  "id": "col_si_pez",
+  "text": "¡Sí, el pez es azul!",
+  "file": "col_si_pez.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Sí, el pez es azul.",
+  "passed": true
+ },
+ {
+  "id": "col_si_gorro",
+  "text": "¡Sí, el gorro es azul!",
+  "file": "col_si_gorro.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "Sí, el gorro es azul.",
+  "passed": true
+ },
+ {
+  "id": "col_si_camion",
+  "text": "¡Sí, el camión es azul!",
+  "file": "col_si_camion.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "¡Sí! ¡El camión es azul!",
+  "passed": true
+ },
+ {
+  "id": "col_si_boton",
+  "text": "¡Sí, el botón es azul!",
+  "file": "col_si_boton.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Sí, el botón es azul.",
+  "passed": true
+ },
+ {
+  "id": "col_si_platano",
+  "text": "¡Sí, el plátano es amarillo!",
+  "file": "col_si_platano.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "Sí, el plátano es amarillo.",
+  "passed": true
+ },
+ {
+  "id": "col_si_sol",
+  "text": "¡Sí, el sol es amarillo!",
+  "file": "col_si_sol.mp3",
+  "seconds": 2.32,
+  "accuracy": 1.0,
+  "heard": "Sí, el sol es amarillo.",
+  "passed": true
+ },
+ {
+  "id": "col_si_pollito",
+  "text": "¡Sí, el pollito es amarillo!",
+  "file": "col_si_pollito.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "Sí, el pollito es amarillo.",
+  "passed": true
+ },
+ {
+  "id": "col_si_estrella",
+  "text": "¡Sí, la estrella es amarilla!",
+  "file": "col_si_estrella.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "Sí, la estrella es amarilla.",
+  "passed": true
+ },
+ {
+  "id": "col_si_hoja",
+  "text": "¡Sí, la hoja es verde!",
+  "file": "col_si_hoja.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Sí, la hoja es verde.",
+  "passed": true
+ },
+ {
+  "id": "col_si_rana",
+  "text": "¡Sí, la rana es verde!",
+  "file": "col_si_rana.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Sí, la rana es verde.",
+  "passed": true
+ },
+ {
+  "id": "col_si_pera",
+  "text": "¡Sí, la pera es verde!",
+  "file": "col_si_pera.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Sí, la pera es verde.",
+  "passed": true
+ },
+ {
+  "id": "col_si_tortuga",
+  "text": "¡Sí, la tortuga es verde!",
+  "file": "col_si_tortuga.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Sí, la tortuga es verde.",
+  "passed": true
+ },
+ {
+  "id": "col_no_rojo_azul",
+  "text": "Mmm, ese es rojo. ¡Busca el azul!",
+  "file": "col_no_rojo_azul.mp3",
+  "seconds": 2.88,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es rojo. Busca el azul.",
+  "passed": true
+ },
+ {
+  "id": "col_no_rojo_amarillo",
+  "text": "Mmm, ese es rojo. ¡Busca el amarillo!",
+  "file": "col_no_rojo_amarillo.mp3",
+  "seconds": 3.36,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es rojo. Busca el amarillo.",
+  "passed": true
+ },
+ {
+  "id": "col_no_rojo_verde",
+  "text": "Mmm, ese es rojo. ¡Busca el verde!",
+  "file": "col_no_rojo_verde.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es rojo. Busca el verde.",
+  "passed": true
+ },
+ {
+  "id": "col_no_azul_rojo",
+  "text": "Mmm, ese es azul. ¡Busca el rojo!",
+  "file": "col_no_azul_rojo.mp3",
+  "seconds": 2.8,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es azul. Busca el rojo.",
+  "passed": true
+ },
+ {
+  "id": "col_no_azul_amarillo",
+  "text": "Mmm, ese es azul. ¡Busca el amarillo!",
+  "file": "col_no_azul_amarillo.mp3",
+  "seconds": 3.52,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es azul. Busca el amarillo.",
+  "passed": true
+ },
+ {
+  "id": "col_no_azul_verde",
+  "text": "Mmm, ese es azul. ¡Busca el verde!",
+  "file": "col_no_azul_verde.mp3",
+  "seconds": 2.64,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es azul. Busca el verde.",
+  "passed": true
+ },
+ {
+  "id": "col_no_amarillo_rojo",
+  "text": "Mmm, ese es amarillo. ¡Busca el rojo!",
+  "file": "col_no_amarillo_rojo.mp3",
+  "seconds": 2.8,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es amarillo. Busca el rojo.",
+  "passed": true
+ },
+ {
+  "id": "col_no_amarillo_azul",
+  "text": "Mmm, ese es amarillo. ¡Busca el azul!",
+  "file": "col_no_amarillo_azul.mp3",
+  "seconds": 3.44,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es amarillo. Busca el azul.",
+  "passed": true
+ },
+ {
+  "id": "col_no_amarillo_verde",
+  "text": "Mmm, ese es amarillo. ¡Busca el verde!",
+  "file": "col_no_amarillo_verde.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es amarillo. Busca el verde.",
+  "passed": true
+ },
+ {
+  "id": "col_no_verde_rojo",
+  "text": "Mmm, ese es verde. ¡Busca el rojo!",
+  "file": "col_no_verde_rojo.mp3",
+  "seconds": 2.64,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es verde. Busca el rojo.",
+  "passed": true
+ },
+ {
+  "id": "col_no_verde_azul",
+  "text": "Mmm, ese es verde. ¡Busca el azul!",
+  "file": "col_no_verde_azul.mp3",
+  "seconds": 2.8,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es verde. Busca el azul.",
+  "passed": true
+ },
+ {
+  "id": "col_no_verde_amarillo",
+  "text": "Mmm, ese es verde. ¡Busca el amarillo!",
+  "file": "col_no_verde_amarillo.mp3",
+  "seconds": 3.04,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese es verde. Busca el amarillo.",
+  "passed": true
+ },
+ {
+  "id": "col_pista",
+  "text": "¡Mira, algo brilla!",
+  "file": "col_pista.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Mira, algo brilla.",
+  "passed": true
+ },
+ {
+  "id": "col_final",
+  "text": "¡Mi antena está encendida! ¡Gracias, amigo!",
+  "file": "col_final.mp3",
+  "seconds": 2.88,
+  "accuracy": 1.0,
+  "heard": "Mi antena está encendida. ¡Gracias, amigo!",
+  "passed": true
+ },
+ {
+  "id": "menu_colores",
+  "text": "¡Vamos a jugar con los colores!",
+  "file": "menu_colores.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Vamos a jugar con los colores.",
+  "passed": true
  }
 ]

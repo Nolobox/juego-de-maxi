@@ -1,7 +1,7 @@
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
 html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"Baloo 2","Comic Sans MS","Chalkboard SE",system-ui,sans-serif}
 #app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
-.stage{position:relative;width:min(100vw,calc(100vh*16/9));aspect-ratio:16/9;overflow:hidden;border-radius:clamp(0px,1.5vw,18px);background:#ffe8b8}
+.stage{container-type:size;position:relative;width:min(100vw,calc(100vh*16/9));aspect-ratio:16/9;overflow:hidden;border-radius:clamp(0px,1.5vw,18px);background:#ffe8b8}
 .screen{position:absolute;inset:0;display:none}
 .screen.on{display:block}
 .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -68,3 +68,38 @@ html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"B
 #papas .pie{display:flex;justify-content:flex-end;margin-top:2vw}
 #rotate{display:none;position:fixed;inset:0;background:#ffc971;color:#4a3a7a;font-size:6vw;font-weight:800;align-items:center;justify-content:center;text-align:center;z-index:99;padding:5vw}
 @media (orientation:portrait) and (max-width:900px){#rotate{display:flex}}
+
+/* ---------- menú principal ---------- */
+/* cqw = 1 % del ancho del escenario (no de la ventana) */
+#menu{background:linear-gradient(#bfe8ff,#fff1c9)}
+.menu-juegos{position:absolute;top:13%;bottom:9%;left:7%;right:7%;display:flex;gap:5cqw;justify-content:center;align-items:stretch}
+.menu-j{flex:1;max-width:40cqw;position:relative;border:.7cqw solid #fff;border-radius:3cqw;background:var(--c);box-shadow:0 .8cqw 0 rgba(0,0,0,.15);
+  padding:0;overflow:hidden;cursor:pointer;font-family:inherit;animation:bob 2.6s ease-in-out infinite}
+.menu-j img{position:absolute;inset:0 0 16% 0;width:100%;height:84%;object-fit:contain}
+.menu-j.cubre img{object-fit:cover}
+.menu-j .lbl{position:absolute;left:0;right:0;bottom:0;padding:1cqw .5cqw;background:rgba(255,255,255,.9);font-size:2.3cqw;font-weight:800;color:#4a3a7a}
+.menu-j.toque{animation:salto .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes salto{40%{transform:translateY(-6%) scale(1.04)}}
+
+/* ---------- Los colores de Bip ---------- */
+#colores{background:radial-gradient(circle at 24% 45%,#fff8e1 0,#ffe3a8 45%,#ffc97a 100%)}
+.col-bip{position:absolute;left:3%;bottom:6%;width:33%;aspect-ratio:720/625;animation:bob 2.8s ease-in-out infinite}
+.col-bip img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 1.2cqw 1cqw rgba(80,40,0,.25))}
+.col-bip.contento{animation:salto .6s cubic-bezier(.3,1.6,.5,1)}
+/* brillo de la antena: crece con cada acierto (--nivel de 0 a 1) */
+.col-brillo{position:absolute;width:11cqw;height:11cqw;margin:-5.5cqw 0 0 -5.5cqw;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(255,236,120,1) 0,rgba(255,210,60,.75) 25%,rgba(255,200,40,0) 70%);
+  opacity:var(--nivel,0);transform:scale(calc(.5 + var(--nivel,0)*.7));transition:opacity .5s,transform .5s}
+.col-luces{position:absolute;left:11%;top:4%;display:flex;gap:1.3cqw;padding:1cqw 1.6cqw;background:rgba(255,255,255,.7);border-radius:4cqw;z-index:3}
+.col-luz{width:4.2cqw;height:4.2cqw;border-radius:50%;background:#c9c3d6;box-shadow:inset 0 -.4cqw 0 rgba(0,0,0,.15)}
+.col-luz.on{background:radial-gradient(circle at 40% 35%,#fffbe0,#ffd23f 55%,#ffad1f);box-shadow:0 0 2cqw .6cqw rgba(255,214,60,.8);animation:pop .5s}
+.col-opciones{position:absolute;left:39%;right:3%;top:16%;bottom:10%;display:flex;gap:2.2cqw;align-items:center}
+.col-op{flex:1;height:82%;border:none;border-radius:3cqw;background:rgba(255,255,255,.75);box-shadow:0 .7cqw 0 rgba(120,70,0,.18);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0;animation:entra .45s cubic-bezier(.3,1.6,.5,1) backwards}
+.col-op img{width:84%;height:84%;object-fit:contain;pointer-events:none}
+.col-op:nth-child(2){animation-delay:.12s}.col-op:nth-child(3){animation-delay:.24s}
+.col-op.salta{animation:salto .6s cubic-bezier(.3,1.6,.5,1)}
+.col-op.sacude{animation:shake .45s}
+.col-op.brilla{animation:glow 1.2s ease-in-out infinite}
+.col-op.listo{opacity:.35;transition:opacity .3s}
+@keyframes entra{from{transform:scale(0)}}
