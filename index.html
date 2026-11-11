@@ -120,32 +120,83 @@ const stars = id => prog[id]||0;           // niveles completados 0..3
 const unlocked = i => i===0 || stars(WORLDS[i-1].id)>=3;
 
 // ---------- audio ----------
-let ac;
-function actx(){ if(!ac){ try{ ac=new (window.AudioContext||window.webkitAudioContext)() }catch(e){} } if(ac&&ac.state==="suspended") ac.resume(); return ac }
+// Todo pasa por tres canales (efectos, voz, música) que terminan en un volumen general.
+let ac, bus={};
+function actx(){
+  if(!ac){ try{ ac=new (window.AudioContext||window.webkitAudioContext)();
+    bus.master=ac.createGain(); bus.master.connect(ac.destination);
+    ["sfx","voz","musica"].forEach(k=>{ bus[k]=ac.createGain(); bus[k].connect(bus.master) });
+  }catch(e){} }
+  if(ac&&ac.state==="suspended") ac.resume(); return ac }
 function tone(f,t=0.15,type="sine",delay=0,vol=.25){ const a=actx(); if(!a) return;
   const o=a.createOscillator(), g=a.createGain(); o.type=type; o.frequency.value=f;
   const s=a.currentTime+delay; g.gain.setValueAtTime(vol,s); g.gain.exponentialRampToValueAtTime(.001,s+t);
-  o.connect(g).connect(a.destination); o.start(s); o.stop(s+t) }
+  o.connect(g).connect(bus.sfx); o.start(s); o.stop(s+t) }
 const sfx = {
   pop(){ tone(520,.12,"triangle"); tone(880,.18,"triangle",.08) },
   boing(){ const a=actx(); if(!a) return; const o=a.createOscillator(),g=a.createGain(); o.type="sine";
     o.frequency.setValueAtTime(300,a.currentTime); o.frequency.exponentialRampToValueAtTime(120,a.currentTime+.25);
-    g.gain.setValueAtTime(.2,a.currentTime); g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3); o.connect(g).connect(a.destination); o.start(); o.stop(a.currentTime+.3) },
+    g.gain.setValueAtTime(.2,a.currentTime); g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3); o.connect(g).connect(bus.sfx); o.start(); o.stop(a.currentTime+.3) },
   win(){ [523,659,784,1047].forEach((f,i)=>tone(f,.25,"triangle",i*.12)) },
   tap(){ tone(660,.08,"sine",0,.15) }
 };
-let voice=null;
-function pickVoice(){ const v=speechSynthesis.getVoices(); voice = v.find(x=>/es[-_](CL|419|MX|US)/i.test(x.lang)) || v.find(x=>/^es/i.test(x.lang)) || null }
+
+// ---------- voz ----------
+// Cada frase tiene un id = nombre del archivo en assets/voz/<id>.mp3 (generados con tools/generar_voces.py).
+// Si el archivo no existe o no carga, se usa la voz del sistema con este texto.
+const FRASES = {
+  intro:"¡Gruñi escondió los juguetes! ¿Me ayudas a encontrarlos?",
+  nivel_tres:"¡Busca los tres juguetes que escondió Gruñi!",
+  nivel_cuatro:"¡Ahora son cuatro los juguetes escondidos!",
+  nivel_cinco:"¡Ahora son cinco los juguetes escondidos!",
+  no_1:"Aquí no está.", no_2:"Mmm, aquí no hay nada.", no_3:"¡Busca en otro sitio!",
+  pista:"¡Mira, algo brilla!",
+  nivel_ok_1:"¡Muy bien! ¡Lo lograste!", nivel_ok_2:"¡Qué bien buscas! ¡Los encontraste todos!", nivel_ok_3:"¡Bravo! ¡Eres un gran buscador!",
+  mundo_ok:"¡Encontraste todos los juguetes! ¡Gruñi está feliz!",
+  bloqueado:"Primero vamos a terminar este otro mundo.",
+  bip_hola:"¡Bip bip! ¡Hola, amigo!",
+};
+// frases generadas: un juguete encontrado (3 variantes) y mundo desbloqueado
+const VARIANTES = {};
+function addVar(base,textos){ VARIANTES[base]=textos.length; textos.forEach((t,i)=>FRASES[`${base}_${i+1}`]=t) }
+TOYS.forEach(([k,n])=>addVar(`enc_${k}`,[`¡Encontraste ${n}!`,`¡Muy bien, ahí estaba ${n}!`,`¡Bravo, apareció ${n}!`]));
+VARIANTES.nivel_ok=3; VARIANTES.no=3;
+WORLDS.slice(1).forEach(W=>FRASES[`abre_${W.id}`]=`¡Se abrió ${W.name}, ya podemos entrar a jugar!`);
+
+const vozBuf={}, vozCarga={};
+let vozSrc=null;
+function cargarVoz(id){
+  if(vozBuf[id]) return Promise.resolve(vozBuf[id]);
+  if(!vozCarga[id]) vozCarga[id]=fetch(`assets/voz/${id}.mp3`).then(r=>{ if(!r.ok) throw 0; return r.arrayBuffer() })
+    .then(b=>new Promise((ok,ko)=>actx().decodeAudioData(b,ok,ko))).then(buf=>vozBuf[id]=buf)
+    .catch(()=>{ vozBuf[id]=null; return null });
+  return vozCarga[id];
+}
+let sysVoice=null;
+function pickVoice(){ const v=speechSynthesis.getVoices(); sysVoice = v.find(x=>/es[-_](CL|419|MX|US)/i.test(x.lang)) || v.find(x=>/^es/i.test(x.lang)) || null }
 if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice }
-function say(txt){ if(!("speechSynthesis" in window)) return; speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(txt); u.lang=voice?voice.lang:"es-ES"; if(voice) u.voice=voice; u.rate=.95; u.pitch=1.25; speechSynthesis.speak(u) }
+function callar(){ if(vozSrc){ try{ vozSrc.stop() }catch(e){} vozSrc=null } if("speechSynthesis" in window) speechSynthesis.cancel() }
+function vozSistema(txt){ if(!txt||!("speechSynthesis" in window)) return;
+  const u=new SpeechSynthesisUtterance(txt); u.lang=sysVoice?sysVoice.lang:"es-ES"; if(sysVoice) u.voice=sysVoice; u.rate=.95; u.pitch=1.25; speechSynthesis.speak(u) }
+// say("pista") dice una frase; si el id tiene variantes (say("enc_pelota")) elige una al azar.
+let vozTurno=0;
+function say(id){
+  if(VARIANTES[id]) id=`${id}_${1+(Math.random()*VARIANTES[id]|0)}`;
+  const txt=FRASES[id]; const turno=++vozTurno; callar();
+  const a=actx();
+  if(!a){ vozSistema(txt); return }
+  cargarVoz(id).then(buf=>{ if(turno!==vozTurno) return;      // ya se pidió otra frase
+    if(!buf){ vozSistema(txt); return }
+    const s=a.createBufferSource(); s.buffer=buf; s.connect(bus.voz); s.start(); vozSrc=s });
+}
+function precargarVoces(){ Object.keys(FRASES).forEach(cargarVoz) }
 
 // ---------- pantallas ----------
 const $=id=>document.getElementById(id);
 function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id)) }
 function goFull(){ const d=document.documentElement; try{ (d.requestFullscreen||d.webkitRequestFullscreen||(()=>{})).call(d) }catch(e){} }
 
-$("play").onclick=()=>{ actx(); sfx.tap(); goFull(); say("¡Gruñi escondió los juguetes! ¿Me ayudas a encontrarlos?"); renderMap(); show("map") };
+$("play").onclick=()=>{ actx(); sfx.tap(); goFull(); precargarVoces(); say("intro"); renderMap(); show("map") };
 $("mapHome").onclick=()=>{ sfx.tap(); show("home") };
 $("gameBack").onclick=()=>{ sfx.tap(); clearTimeout(hintT); renderMap(); show("map") };
 
@@ -155,13 +206,13 @@ function renderMap(){
     const d=document.createElement("div"); d.className="world"+(unlocked(i)?"":" locked");
     const s=stars(W.id);
     d.innerHTML=`<img src="${W.bg}" alt=""><div class="stars">${"⭐".repeat(s)}${"☆".repeat(3-s)}</div><div class="lbl">${W.name}</div>`;
-    d.onclick=()=>{ if(!unlocked(i)){ sfx.boing(); say("Primero termina el mundo anterior"); return }
+    d.onclick=()=>{ if(!unlocked(i)){ sfx.boing(); say("bloqueado"); return }
       sfx.tap(); startWorld(i, s>=3?0:s) };
     w.appendChild(d);
   });
   const m=document.createElement("div"); m.className="world mascot";
   m.innerHTML=`<img src="assets/p_bip.webp" alt="" style="object-fit:cover">`;
-  m.onclick=()=>{ sfx.pop(); say("¡Bip bip! ¡Hola!") };
+  m.onclick=()=>{ sfx.pop(); say("bip_hola") };
   w.appendChild(m);
 }
 
@@ -186,12 +237,12 @@ function startWorld(wi, level){
   if(level>0){ const g=document.createElement("img"); g.src="assets/c_gruni.png"; g.className="gruni";
     g.style.cssText+=`left:${10+Math.random()*70}%;top:4%`; sp.appendChild(g) }
   show("game"); resetHint();
-  setTimeout(()=>say(n===3?`Busca ${n} juguetes`:`¡Ahora hay ${n} juguetes escondidos!`),300);
+  setTimeout(()=>say(["nivel_tres","nivel_cuatro","nivel_cinco"][level]),300);
 }
 
 function resetHint(){ clearTimeout(hintT); document.querySelectorAll(".spot.hint").forEach(s=>s.classList.remove("hint"));
   hintT=setTimeout(()=>{ if(!cur) return; const k=Object.keys(cur.hidden)[0]; if(k===undefined) return;
-    $("spots").children[k].classList.add("hint"); say("¡Mira, algo brilla!") }, 12000) }
+    $("spots").children[k].classList.add("hint"); say("pista") }, 12000) }
 
 function puff(x,y,ch){ const p=document.createElement("div"); p.className="puff"; p.textContent=ch;
   p.style.left=x+"%"; p.style.top=y+"%"; $("game").appendChild(p); setTimeout(()=>p.remove(),900) }
@@ -202,14 +253,14 @@ function tapSpot(i,el){
   const r=WORLDS[cur.wi].spots[i], cx=r[0]+r[2]/2, cy=r[1]+r[3]/2;
   const t=cur.hidden[i];
   if(!t){ sfx.boing(); puff(cx-2,cy-4,["💨","🍃","✨"][Math.random()*3|0]);
-    if(Math.random()<.4) say(["Aquí no está","Mmm, aquí no","¡Busca en otro lado!"][Math.random()*3|0]); return }
+    if(Math.random()<.4) say("no"); return }
   delete cur.hidden[i]; cur.busy=true; resetHint(); el.classList.remove("hint");
   sfx.pop(); puff(cx-2,cy-6,"⭐");
   const toy=document.createElement("img"); toy.src=`assets/t_${t[0]}.png`; toy.className="toy";
   toy.style.left=(cx-5.5)+"%"; toy.style.top=(cy-8)+"%"; $("game").appendChild(toy);
   const slot=[...$("tray").children].find(s=>s.dataset.t===t[0]);
   toy.animate([{transform:"translateY(40%) scale(0)"},{transform:"translateY(-60%) scale(1.25)",offset:.6},{transform:"translateY(-40%) scale(1)"}],{duration:650,easing:"cubic-bezier(.3,1.6,.5,1)",fill:"forwards"});
-  say(`¡Encontraste ${t[1]}!`);
+  say(`enc_${t[0]}`);
   setTimeout(()=>{
     const st=$("stage").getBoundingClientRect(), a=toy.getBoundingClientRect(), b=slot.getBoundingClientRect();
     const dx=b.left+b.width/2-(a.left+a.width/2), dy=b.top+b.height/2-(a.top+a.height/2);
@@ -225,11 +276,11 @@ function levelDone(){
   sfx.win(); confetti();
   const worldDone = lv===2;
   setTimeout(()=>{
-    say(worldDone?"¡Encontraste todos los juguetes! ¡Gruñi está feliz!":"¡Muy bien! ¡Lo lograste!");
+    say(worldDone?"mundo_ok":"nivel_ok");
     const v = worldDone?"assets/v_gruni.mp4": (lv===0?"assets/v_maxi.mp4":"assets/v_rex.mp4");
     setTimeout(()=>playVideo(v,()=>{
       if(worldDone){ renderMap(); show("map");
-        const nxt=WORLDS[cur.wi+1]; if(nxt) setTimeout(()=>say(`¡Se abrió ${nxt.name}!`),400) }
+        const nxt=WORLDS[cur.wi+1]; if(nxt) setTimeout(()=>say(`abre_${nxt.id}`),400) }
       else startWorld(cur.wi,lv+1) }),1600);
   },500);
 }
