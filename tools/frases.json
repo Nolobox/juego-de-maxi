@@ -3,12 +3,10 @@
   {"id": "nivel_tres", "text": "¡Busca los tres juguetes que escondió Gruñi!"},
   {"id": "nivel_cuatro", "text": "¡Ahora son cuatro los juguetes escondidos!"},
   {"id": "nivel_cinco", "text": "¡Ahora son cinco los juguetes escondidos!"},
-
   {"id": "no_1", "text": "Aquí no está."},
   {"id": "no_2", "text": "Mmm, aquí no hay nada."},
   {"id": "no_3", "text": "¡Busca en otro sitio!"},
   {"id": "pista", "text": "¡Mira, algo brilla!"},
-
   {"id": "enc_pelota_1", "text": "¡Encontraste la pelota!"},
   {"id": "enc_pelota_2", "text": "¡Muy bien, ahí estaba la pelota!"},
   {"id": "enc_pelota_3", "text": "¡Bravo, apareció la pelota!"},
@@ -39,15 +37,14 @@
   {"id": "enc_globo_1", "text": "¡Encontraste el globo!"},
   {"id": "enc_globo_2", "text": "¡Muy bien, ahí estaba el globo!"},
   {"id": "enc_globo_3", "text": "¡Bravo, apareció el globo!"},
-
   {"id": "nivel_ok_1", "text": "¡Muy bien! ¡Lo lograste!"},
   {"id": "nivel_ok_2", "text": "¡Qué bien buscas! ¡Los encontraste todos!"},
   {"id": "nivel_ok_3", "text": "¡Bravo! ¡Eres un gran buscador!"},
   {"id": "mundo_ok", "text": "¡Encontraste todos los juguetes! ¡Gruñi está feliz!"},
-
   {"id": "abre_parque", "text": "¡Se abrió el parque, ya podemos entrar a jugar!"},
   {"id": "abre_valle", "text": "¡Se abrió el Valle de Rex, ya podemos entrar a jugar!"},
   {"id": "abre_playa", "text": "¡Se abrió la playa, ya podemos entrar a jugar!"},
   {"id": "abre_taller", "text": "¡Se abrió el Taller de Bip, ya podemos entrar a jugar!"},
-  {"id": "bloqueado", "text": "Primero vamos a terminar este otro mundo."}
+  {"id": "bloqueado", "text": "Primero vamos a terminar este otro mundo."},
+  {"id": "gruni_cambio", "text": "¡Uy! Gruñi cambió un juguete de lugar. ¿Viste dónde lo dejó?"}
 ]}

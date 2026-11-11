@@ -138,7 +138,14 @@ const sfx = {
     o.frequency.setValueAtTime(300,a.currentTime); o.frequency.exponentialRampToValueAtTime(120,a.currentTime+.25);
     g.gain.setValueAtTime(.2,a.currentTime); g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3); o.connect(g).connect(bus.sfx); o.start(); o.stop(a.currentTime+.3) },
   win(){ [523,659,784,1047].forEach((f,i)=>tone(f,.25,"triangle",i*.12)) },
-  tap(){ tone(660,.08,"sine",0,.15) }
+  tap(){ tone(660,.08,"sine",0,.15) },
+  // viento al volar Gruñi: ruido filtrado que sube y baja
+  whoosh(ms=700){ const a=actx(); if(!a) return; const d=ms/1000, n=a.createBufferSource(), b=a.createBuffer(1,a.sampleRate*d,a.sampleRate), ch=b.getChannelData(0);
+    for(let i=0;i<ch.length;i++) ch[i]=Math.random()*2-1; n.buffer=b;
+    const f=a.createBiquadFilter(); f.type="bandpass"; f.Q.value=1.2; const t=a.currentTime;
+    f.frequency.setValueAtTime(300,t); f.frequency.exponentialRampToValueAtTime(1400,t+d*.5); f.frequency.exponentialRampToValueAtTime(400,t+d);
+    const g=a.createGain(); g.gain.setValueAtTime(.001,t); g.gain.exponentialRampToValueAtTime(.18,t+d*.4); g.gain.exponentialRampToValueAtTime(.001,t+d);
+    n.connect(f).connect(g).connect(bus.sfx); n.start(t); n.stop(t+d) }
 };
 
 // ---------- voz ----------
@@ -155,7 +162,11 @@ const FRASES = {
   mundo_ok:"¡Encontraste todos los juguetes! ¡Gruñi está feliz!",
   bloqueado:"Primero vamos a terminar este otro mundo.",
   bip_hola:"¡Bip bip! ¡Hola, amigo!",
+  gruni_risa:"¡Jijijí! ¡Jijijí! ¡Qué divertido!",
+  gruni_cambio:"¡Uy! Gruñi cambió un juguete de lugar. ¿Viste dónde lo dejó?",
 };
+// Velocidad por frase (1 = normal). Gruñi y Bip usan la misma voz; a Gruñi la subimos un poco para distinguirlo.
+const VELOCIDAD = { gruni_risa:1.12 };
 // frases generadas: un juguete encontrado (3 variantes) y mundo desbloqueado
 const VARIANTES = {};
 function addVar(base,textos){ VARIANTES[base]=textos.length; textos.forEach((t,i)=>FRASES[`${base}_${i+1}`]=t) }
@@ -176,19 +187,22 @@ let sysVoice=null;
 function pickVoice(){ const v=speechSynthesis.getVoices(); sysVoice = v.find(x=>/es[-_](CL|419|MX|US)/i.test(x.lang)) || v.find(x=>/^es/i.test(x.lang)) || null }
 if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice }
 function callar(){ if(vozSrc){ try{ vozSrc.stop() }catch(e){} vozSrc=null } if("speechSynthesis" in window) speechSynthesis.cancel() }
-function vozSistema(txt){ if(!txt||!("speechSynthesis" in window)) return;
-  const u=new SpeechSynthesisUtterance(txt); u.lang=sysVoice?sysVoice.lang:"es-ES"; if(sysVoice) u.voice=sysVoice; u.rate=.95; u.pitch=1.25; speechSynthesis.speak(u) }
+function vozSistema(txt,fin){ if(!txt||!("speechSynthesis" in window)) return fin();
+  const u=new SpeechSynthesisUtterance(txt); u.lang=sysVoice?sysVoice.lang:"es-ES"; if(sysVoice) u.voice=sysVoice; u.rate=.95; u.pitch=1.25;
+  u.onend=u.onerror=()=>fin(); speechSynthesis.speak(u) }
 // say("pista") dice una frase; si el id tiene variantes (say("enc_pelota")) elige una al azar.
+// Devuelve una promesa que se cumple cuando termina de hablar (o si otra frase la interrumpe).
 let vozTurno=0;
-function say(id){
+function say(id){ return new Promise(fin=>{
   if(VARIANTES[id]) id=`${id}_${1+(Math.random()*VARIANTES[id]|0)}`;
   const txt=FRASES[id]; const turno=++vozTurno; callar();
   const a=actx();
-  if(!a){ vozSistema(txt); return }
-  cargarVoz(id).then(buf=>{ if(turno!==vozTurno) return;      // ya se pidió otra frase
-    if(!buf){ vozSistema(txt); return }
-    const s=a.createBufferSource(); s.buffer=buf; s.connect(bus.voz); s.start(); vozSrc=s });
-}
+  if(!a) return vozSistema(txt,fin);
+  cargarVoz(id).then(buf=>{ if(turno!==vozTurno) return fin();      // ya se pidió otra frase
+    if(!buf) return vozSistema(txt,fin);
+    const s=a.createBufferSource(); s.buffer=buf; s.playbackRate.value=VELOCIDAD[id]||1;
+    s.connect(bus.voz); s.onended=()=>fin(); s.start(); vozSrc=s });
+}) }
 function precargarVoces(){ Object.keys(FRASES).forEach(cargarVoz) }
 
 // ---------- pantallas ----------
@@ -198,7 +212,7 @@ function goFull(){ const d=document.documentElement; try{ (d.requestFullscreen||
 
 $("play").onclick=()=>{ actx(); sfx.tap(); goFull(); precargarVoces(); say("intro"); renderMap(); show("map") };
 $("mapHome").onclick=()=>{ sfx.tap(); show("home") };
-$("gameBack").onclick=()=>{ sfx.tap(); clearTimeout(hintT); renderMap(); show("map") };
+$("gameBack").onclick=()=>{ sfx.tap(); clearTimeout(hintT); cur=null; callar(); renderMap(); show("map") };
 
 function renderMap(){
   const w=$("worlds"); w.innerHTML="";
@@ -225,7 +239,7 @@ function startWorld(wi, level){
   const toys=shuffle(TOYS).slice(0,n);
   const spotIdx=shuffle(W.spots.map((_,i)=>i));
   const hidden={}; toys.forEach((t,k)=>hidden[spotIdx[k]]=t);
-  cur={wi,level,toys,hidden,found:0,busy:false};
+  cur={wi,level,toys,hidden,found:0,busy:false,gruni:null,travesura:false};
   $("gbg").src=W.bg; $("lvl").textContent=`${W.name} · Nivel ${level+1}`;
   const tray=$("tray"); tray.innerHTML="";
   toys.forEach(t=>{ const s=document.createElement("div"); s.className="slot"; s.dataset.t=t[0]; s.innerHTML=`<img src="assets/t_${t[0]}.png" alt="">`; tray.appendChild(s) });
@@ -233,9 +247,9 @@ function startWorld(wi, level){
   W.spots.forEach((r,i)=>{ const d=document.createElement("div"); d.className="spot";
     Object.assign(d.style,{left:r[0]+"%",top:r[1]+"%",width:r[2]+"%",height:r[3]+"%"});
     d.onpointerdown=e=>{ e.preventDefault(); tapSpot(i,d) }; sp.appendChild(d) });
-  // Gruñi flotando en los niveles 2 y 3: se mueve a otro lugar
+  // Gruñi flota arriba en los niveles 2 y 3; en el nivel 3 además cambia un juguete de escondite (gruniTravesura)
   if(level>0){ const g=document.createElement("img"); g.src="assets/c_gruni.png"; g.className="gruni";
-    g.style.cssText+=`left:${10+Math.random()*70}%;top:4%`; sp.appendChild(g) }
+    g.style.cssText+=`left:${10+Math.random()*70}%;top:4%`; sp.appendChild(g); cur.gruni=g }
   show("game"); resetHint();
   setTimeout(()=>say(["nivel_tres","nivel_cuatro","nivel_cinco"][level]),300);
 }
@@ -266,8 +280,61 @@ function tapSpot(i,el){
     const dx=b.left+b.width/2-(a.left+a.width/2), dy=b.top+b.height/2-(a.top+a.height/2);
     toy.animate([{transform:"translateY(-40%) scale(1)"},{transform:`translate(${dx}px,${dy}px) scale(.35)`}],{duration:600,easing:"ease-in",fill:"forwards"}).onfinish=()=>{
       toy.remove(); slot.classList.add("got"); sfx.tap(); cur.found++; cur.busy=false;
-      if(cur.found===cur.toys.length) levelDone() };
+      if(cur.found===cur.toys.length) levelDone();
+      else if(cur.level===2 && cur.found===2 && !cur.travesura) gruniTravesura() };
   },1300);
+}
+
+// ---------- Gruñi travieso (nivel 3) ----------
+// Baja volando a un escondite con juguete, lo saca, se ríe y lo lleva a otro escondite vacío.
+const espera=ms=>new Promise(r=>setTimeout(r,ms));
+function centro(wi,i){ const r=WORLDS[wi].spots[i]; return [r[0]+r[2]/2, r[1]+r[3]/2] }
+// mueve un elemento por una lista de puntos [x,y] en % del escenario; (ox,oy) = desfase del punto respecto a su esquina
+function volar(el,pts,ms,ox,oy){
+  const kf=pts.map(([x,y])=>({left:(x-ox)+"%",top:(y-oy)+"%"}));
+  Object.assign(el.style,kf[kf.length-1]);
+  return el.animate(kf,{duration:ms,easing:"ease-in-out"}).finished.catch(()=>{});
+}
+async function gruniTravesura(){
+  const c=cur, g=c&&c.gruni; if(!g) return;
+  const W=WORLDS[c.wi], llenos=Object.keys(c.hidden).map(Number);
+  const vacios=W.spots.map((_,i)=>i).filter(i=>!(i in c.hidden));
+  if(!llenos.length||!vacios.length) return;
+  c.travesura=true; c.busy=true; clearTimeout(hintT);
+  document.querySelectorAll(".spot.hint").forEach(s=>s.classList.remove("hint"));
+  const vivo=()=>cur===c;                     // si el niño sale del nivel, se corta la escena
+  await espera(500); if(!vivo()) return;
+  const de=llenos[Math.random()*llenos.length|0], [x0,y0]=centro(c.wi,de);
+  // destino: uno de los dos escondites vacíos más lejanos, para que el viaje se vea
+  const dist=i=>{ const [x,y]=centro(c.wi,i); return (x-x0)**2+(y-y0)**2 };
+  vacios.sort((p,q)=>dist(q)-dist(p));
+  const a=vacios[Math.random()*Math.min(2,vacios.length)|0], [x1,y1]=centro(c.wi,a);
+  const st=$("stage").getBoundingClientRect(), gw=g.offsetWidth/st.width*100, gh=g.offsetHeight/st.height*100;
+  const gx=parseFloat(g.style.left)+gw/2, gy=parseFloat(g.style.top)+gh*.8;
+  const spotEl=i=>$("spots").children[i], sacudir=el=>{ el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake") };
+  // 1) baja hasta el escondite
+  sfx.whoosh(900); await volar(g,[[gx,gy],[x0,y0-4]],900,gw/2,gh*.8); if(!vivo()) return;
+  // 2) saca el juguete y se ríe
+  sacudir(spotEl(de)); const t=c.hidden[de];
+  const toy=document.createElement("img"); toy.src=`assets/t_${t[0]}.png`; toy.className="toy";
+  Object.assign(toy.style,{left:(x0-5.5)+"%",top:(y0-8)+"%"}); $("game").appendChild(toy);
+  toy.animate([{transform:"scale(0)"},{transform:"scale(1.15)",offset:.7},{transform:"scale(1)"}],{duration:350,easing:"ease-out"});
+  sfx.pop(); const risa=say("gruni_risa");
+  await espera(800); if(!vivo()) return toy.remove();
+  // 3) vuela con el juguete, en curva, al otro escondite
+  const alto=Math.max(6,Math.min(y0,y1)-22), medio=[(x0+x1)/2,alto];
+  sfx.whoosh(1400);
+  const balanceo=toy.animate([{rotate:"-12deg"},{rotate:"12deg"}],{duration:300,direction:"alternate",iterations:Infinity});
+  await Promise.all([volar(g,[[x0,y0-4],medio,[x1,y1-4]],1400,gw/2,gh*.8), volar(toy,[[x0,y0],[medio[0],medio[1]+4],[x1,y1]],1400,5.5,8)]);
+  balanceo.cancel(); if(!vivo()) return toy.remove();
+  // 4) lo esconde ahí
+  delete c.hidden[de]; c.hidden[a]=t;
+  await toy.animate([{transform:"scale(1)"},{transform:"scale(1.2)",offset:.3},{transform:"scale(0)"}],{duration:400,easing:"ease-in",fill:"forwards"}).finished.catch(()=>{});
+  toy.remove(); sacudir(spotEl(a)); puff(x1-2,y1-4,"💨"); sfx.boing();
+  await risa; if(!vivo()) return;
+  // 5) vuelve arriba y la narradora avisa
+  sfx.whoosh(900); volar(g,[[x1,y1-4],[10+gw/2+Math.random()*70,4+gh*.8]],900,gw/2,gh*.8);
+  c.busy=false; resetHint(); say("gruni_cambio");
 }
 
 function levelDone(){

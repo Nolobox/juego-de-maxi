@@ -1,0 +1,20 @@
+[
+ {
+  "id": "bip_hola",
+  "text": "¡Bip bip! ¡Hola, amigo!",
+  "file": "bip_hola.mp3",
+  "seconds": 2.16,
+  "accuracy": 1.0,
+  "heard": "Bip, bip. Hola, amigo.",
+  "passed": true
+ },
+ {
+  "id": "gruni_risa",
+  "text": "¡Jijijí! ¡Jijijí! ¡Qué divertido!",
+  "file": "gruni_risa.mp3",
+  "seconds": 2.88,
+  "accuracy": 1.0,
+  "heard": "¡Jijiji! ¡Jijiji! ¡Qué divertido!",
+  "passed": true
+ }
+]

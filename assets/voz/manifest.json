@@ -421,5 +421,14 @@
   "accuracy": 1.0,
   "heard": "Primero vamos a terminar este otro mundo.",
   "passed": true
+ },
+ {
+  "id": "gruni_cambio",
+  "text": "¡Uy! Gruñi cambió un juguete de lugar. ¿Viste dónde lo dejó?",
+  "file": "gruni_cambio.mp3",
+  "seconds": 4.56,
+  "accuracy": 0.909,
+  "heard": "Uy, Gruny cambió un juguete de lugar. ¿Viste dónde lo dejó?",
+  "passed": true
  }
 ]
