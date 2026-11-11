@@ -295,6 +295,7 @@ function startWorld(wi, level){
   if(level>0){ const g=document.createElement("img"); g.src="assets/c_gruni.png"; g.className="gruni";
     g.style.cssText+=`left:${10+Math.random()*70}%;top:4%`; sp.appendChild(g); cur.gruni=g }
   show("game"); resetHint();
+  precargar(videoPremio(level)); if(WORLDS[wi+1]) precargar(WORLDS[wi+1].bg);
   setTimeout(()=>say(["nivel_tres","nivel_cuatro","nivel_cinco"][level]),300);
 }
 
@@ -328,6 +329,13 @@ function tapSpot(i,el){
       else if(cur.level===2 && cur.found===2 && !cur.travesura) gruniTravesura() };
   },1300);
 }
+
+// Video de premio de cada nivel (versiones comprimidas a 720p; los originales siguen en assets/)
+const videoPremio = lv => ["assets/v_maxi_720.mp4","assets/v_rex_720.mp4","assets/v_gruni_720.mp4"][lv];
+// Precarga en segundo plano: el video de este nivel y el escenario del mundo siguiente
+const precargado = new Set();
+function precargar(url){ if(precargado.has(url)) return; precargado.add(url);
+  if(/\.(webp|png|jpg)$/.test(url)) new Image().src=url; else fetch(url).catch(()=>precargado.delete(url)) }
 
 // ---------- Gruñi travieso (nivel 3) ----------
 // Baja volando a un escondite con juguete, lo saca, se ríe y lo lleva a otro escondite vacío.
@@ -388,7 +396,7 @@ function levelDone(){
   const worldDone = lv===2;
   setTimeout(()=>{
     say(worldDone?"mundo_ok":"nivel_ok");
-    const v = worldDone?"assets/v_gruni.mp4": (lv===0?"assets/v_maxi.mp4":"assets/v_rex.mp4");
+    const v = videoPremio(lv);
     setTimeout(()=>playVideo(v,()=>{
       if(worldDone){ renderMap(); show("map");
         const nxt=WORLDS[cur.wi+1]; if(nxt) setTimeout(()=>say(`abre_${nxt.id}`),400) }
@@ -414,8 +422,8 @@ function confetti(){
     if(++t<150) requestAnimationFrame(f); else x.clearRect(0,0,c.width,c.height) })();
 }
 
-// precarga
-WORLDS.forEach(W=>{ new Image().src=W.bg }); TOYS.forEach(t=>{ new Image().src=`assets/t_${t[0]}.png` });
+// precarga: juguetes, Gruñi y el primer escenario (los demás se precargan al jugar y se ven en el mapa)
+TOYS.forEach(t=>precargar(`assets/t_${t[0]}.png`)); precargar("assets/c_gruni.png"); precargar(WORLDS[0].bg);
 if("serviceWorker" in navigator){ try{ navigator.serviceWorker.register("sw.js").catch(()=>{}) }catch(e){} }
 // modo prueba: ?debug muestra los escondites
 if(location.search.includes("debug")) document.head.insertAdjacentHTML("beforeend","<style>.spot{outline:3px dashed red;background:rgba(255,0,0,.15)}</style>");
