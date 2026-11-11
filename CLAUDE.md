@@ -58,7 +58,7 @@ Un minijuego nuevo va en `js/minijuegos/<nombre>.js` (y su `<script>` en `index.
 ## Reglas de diseño (no romper)
 - Pensado para 3 años: no se puede perder, no hay tiempo límite, no hay textos que haya que leer y no hay nada que asuste.
 - Zonas táctiles grandes, de al menos 10 % del ancho. Las respuestas al tocar son inmediatas: sonido y animación.
-- Siempre en horizontal. iOS no deja bloquear la orientación: si el teléfono queda vertical, `ajustarGiro()` (nucleo.js) gira el juego por dentro para que siga sobre el lado largo. Por eso **todas las medidas dentro del escenario van en `cqw`/% y no en `vw`**, y los desplazamientos medidos en pantalla se pasan por `aJuego(dx, dy)`. Probar en el celular y la tablet reales.
+- Siempre en horizontal. iOS no deja bloquear la orientación: si el teléfono queda vertical, el escenario se gira por dentro para que siga sobre el lado largo. **El tamaño y el giro los pone solo el CSS** (`@media (orientation:portrait)` en `estilos.css`, con `--W`/`--H` en `dvw`/`dvh`); `ajustarGiro()` (nucleo.js) solo elige el lado (`--giro`). No volver a medir con `innerWidth`/`innerHeight`: iOS los informa tarde al girar y el juego quedaba con zoom. `#app` mide lo mismo que la pantalla y recorta. Para revisar problemas de pantalla en el teléfono: rincón de los papás → "Diagnóstico de pantalla". Por eso **todas las medidas dentro del escenario van en `cqw`/% y no en `vw`**, y los desplazamientos medidos en pantalla se pasan por `aJuego(dx, dy)`. Probar en el celular y la tablet reales.
 - Sin dependencias pesadas. Phaser solo si un minijuego futuro necesita física.
 - Todo el texto y la voz en español (Chile).
 

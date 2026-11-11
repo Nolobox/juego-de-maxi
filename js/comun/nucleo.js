@@ -64,29 +64,22 @@ function anguloPantalla(){
   const a=(screen.orientation&&typeof screen.orientation.angle==="number")?screen.orientation.angle:(window.orientation||0);
   return ((a%360)+360)%360;
 }
+// El tamaño y el giro los pone el CSS (@media orientation). Aquí solo se elige hacia qué lado girar.
+const mqVertical=matchMedia("(orientation: portrait)");
 function ajustarGiro(){
-  const W=innerWidth, H=innerHeight, vertical=H>W, a=anguloPantalla();
+  const vertical=mqVertical.matches, a=anguloPantalla();
   if(a===90||a===270) ultimoHorizontal=a;
   // 90 = girado a la izquierda (la parte de arriba del teléfono queda a la izquierda)
   giro=vertical?(ultimoHorizontal===270?-90:90):0;
-  const raiz=document.documentElement;
-  raiz.style.setProperty("--W",(vertical?H:W)+"px"); raiz.style.setProperty("--H",(vertical?W:H)+"px");
-  raiz.style.setProperty("--giro",giro+"deg");
-  raiz.classList.toggle("girado",vertical);
+  document.documentElement.style.setProperty("--giro",(giro||90)+"deg");
+  window.scrollTo(0,0);
 }
-// iOS a veces queda con zoom después de girar: volver a escribir el viewport lo reinicia
-const VIEWPORT=["width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover",
-                "width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"];
-let vpAlt=0;
-function quitarZoom(){ const m=document.querySelector('meta[name="viewport"]'); if(m){ vpAlt^=1; m.setAttribute("content",VIEWPORT[vpAlt]) } window.scrollTo(0,0) }
-// iOS informa el tamaño nuevo con retraso: se reajusta varias veces después de girar
-function alGirar(){ quitarZoom(); ajustarGiro(); [100,300,600,1000].forEach(ms=>setTimeout(()=>{ ajustarGiro(); if(ms===600) quitarZoom() },ms)) }
+function alGirar(){ ajustarGiro(); setTimeout(ajustarGiro,300) }
 // Convierte un desplazamiento medido en pantalla (px) a las coordenadas del juego (por si está girado)
 function aJuego(dx,dy){ const t=-giro*Math.PI/180, c=Math.cos(t), s=Math.sin(t); return [dx*c-dy*s, dx*s+dy*c] }
-addEventListener("resize",ajustarGiro);
+if(mqVertical.addEventListener) mqVertical.addEventListener("change",alGirar); else if(mqVertical.addListener) mqVertical.addListener(alGirar);
 addEventListener("orientationchange",alGirar);
 if(screen.orientation&&screen.orientation.addEventListener) screen.orientation.addEventListener("change",alGirar);
-if(window.visualViewport) visualViewport.addEventListener("resize",()=>{ if(visualViewport.scale!==1) quitarZoom(); ajustarGiro() });
 ajustarGiro();
 
 function playVideo(src,done){
