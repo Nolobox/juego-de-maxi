@@ -360,21 +360,813 @@
   "passed": true
  },
  {
-  "id": "menu_colores",
-  "text": "¡Vamos a jugar con los colores!",
-  "file": "menu_colores.mp3",
-  "seconds": 1.52,
-  "accuracy": 1.0,
-  "heard": "Vamos a jugar con los colores.",
-  "passed": true
- },
- {
   "id": "col_anima",
   "text": "¿Cuál será? ¡Toca uno, tú puedes!",
   "file": "col_anima.mp3",
   "seconds": 2.56,
   "accuracy": 1.0,
   "heard": "¿Cuál será? Toca uno. ¡Tú puedes!",
+  "passed": true
+ },
+ {
+  "id": "col_par_rojo",
+  "text": "¡Busca las dos cosas rojas!",
+  "file": "col_par_rojo.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "Busca las dos cosas rojas.",
+  "passed": true
+ },
+ {
+  "id": "col_par_azul",
+  "text": "¡Busca las dos cosas azules!",
+  "file": "col_par_azul.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "Busca las dos cosas azules.",
+  "passed": true
+ },
+ {
+  "id": "col_par_amarillo",
+  "text": "¡Busca las dos cosas amarillas!",
+  "file": "col_par_amarillo.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "Busca las dos cosas amarillas.",
+  "passed": true
+ },
+ {
+  "id": "col_par_verde",
+  "text": "¡Busca las dos cosas verdes!",
+  "file": "col_par_verde.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "Busca las dos cosas verdes.",
+  "passed": true
+ },
+ {
+  "id": "col_falta",
+  "text": "¡Muy bien! ¡Falta una más!",
+  "file": "col_falta.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "Muy bien. Falta una más.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_estrella_1",
+  "text": "¡Busca una estrella!",
+  "file": "num_pide_estrella_1.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Busca una estrella.",
+  "passed": true
+ },
+ {
+  "id": "num_si_estrella_1",
+  "text": "¡Sí, es una estrella!",
+  "file": "num_si_estrella_1.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Sí, es una estrella.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_estrella_2",
+  "text": "¡Busca dos estrellas!",
+  "file": "num_pide_estrella_2.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Busca dos estrellas.",
+  "passed": true
+ },
+ {
+  "id": "num_si_estrella_2",
+  "text": "¡Sí, son dos estrellas!",
+  "file": "num_si_estrella_2.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "Sí, son dos estrellas.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_estrella_3",
+  "text": "¡Busca tres estrellas!",
+  "file": "num_pide_estrella_3.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Busca tres estrellas.",
+  "passed": true
+ },
+ {
+  "id": "num_si_estrella_3",
+  "text": "¡Sí, son tres estrellas!",
+  "file": "num_si_estrella_3.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "Sí, son tres estrellas.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_estrella_4",
+  "text": "¡Busca cuatro estrellas!",
+  "file": "num_pide_estrella_4.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Busca cuatro estrellas.",
+  "passed": true
+ },
+ {
+  "id": "num_si_estrella_4",
+  "text": "¡Sí, son cuatro estrellas!",
+  "file": "num_si_estrella_4.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Sí, son cuatro estrellas.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_estrella_5",
+  "text": "¡Busca cinco estrellas!",
+  "file": "num_pide_estrella_5.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "¡Busca cinco estrellas!",
+  "passed": true
+ },
+ {
+  "id": "num_si_estrella_5",
+  "text": "¡Sí, son cinco estrellas!",
+  "file": "num_si_estrella_5.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Sí, son cinco estrellas.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_manzana_1",
+  "text": "¡Busca una manzana!",
+  "file": "num_pide_manzana_1.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Busca una manzana.",
+  "passed": true
+ },
+ {
+  "id": "num_si_manzana_1",
+  "text": "¡Sí, es una manzana!",
+  "file": "num_si_manzana_1.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "Sí, es una manzana.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_manzana_2",
+  "text": "¡Busca dos manzanas!",
+  "file": "num_pide_manzana_2.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Busca dos manzanas.",
+  "passed": true
+ },
+ {
+  "id": "num_si_manzana_2",
+  "text": "¡Sí, son dos manzanas!",
+  "file": "num_si_manzana_2.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Sí, son dos manzanas.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_manzana_3",
+  "text": "¡Busca tres manzanas!",
+  "file": "num_pide_manzana_3.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "Busca tres manzanas.",
+  "passed": true
+ },
+ {
+  "id": "num_si_manzana_3",
+  "text": "¡Sí, son tres manzanas!",
+  "file": "num_si_manzana_3.mp3",
+  "seconds": 2.16,
+  "accuracy": 1.0,
+  "heard": "¡Sí! ¡Son tres manzanas!",
+  "passed": true
+ },
+ {
+  "id": "num_pide_manzana_4",
+  "text": "¡Busca cuatro manzanas!",
+  "file": "num_pide_manzana_4.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Busca 4 manzanas.",
+  "passed": true
+ },
+ {
+  "id": "num_si_manzana_4",
+  "text": "¡Sí, son cuatro manzanas!",
+  "file": "num_si_manzana_4.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "¡Sí! ¡Son cuatro manzanas!",
+  "passed": true
+ },
+ {
+  "id": "num_pide_manzana_5",
+  "text": "¡Busca cinco manzanas!",
+  "file": "num_pide_manzana_5.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Busca 5 manzanas.",
+  "passed": true
+ },
+ {
+  "id": "num_si_manzana_5",
+  "text": "¡Sí, son cinco manzanas!",
+  "file": "num_si_manzana_5.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "Sí, son cinco manzanas.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pez_1",
+  "text": "¡Busca un pez!",
+  "file": "num_pide_pez_1.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Busca un pez.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pez_1",
+  "text": "¡Sí, es un pez!",
+  "file": "num_si_pez_1.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Sí, es un pez.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pez_2",
+  "text": "¡Busca dos peces!",
+  "file": "num_pide_pez_2.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Busca dos peces.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pez_2",
+  "text": "¡Sí, son dos peces!",
+  "file": "num_si_pez_2.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Sí, son dos peces.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pez_3",
+  "text": "¡Busca tres peces!",
+  "file": "num_pide_pez_3.mp3",
+  "seconds": 2.16,
+  "accuracy": 1.0,
+  "heard": "Busca tres peces.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pez_3",
+  "text": "¡Sí, son tres peces!",
+  "file": "num_si_pez_3.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Sí, son tres peces.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pez_4",
+  "text": "¡Busca cuatro peces!",
+  "file": "num_pide_pez_4.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Busca cuatro peces.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pez_4",
+  "text": "¡Sí, son cuatro peces!",
+  "file": "num_si_pez_4.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "¡Sí! ¡Son cuatro peces!",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pez_5",
+  "text": "¡Busca cinco peces!",
+  "file": "num_pide_pez_5.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "¡Busca cinco peces!",
+  "passed": true
+ },
+ {
+  "id": "num_si_pez_5",
+  "text": "¡Sí, son cinco peces!",
+  "file": "num_si_pez_5.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Sí, son cinco peces.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_sol_1",
+  "text": "¡Busca un sol!",
+  "file": "num_pide_sol_1.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Busca un sol.",
+  "passed": true
+ },
+ {
+  "id": "num_si_sol_1",
+  "text": "¡Sí, es un sol!",
+  "file": "num_si_sol_1.mp3",
+  "seconds": 1.36,
+  "accuracy": 1.0,
+  "heard": "Sí, es un sol.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_sol_2",
+  "text": "¡Busca dos soles!",
+  "file": "num_pide_sol_2.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Busca dos soles.",
+  "passed": true
+ },
+ {
+  "id": "num_si_sol_2",
+  "text": "¡Sí, son dos soles!",
+  "file": "num_si_sol_2.mp3",
+  "seconds": 2.16,
+  "accuracy": 1.0,
+  "heard": "Sí, son dos soles.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_sol_3",
+  "text": "¡Busca tres soles!",
+  "file": "num_pide_sol_3.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Busca tres soles.",
+  "passed": true
+ },
+ {
+  "id": "num_si_sol_3",
+  "text": "¡Sí, son tres soles!",
+  "file": "num_si_sol_3.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Sí, son tres soles.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_sol_4",
+  "text": "¡Busca cuatro soles!",
+  "file": "num_pide_sol_4.mp3",
+  "seconds": 1.2,
+  "accuracy": 1.0,
+  "heard": "Busca 4 soles.",
+  "passed": true
+ },
+ {
+  "id": "num_si_sol_4",
+  "text": "¡Sí, son cuatro soles!",
+  "file": "num_si_sol_4.mp3",
+  "seconds": 2.08,
+  "accuracy": 1.0,
+  "heard": "Sí, son cuatro soles.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_sol_5",
+  "text": "¡Busca cinco soles!",
+  "file": "num_pide_sol_5.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Busca 5 soles.",
+  "passed": true
+ },
+ {
+  "id": "num_si_sol_5",
+  "text": "¡Sí, son cinco soles!",
+  "file": "num_si_sol_5.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Sí, son cinco soles.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_corazon_1",
+  "text": "¡Busca un corazón!",
+  "file": "num_pide_corazon_1.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Busca un corazón.",
+  "passed": true
+ },
+ {
+  "id": "num_si_corazon_1",
+  "text": "¡Sí, es un corazón!",
+  "file": "num_si_corazon_1.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Sí, es un corazón.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_corazon_2",
+  "text": "¡Busca dos corazones!",
+  "file": "num_pide_corazon_2.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Busca dos corazones.",
+  "passed": true
+ },
+ {
+  "id": "num_si_corazon_2",
+  "text": "¡Sí, son dos corazones!",
+  "file": "num_si_corazon_2.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "Sí, son dos corazones.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_corazon_3",
+  "text": "¡Busca tres corazones!",
+  "file": "num_pide_corazon_3.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Busca tres corazones.",
+  "passed": true
+ },
+ {
+  "id": "num_si_corazon_3",
+  "text": "¡Sí, son tres corazones!",
+  "file": "num_si_corazon_3.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "Sí, son tres corazones.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_corazon_4",
+  "text": "¡Busca cuatro corazones!",
+  "file": "num_pide_corazon_4.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Busca cuatro corazones.",
+  "passed": true
+ },
+ {
+  "id": "num_si_corazon_4",
+  "text": "¡Sí, son cuatro corazones!",
+  "file": "num_si_corazon_4.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "¡Sí! ¡Son cuatro corazones!",
+  "passed": true
+ },
+ {
+  "id": "num_pide_corazon_5",
+  "text": "¡Busca cinco corazones!",
+  "file": "num_pide_corazon_5.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Busca cinco corazones.",
+  "passed": true
+ },
+ {
+  "id": "num_si_corazon_5",
+  "text": "¡Sí, son cinco corazones!",
+  "file": "num_si_corazon_5.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Sí, son cinco corazones.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pollito_1",
+  "text": "¡Busca un pollito!",
+  "file": "num_pide_pollito_1.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Busca un pollito.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pollito_1",
+  "text": "¡Sí, es un pollito!",
+  "file": "num_si_pollito_1.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "¡Sí! ¡Es un pollito!",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pollito_2",
+  "text": "¡Busca dos pollitos!",
+  "file": "num_pide_pollito_2.mp3",
+  "seconds": 1.36,
+  "accuracy": 1.0,
+  "heard": "Busca dos pollitos.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pollito_2",
+  "text": "¡Sí, son dos pollitos!",
+  "file": "num_si_pollito_2.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Sí, son dos pollitos.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pollito_3",
+  "text": "¡Busca tres pollitos!",
+  "file": "num_pide_pollito_3.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Busca tres pollitos.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pollito_3",
+  "text": "¡Sí, son tres pollitos!",
+  "file": "num_si_pollito_3.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Sí, son tres pollitos.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pollito_4",
+  "text": "¡Busca cuatro pollitos!",
+  "file": "num_pide_pollito_4.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Busca cuatro pollitos.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pollito_4",
+  "text": "¡Sí, son cuatro pollitos!",
+  "file": "num_si_pollito_4.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Sí, son cuatro pollitos.",
+  "passed": true
+ },
+ {
+  "id": "num_pide_pollito_5",
+  "text": "¡Busca cinco pollitos!",
+  "file": "num_pide_pollito_5.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Busca cinco pollitos.",
+  "passed": true
+ },
+ {
+  "id": "num_si_pollito_5",
+  "text": "¡Sí, son cinco pollitos!",
+  "file": "num_si_pollito_5.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "Sí, son cinco pollitos.",
+  "passed": true
+ },
+ {
+  "id": "num_no_1_2",
+  "text": "Mmm, ese tiene uno. ¡Busca el que tiene dos!",
+  "file": "num_no_1_2.mp3",
+  "seconds": 3.44,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene uno. Busca el que tiene dos.",
+  "passed": true
+ },
+ {
+  "id": "num_no_1_3",
+  "text": "Mmm, ese tiene uno. ¡Busca el que tiene tres!",
+  "file": "num_no_1_3.mp3",
+  "seconds": 3.36,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene uno. Busca el que tiene tres.",
+  "passed": true
+ },
+ {
+  "id": "num_no_1_4",
+  "text": "Mmm, ese tiene uno. ¡Busca el que tiene cuatro!",
+  "file": "num_no_1_4.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene uno. Busca el que tiene cuatro.",
+  "passed": true
+ },
+ {
+  "id": "num_no_1_5",
+  "text": "Mmm, ese tiene uno. ¡Busca el que tiene cinco!",
+  "file": "num_no_1_5.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene uno. Busca el que tiene cinco.",
+  "passed": true
+ },
+ {
+  "id": "num_no_2_1",
+  "text": "Mmm, ese tiene dos. ¡Busca el que tiene uno!",
+  "file": "num_no_2_1.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene dos. Busca el que tiene uno.",
+  "passed": true
+ },
+ {
+  "id": "num_no_2_3",
+  "text": "Mmm, ese tiene dos. ¡Busca el que tiene tres!",
+  "file": "num_no_2_3.mp3",
+  "seconds": 3.6,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene dos. Busca el que tiene tres.",
+  "passed": true
+ },
+ {
+  "id": "num_no_2_4",
+  "text": "Mmm, ese tiene dos. ¡Busca el que tiene cuatro!",
+  "file": "num_no_2_4.mp3",
+  "seconds": 3.68,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene dos. Busca el que tiene cuatro.",
+  "passed": true
+ },
+ {
+  "id": "num_no_2_5",
+  "text": "Mmm, ese tiene dos. ¡Busca el que tiene cinco!",
+  "file": "num_no_2_5.mp3",
+  "seconds": 3.44,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene dos. Busca el que tiene cinco.",
+  "passed": true
+ },
+ {
+  "id": "num_no_3_1",
+  "text": "Mmm, ese tiene tres. ¡Busca el que tiene uno!",
+  "file": "num_no_3_1.mp3",
+  "seconds": 3.52,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene tres. Busca el que tiene uno.",
+  "passed": true
+ },
+ {
+  "id": "num_no_3_2",
+  "text": "Mmm, ese tiene tres. ¡Busca el que tiene dos!",
+  "file": "num_no_3_2.mp3",
+  "seconds": 3.52,
+  "accuracy": 1.0,
+  "heard": "¡Mmm! Ese tiene tres. Busca el que tiene dos.",
+  "passed": true
+ },
+ {
+  "id": "num_no_3_4",
+  "text": "Mmm, ese tiene tres. ¡Busca el que tiene cuatro!",
+  "file": "num_no_3_4.mp3",
+  "seconds": 3.28,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene tres. Busca el que tiene cuatro.",
+  "passed": true
+ },
+ {
+  "id": "num_no_3_5",
+  "text": "Mmm, ese tiene tres. ¡Busca el que tiene cinco!",
+  "file": "num_no_3_5.mp3",
+  "seconds": 3.44,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene tres. Busca el que tiene cinco.",
+  "passed": true
+ },
+ {
+  "id": "num_no_4_1",
+  "text": "Mmm, ese tiene cuatro. ¡Busca el que tiene uno!",
+  "file": "num_no_4_1.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "¡Mmm! Ese tiene cuatro. Busca el que tiene uno.",
+  "passed": true
+ },
+ {
+  "id": "num_no_4_2",
+  "text": "Mmm, ese tiene cuatro. ¡Busca el que tiene dos!",
+  "file": "num_no_4_2.mp3",
+  "seconds": 3.44,
+  "accuracy": 1.0,
+  "heard": "Mmm. Ese tiene cuatro. Busca el que tiene dos.",
+  "passed": true
+ },
+ {
+  "id": "num_no_4_3",
+  "text": "Mmm, ese tiene cuatro. ¡Busca el que tiene tres!",
+  "file": "num_no_4_3.mp3",
+  "seconds": 4.08,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene cuatro. Busca el que tiene tres.",
+  "passed": true
+ },
+ {
+  "id": "num_no_4_5",
+  "text": "Mmm, ese tiene cuatro. ¡Busca el que tiene cinco!",
+  "file": "num_no_4_5.mp3",
+  "seconds": 3.68,
+  "accuracy": 1.0,
+  "heard": "¡Mmm! ¡Ese tiene cuatro! ¡Busca el que tiene cinco!",
+  "passed": true
+ },
+ {
+  "id": "num_no_5_1",
+  "text": "Mmm, ese tiene cinco. ¡Busca el que tiene uno!",
+  "file": "num_no_5_1.mp3",
+  "seconds": 3.44,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene cinco. Busca el que tiene uno.",
+  "passed": true
+ },
+ {
+  "id": "num_no_5_2",
+  "text": "Mmm, ese tiene cinco. ¡Busca el que tiene dos!",
+  "file": "num_no_5_2.mp3",
+  "seconds": 3.68,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene cinco. Busca el que tiene dos.",
+  "passed": true
+ },
+ {
+  "id": "num_no_5_3",
+  "text": "Mmm, ese tiene cinco. ¡Busca el que tiene tres!",
+  "file": "num_no_5_3.mp3",
+  "seconds": 3.68,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene cinco. Busca el que tiene tres.",
+  "passed": true
+ },
+ {
+  "id": "num_no_5_4",
+  "text": "Mmm, ese tiene cinco. ¡Busca el que tiene cuatro!",
+  "file": "num_no_5_4.mp3",
+  "seconds": 3.44,
+  "accuracy": 1.0,
+  "heard": "Mmm, ese tiene cinco. Busca el que tiene cuatro.",
+  "passed": true
+ },
+ {
+  "id": "num_intro",
+  "text": "¿Me ayudas a encender mi antena? ¡Vamos a contar!",
+  "file": "num_intro.mp3",
+  "seconds": 2.88,
+  "accuracy": 1.0,
+  "heard": "¿Me ayudas a encender mi antena? ¡Vamos a contar!",
+  "passed": true
+ },
+ {
+  "id": "col_bloqueado",
+  "text": "¡Primero juguemos el nivel anterior!",
+  "file": "col_bloqueado.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Primero, juguemos el nivel anterior.",
+  "passed": true
+ },
+ {
+  "id": "col_nuevo_nivel",
+  "text": "¡Se abrió un nivel nuevo!",
+  "file": "col_nuevo_nivel.mp3",
+  "seconds": 1.36,
+  "accuracy": 1.0,
+  "heard": "Se abrió un nivel nuevo.",
+  "passed": true
+ },
+ {
+  "id": "menu_colores",
+  "text": "¡Vamos a jugar con Bip!",
+  "file": "menu_colores.mp3",
+  "seconds": 1.36,
+  "accuracy": 1.0,
+  "heard": "¡Vamos a jugar con Bip!",
   "passed": true
  }
 ]

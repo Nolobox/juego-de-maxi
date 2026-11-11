@@ -124,3 +124,33 @@ html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"B
 .col-op.brilla{animation:glow 1.2s ease-in-out infinite}
 .col-op.listo{opacity:.35;transition:opacity .3s}
 @keyframes entra{from{transform:scale(0)}}
+
+/* mapa de niveles de Bip */
+#bipNiveles{background:radial-gradient(circle at 50% 20%,#fff8e1 0,#ffe3a8 50%,#ffc97a 100%)}
+.bipn-bip{position:absolute;left:50%;top:2%;width:17%;transform:translateX(-50%);animation:bob 2.8s ease-in-out infinite;filter:drop-shadow(0 1cqw .8cqw rgba(80,40,0,.25))}
+.bipn-lista{position:absolute;left:4%;right:4%;top:34%;bottom:9%;display:flex;gap:2.2cqw}
+.bipn{flex:1;position:relative;border:.6cqw solid #fff;border-radius:3cqw;background:rgba(255,255,255,.8);box-shadow:0 .7cqw 0 rgba(120,70,0,.18);
+  cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center;animation:entra .45s cubic-bezier(.3,1.6,.5,1) backwards}
+.bipn:nth-child(2){animation-delay:.08s}.bipn:nth-child(3){animation-delay:.16s}.bipn:nth-child(4){animation-delay:.24s}.bipn:nth-child(5){animation-delay:.32s}
+.bipn-ico{width:86%;height:74%;display:flex;flex-wrap:wrap;align-content:center;justify-content:center;gap:4%}
+.bipn-ico img{object-fit:contain;width:44%;height:44%}
+.bipn-ico.n1 img{width:80%;height:80%}
+.bipn-ico.n5 img{width:30%;height:30%}
+.bipn-est{position:absolute;top:2%;right:5%;font-size:3cqw;filter:drop-shadow(0 .2cqw 0 rgba(0,0,0,.3))}
+.bipn.locked .bipn-ico{filter:grayscale(1) brightness(.85);opacity:.55}
+.bipn.locked::after{content:"🔒";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5cqw}
+.bipn.nuevo{animation:salto .7s cubic-bezier(.3,1.6,.5,1) 3}
+
+/* nivel con 5 opciones: Bip más chico para dejar espacio */
+#colores.muchas .col-bip{width:24%}
+#colores.muchas .col-opciones{left:28%;gap:1.4cqw}
+.col-op.hecho{box-shadow:0 0 0 .6cqw #2fbf71,0 .7cqw 0 rgba(120,70,0,.18)}
+
+/* tarjetas para contar: n copias del mismo objeto */
+.cnt{display:grid;width:84%;height:88%;gap:5%;place-items:center;pointer-events:none}
+.cnt img{width:100%;height:100%;min-height:0;object-fit:contain}
+.cnt-1{grid-template:1fr/1fr}.cnt-1 img{width:85%}
+.cnt-2{grid-template:repeat(2,1fr)/1fr}
+.cnt-3{grid-template:repeat(3,1fr)/1fr}
+.cnt-4{grid-template:repeat(2,1fr)/repeat(2,1fr)}
+.cnt-5{grid-template:repeat(3,1fr)/repeat(2,1fr)}.cnt-5 img:last-child{grid-column:1/3;width:50%}

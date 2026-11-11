@@ -23,15 +23,20 @@ Los personajes, escenarios, juguetes y videos se generaron en Google Flow y est�
 - Abrir con `?debug` muestra los escondites con bordes rojos. Abrir con `?editor` abre el editor de escondites.
 
 ### Minijuego 2: Los colores de Bip (`js/minijuegos/colores.js`)
-- Bip aparece con la antena apagada y pide un color con su voz ("¿Me ayudas a encender mi antena? ¡Busca algo rojo!"; después "¡Ahora busca algo azul!").
-- Aparecen 3 objetos grandes de colores distintos; solo uno es del color pedido.
-- Acierto: el objeto salta, Bip dice "¡Sí, la manzana es roja!", pone cara feliz, se enciende una de las 5 luces y el brillo de la antena crece.
-- Error: sonido "uy" suave (`sfx.uy`), el objeto se sacude y Bip dice "Mmm, ese es azul. ¡Busca el rojo!". No se pierde nunca.
-- Pista que se gana buscando (`COLORES_CFG.pista`): 15 s sin tocar -> Bip anima ("¿Cuál será? ¡Toca uno!"); 1 error -> el correcto se mueve un poco; 2 errores -> brilla y Bip dice "¡Mira, algo brilla!".
-- 5 aciertos: antena encendida, confeti, "¡Mi antena está encendida!" y el video `v_bip_720.mp4`; luego vuelve al menú. `prog.colores` cuenta las veces completadas.
-- Cada ronda sortea un color distinto al anterior y objetos que no estuvieron en la ronda anterior.
-- Configuración en `COLORES_CFG` (aciertos, opciones, pista, video). Lo específico de los colores está en `MODOS_BIP.colores` (categorías, objetos, imagen, ids de voz y textos de respaldo). Para formas o números del 1 al 5 se agrega otro modo (`dibujar(o, el)` permite mostrar, por ejemplo, n copias de un objeto) y se elige en `COLORES_CFG.modo`.
-- Imágenes en `assets/colores/` (`bip-apagado|feliz|pensando.webp` y `<color>-<objeto>.webp`), recortadas con `tools/recortar_colores.py` desde `Referencias/colores-bip/`. Voces `col_*` con `juego-hombre` (Bip).
+- Al entrar se ve un **mapa de 5 niveles** (botones grandes con dibujos, ⭐ si está completo, 🔒 si falta el anterior). Cada nivel completo abre el siguiente y Bip avisa "¡Se abrió un nivel nuevo!". `prog.bip` = niveles completados; el rincón de los papás puede abrir todos.
+- Niveles (`NIVELES_BIP`):
+  1. **Colores, 3 objetos** — "¿Me ayudas a encender mi antena? ¡Busca algo rojo!" (5 aciertos).
+  2. **Colores, 4 objetos** (uno de cada color, 5 aciertos).
+  3. **Los dos del color** — 5 objetos, 2 son del color pedido: "¡Busca las dos cosas rojas!"; al primero, "¡Falta una más!" (4 aciertos).
+  4. **Contar del 1 al 3** — 3 tarjetas con 1, 2 o 3 copias del mismo objeto: "¡Busca tres estrellas!" (5 aciertos).
+  5. **Contar del 1 al 5** — igual, con cantidades hasta 5.
+- Acierto: el objeto salta, Bip lo nombra ("¡Sí, la manzana es roja!", "¡Sí, son tres estrellas!"), pone cara feliz, se enciende una luz y crece el brillo de la antena.
+- Error: sonido "uy" (`sfx.uy`), el objeto se sacude y Bip corrige ("Mmm, ese es azul. ¡Busca el rojo!", "Mmm, ese tiene dos. ¡Busca el que tiene tres!"). No se pierde nunca.
+- Pista que se gana buscando (`BIP_CFG.pista`): 15 s sin tocar -> Bip anima; 1 error -> el correcto se mueve; 2 errores -> brilla.
+- Al completar las luces: confeti, "¡Mi antena está encendida!", video `v_bip_720.mp4` y vuelta al mapa de niveles.
+- No se repite: el pedido cambia en cada ronda y los objetos de la ronda anterior no vuelven en la siguiente (en contar, cambia el objeto).
+- **Cómo sumar niveles:** agregar una entrada a `NIVELES_BIP` con un `modo` existente (`colores`, `pares`, `numeros`) y sus parámetros, o crear un modo nuevo en `MODOS_BIP` con `sortear(e, nivel)`, `dibujar(o, boton)` y `voz.pedir/acierto/error` (ids de voz, o listas de ids que se dicen seguidas). Formas necesitaría imágenes nuevas.
+- Imágenes en `assets/colores/` (`bip-apagado|feliz|pensando.webp` y `<color>-<objeto>.webp`), recortadas con `tools/recortar_colores.py` desde `Referencias/colores-bip/`. Voces `col_*` y `num_*` con `juego-hombre` (Bip).
 
 ## Estructura
 ```
@@ -80,7 +85,7 @@ Un minijuego nuevo va en `js/minijuegos/<nombre>.js` (y su `<script>` en `index.
 
 ## Futuro (no hacer todavía; la estructura ya está preparada)
 Desde el mapa se podrá elegir entre más minijuegos con los mismos personajes:
-1. ✅ **Los colores de Bip** (hecho). Pendiente: modos formas y números del 1 al 5.
+1. ✅ **Los colores de Bip** (hecho, con 5 niveles: colores y números del 1 al 5). Pendiente: formas (necesita imágenes).
 2. **El paseo de Rex:** Rex camina solo y el niño toca la pantalla para saltar charcos y recoger frutas, sin poder perder.
 3. **¡Que no llueva!:** alegrar a Gruñi con cosquillas, un globo o una canción, y al final sale un arcoíris.
 4. **Vestir a Maxi:** elegir ropa según el clima.
