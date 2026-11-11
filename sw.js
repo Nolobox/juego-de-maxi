@@ -1,7 +1,7 @@
 // Service worker: deja el juego listo para jugar sin internet.
 // La lista de archivos y la versión las escribe tools/actualizar_sw.py (no editar a mano entre las marcas).
 // <precache>
-const VERSION = "7fa40e6ebe";
+const VERSION = "51f5231e77";
 const ARCHIVOS = [
   "assets/bg_casa.webp",
   "assets/bg_parque.webp",
@@ -81,8 +81,17 @@ const ARCHIVOS = [
   "assets/voz/no_2.mp3",
   "assets/voz/no_3.mp3",
   "assets/voz/pista.mp3",
+  "css/estilos.css",
   "index.html",
+  "js/comun/audio.js",
+  "js/comun/nucleo.js",
+  "js/comun/papas.js",
+  "js/comun/personajes.js",
+  "js/comun/progreso.js",
+  "js/comun/voz.js",
   "js/editor.js",
+  "js/main.js",
+  "js/minijuegos/juguetes.js",
   "manifest.json"
 ];
 // </precache>
