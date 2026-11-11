@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ffd166">
+<title>¿Dónde está el juguete?</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="assets/icon.png">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"Baloo 2","Comic Sans MS","Chalkboard SE",system-ui,sans-serif}
+#app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.stage{position:relative;width:min(100vw,calc(100vh*16/9));aspect-ratio:16/9;overflow:hidden;border-radius:clamp(0px,1.5vw,18px);background:#ffe8b8}
+.screen{position:absolute;inset:0;display:none}
+.screen.on{display:block}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.btn{border:none;cursor:pointer;font-family:inherit;font-weight:800;color:#fff;border-radius:999px;box-shadow:0 .5vw 0 rgba(0,0,0,.25),inset 0 -.4vw 0 rgba(0,0,0,.15);transition:transform .1s}
+.btn:active{transform:translateY(.4vw) scale(.97)}
+/* home */
+#home{background:radial-gradient(circle at 50% 30%,#fff3c4,#ffc971)}
+#home h1{position:absolute;top:5%;width:100%;text-align:center;margin:0;font-size:5.2vw;color:#e2574c;text-shadow:0 .35vw 0 #fff,0 .7vw 0 rgba(0,0,0,.15);letter-spacing:.1vw}
+.hero{position:absolute;bottom:0;height:62%;border-radius:2vw;animation:bob 2.4s ease-in-out infinite}
+#play{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);font-size:4.4vw;padding:1.4vw 5vw;background:#2fbf71;animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{transform:translate(-50%,-50%) scale(1.08)}}
+@keyframes bob{50%{transform:translateY(-3%)}}
+.round{position:absolute;width:6vw;height:6vw;border-radius:50%;background:rgba(255,255,255,.85);border:none;font-size:3vw;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 .4vw 0 rgba(0,0,0,.2)}
+/* map */
+#map{background:linear-gradient(#bfe8ff,#fff1c9)}
+#map h2{text-align:center;margin:2.5% 0 0;font-size:3.6vw;color:#4a3a7a}
+.worlds{position:absolute;top:17%;left:4%;right:4%;bottom:5%;display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:2vw}
+.world{position:relative;border-radius:2vw;overflow:hidden;border:.5vw solid #fff;box-shadow:0 .6vw 0 rgba(0,0,0,.15);cursor:pointer;background:#ddd}
+.world img{width:100%;height:100%;object-fit:cover;display:block}
+.world .lbl{position:absolute;bottom:0;left:0;right:0;background:rgba(255,255,255,.88);text-align:center;font-size:2.1vw;font-weight:800;color:#4a3a7a;padding:.3vw}
+.world .stars{position:absolute;top:.5vw;right:.8vw;font-size:2.2vw;filter:drop-shadow(0 .2vw 0 rgba(0,0,0,.3))}
+.world.locked img{filter:grayscale(1) brightness(.75)}
+.world.locked::after{content:"🔒";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:6vw}
+.world.mascot{background:#fff;display:flex;align-items:center;justify-content:center;cursor:default}
+/* game */
+.spot{position:absolute;border-radius:30%;cursor:pointer}
+.spot.shake{animation:shake .45s}
+.spot.hint{animation:glow 1.2s ease-in-out infinite}
+@keyframes shake{20%{transform:rotate(-4deg) scale(1.03)}40%{transform:rotate(4deg)}60%{transform:rotate(-3deg)}80%{transform:rotate(2deg)}}
+@keyframes glow{50%{box-shadow:0 0 3vw 1.5vw rgba(255,240,120,.85);background:rgba(255,250,180,.25)}}
+.toy{position:absolute;width:11%;pointer-events:none;filter:drop-shadow(0 .5vw .4vw rgba(0,0,0,.3));z-index:5}
+.tray{position:absolute;top:2%;left:50%;transform:translateX(-50%);display:flex;gap:1vw;padding:.7vw 1.2vw;background:rgba(255,255,255,.85);border-radius:3vw;z-index:6}
+.slot{width:5.5vw;height:5.5vw;border-radius:50%;background:rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center}
+.slot img{width:85%;height:85%;object-fit:contain;opacity:.25;filter:grayscale(1) brightness(.3)}
+.slot.got img{opacity:1;filter:none;animation:pop .5s}
+@keyframes pop{0%{transform:scale(0)}70%{transform:scale(1.3)}100%{transform:scale(1)}}
+.gruni{position:absolute;width:13%;z-index:4;pointer-events:none;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-12%)}}
+.puff{position:absolute;font-size:4vw;pointer-events:none;z-index:7;animation:puff .8s forwards}
+@keyframes puff{to{transform:translateY(-120%) scale(1.6);opacity:0}}
+.lvl{position:absolute;bottom:3%;right:2%;background:rgba(255,255,255,.85);border-radius:2vw;padding:.4vw 1.4vw;font-size:2.2vw;font-weight:800;color:#4a3a7a;z-index:6}
+/* video */
+#vid{position:absolute;inset:0;background:#000;z-index:20;display:none}
+#vid video{width:100%;height:100%;object-fit:cover}
+#vid.on{display:block}
+#vid .skip{position:absolute;bottom:3%;right:2%}
+#confetti{position:absolute;inset:0;pointer-events:none;z-index:15}
+#rotate{display:none;position:fixed;inset:0;background:#ffc971;color:#4a3a7a;font-size:6vw;font-weight:800;align-items:center;justify-content:center;text-align:center;z-index:99;padding:5vw}
+@media (orientation:portrait) and (max-width:900px){#rotate{display:flex}}
+</style>
+</head>
+<body>
+<div id="rotate">📱↻<br>Gira el teléfono</div>
+<div id="app"><div class="stage" id="stage">
+
+  <section class="screen on" id="home">
+    <h1>¿Dónde está el juguete?</h1>
+    <img class="hero" src="assets/p_maxi.webp" style="left:-4%" alt="">
+    <img class="hero" src="assets/p_rex.webp" style="right:-6%;animation-delay:.6s" alt="">
+    <button class="btn" id="play">▶ ¡Jugar!</button>
+  </section>
+
+  <section class="screen" id="map">
+    <button class="round" id="mapHome" style="top:2%;left:1.5%">🏠</button>
+    <h2>Elige un mundo</h2>
+    <div class="worlds" id="worlds"></div>
+  </section>
+
+  <section class="screen" id="game">
+    <img class="bg" id="gbg" alt="">
+    <div id="spots"></div>
+    <div class="tray" id="tray"></div>
+    <button class="round" id="gameBack" style="top:2%;left:1.5%;z-index:8">⬅</button>
+    <div class="lvl" id="lvl"></div>
+  </section>
+
+  <canvas id="confetti"></canvas>
+  <div id="vid"><video id="video" playsinline preload="auto"></video><button class="round skip" id="skip">⏭</button></div>
+</div></div>
+
+<script>
+// Coordenadas de escondites en % del escenario (x, y, ancho, alto)
+const WORLDS = [
+ {id:"casa",  name:"Casa de Maxi", bg:"assets/bg_casa.webp", spots:[
+   [2,65,28,30],[5,30,36,35],[41.5,14,17,45],[60,39,33,27],[64,72,22,25],[83,54,15,36]]},
+ {id:"parque",name:"El parque", bg:"assets/bg_parque.webp", spots:[
+   [1,48,24,35],[25,30,16,42],[37,48,21,32],[57,38,20,32],[64,68,29,22],[83,44,15,31]]},
+ {id:"valle", name:"Valle de Rex", bg:"assets/bg_valle.webp", spots:[
+   [0,20,31,62],[27,46,18,22],[30,68,20,16],[53,50,17,30],[78,47,22,26],[88,72,12,20]]},
+ {id:"playa", name:"La playa", bg:"assets/bg_playa.webp", spots:[
+   [7,30,28,40],[24,63,14,25],[40,26,21,49],[71,50,18,20],[59,66,16,25],[80,64,15,27]]},
+ {id:"taller",name:"Taller de Bip", bg:"assets/bg_taller.webp", spots:[
+   [0,45,18,50],[21,58,14,28],[41,64,18,18],[63,53,19,32],[78,67,22,28],[55,14,14,26]]},
+];
+const TOYS = [["pelota","la pelota"],["osito","el osito"],["autito","el autito"],["cubo","el cubo"],["trompo","el trompo"],
+  ["patito","el patito"],["dino","el dinosaurio"],["cohete","el cohete"],["tambor","el tambor"],["globo","el globo"]];
+const LEVEL_TOYS = [3,4,5];
+
+// ---------- progreso ----------
+let prog = {};
+try{ prog = JSON.parse(localStorage.getItem("dej_prog")||"{}") }catch(e){}
+function save(){ try{ localStorage.setItem("dej_prog",JSON.stringify(prog)) }catch(e){} }
+const stars = id => prog[id]||0;           // niveles completados 0..3
+const unlocked = i => i===0 || stars(WORLDS[i-1].id)>=3;
+
+// ---------- audio ----------
+let ac;
+function actx(){ if(!ac){ try{ ac=new (window.AudioContext||window.webkitAudioContext)() }catch(e){} } if(ac&&ac.state==="suspended") ac.resume(); return ac }
+function tone(f,t=0.15,type="sine",delay=0,vol=.25){ const a=actx(); if(!a) return;
+  const o=a.createOscillator(), g=a.createGain(); o.type=type; o.frequency.value=f;
+  const s=a.currentTime+delay; g.gain.setValueAtTime(vol,s); g.gain.exponentialRampToValueAtTime(.001,s+t);
+  o.connect(g).connect(a.destination); o.start(s); o.stop(s+t) }
+const sfx = {
+  pop(){ tone(520,.12,"triangle"); tone(880,.18,"triangle",.08) },
+  boing(){ const a=actx(); if(!a) return; const o=a.createOscillator(),g=a.createGain(); o.type="sine";
+    o.frequency.setValueAtTime(300,a.currentTime); o.frequency.exponentialRampToValueAtTime(120,a.currentTime+.25);
+    g.gain.setValueAtTime(.2,a.currentTime); g.gain.exponentialRampToValueAtTime(.001,a.currentTime+.3); o.connect(g).connect(a.destination); o.start(); o.stop(a.currentTime+.3) },
+  win(){ [523,659,784,1047].forEach((f,i)=>tone(f,.25,"triangle",i*.12)) },
+  tap(){ tone(660,.08,"sine",0,.15) }
+};
+let voice=null;
+function pickVoice(){ const v=speechSynthesis.getVoices(); voice = v.find(x=>/es[-_](CL|419|MX|US)/i.test(x.lang)) || v.find(x=>/^es/i.test(x.lang)) || null }
+if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged=pickVoice }
+function say(txt){ if(!("speechSynthesis" in window)) return; speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(txt); u.lang=voice?voice.lang:"es-ES"; if(voice) u.voice=voice; u.rate=.95; u.pitch=1.25; speechSynthesis.speak(u) }
+
+// ---------- pantallas ----------
+const $=id=>document.getElementById(id);
+function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id)) }
+function goFull(){ const d=document.documentElement; try{ (d.requestFullscreen||d.webkitRequestFullscreen||(()=>{})).call(d) }catch(e){} }
+
+$("play").onclick=()=>{ actx(); sfx.tap(); goFull(); say("¡Gruñi escondió los juguetes! ¿Me ayudas a encontrarlos?"); renderMap(); show("map") };
+$("mapHome").onclick=()=>{ sfx.tap(); show("home") };
+$("gameBack").onclick=()=>{ sfx.tap(); clearTimeout(hintT); renderMap(); show("map") };
+
+function renderMap(){
+  const w=$("worlds"); w.innerHTML="";
+  WORLDS.forEach((W,i)=>{
+    const d=document.createElement("div"); d.className="world"+(unlocked(i)?"":" locked");
+    const s=stars(W.id);
+    d.innerHTML=`<img src="${W.bg}" alt=""><div class="stars">${"⭐".repeat(s)}${"☆".repeat(3-s)}</div><div class="lbl">${W.name}</div>`;
+    d.onclick=()=>{ if(!unlocked(i)){ sfx.boing(); say("Primero termina el mundo anterior"); return }
+      sfx.tap(); startWorld(i, s>=3?0:s) };
+    w.appendChild(d);
+  });
+  const m=document.createElement("div"); m.className="world mascot";
+  m.innerHTML=`<img src="assets/p_bip.webp" alt="" style="object-fit:cover">`;
+  m.onclick=()=>{ sfx.pop(); say("¡Bip bip! ¡Hola!") };
+  w.appendChild(m);
+}
+
+// ---------- juego ----------
+let cur=null, hintT=null;
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.random()*(i+1)|0; [a[i],a[j]]=[a[j],a[i]] } return a }
+
+function startWorld(wi, level){
+  const W=WORLDS[wi], n=LEVEL_TOYS[level];
+  const toys=shuffle(TOYS).slice(0,n);
+  const spotIdx=shuffle(W.spots.map((_,i)=>i));
+  const hidden={}; toys.forEach((t,k)=>hidden[spotIdx[k]]=t);
+  cur={wi,level,toys,hidden,found:0,busy:false};
+  $("gbg").src=W.bg; $("lvl").textContent=`${W.name} · Nivel ${level+1}`;
+  const tray=$("tray"); tray.innerHTML="";
+  toys.forEach(t=>{ const s=document.createElement("div"); s.className="slot"; s.dataset.t=t[0]; s.innerHTML=`<img src="assets/t_${t[0]}.png" alt="">`; tray.appendChild(s) });
+  const sp=$("spots"); sp.innerHTML="";
+  W.spots.forEach((r,i)=>{ const d=document.createElement("div"); d.className="spot";
+    Object.assign(d.style,{left:r[0]+"%",top:r[1]+"%",width:r[2]+"%",height:r[3]+"%"});
+    d.onpointerdown=e=>{ e.preventDefault(); tapSpot(i,d) }; sp.appendChild(d) });
+  // Gruñi flotando en los niveles 2 y 3: se mueve a otro lugar
+  if(level>0){ const g=document.createElement("img"); g.src="assets/c_gruni.png"; g.className="gruni";
+    g.style.cssText+=`left:${10+Math.random()*70}%;top:4%`; sp.appendChild(g) }
+  show("game"); resetHint();
+  setTimeout(()=>say(n===3?`Busca ${n} juguetes`:`¡Ahora hay ${n} juguetes escondidos!`),300);
+}
+
+function resetHint(){ clearTimeout(hintT); document.querySelectorAll(".spot.hint").forEach(s=>s.classList.remove("hint"));
+  hintT=setTimeout(()=>{ if(!cur) return; const k=Object.keys(cur.hidden)[0]; if(k===undefined) return;
+    $("spots").children[k].classList.add("hint"); say("¡Mira, algo brilla!") }, 12000) }
+
+function puff(x,y,ch){ const p=document.createElement("div"); p.className="puff"; p.textContent=ch;
+  p.style.left=x+"%"; p.style.top=y+"%"; $("game").appendChild(p); setTimeout(()=>p.remove(),900) }
+
+function tapSpot(i,el){
+  if(!cur||cur.busy) return; actx();
+  el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
+  const r=WORLDS[cur.wi].spots[i], cx=r[0]+r[2]/2, cy=r[1]+r[3]/2;
+  const t=cur.hidden[i];
+  if(!t){ sfx.boing(); puff(cx-2,cy-4,["💨","🍃","✨"][Math.random()*3|0]);
+    if(Math.random()<.4) say(["Aquí no está","Mmm, aquí no","¡Busca en otro lado!"][Math.random()*3|0]); return }
+  delete cur.hidden[i]; cur.busy=true; resetHint(); el.classList.remove("hint");
+  sfx.pop(); puff(cx-2,cy-6,"⭐");
+  const toy=document.createElement("img"); toy.src=`assets/t_${t[0]}.png`; toy.className="toy";
+  toy.style.left=(cx-5.5)+"%"; toy.style.top=(cy-8)+"%"; $("game").appendChild(toy);
+  const slot=[...$("tray").children].find(s=>s.dataset.t===t[0]);
+  toy.animate([{transform:"translateY(40%) scale(0)"},{transform:"translateY(-60%) scale(1.25)",offset:.6},{transform:"translateY(-40%) scale(1)"}],{duration:650,easing:"cubic-bezier(.3,1.6,.5,1)",fill:"forwards"});
+  say(`¡Encontraste ${t[1]}!`);
+  setTimeout(()=>{
+    const st=$("stage").getBoundingClientRect(), a=toy.getBoundingClientRect(), b=slot.getBoundingClientRect();
+    const dx=b.left+b.width/2-(a.left+a.width/2), dy=b.top+b.height/2-(a.top+a.height/2);
+    toy.animate([{transform:"translateY(-40%) scale(1)"},{transform:`translate(${dx}px,${dy}px) scale(.35)`}],{duration:600,easing:"ease-in",fill:"forwards"}).onfinish=()=>{
+      toy.remove(); slot.classList.add("got"); sfx.tap(); cur.found++; cur.busy=false;
+      if(cur.found===cur.toys.length) levelDone() };
+  },1300);
+}
+
+function levelDone(){
+  clearTimeout(hintT); const W=WORLDS[cur.wi]; const lv=cur.level;
+  prog[W.id]=Math.max(stars(W.id),lv+1); save();
+  sfx.win(); confetti();
+  const worldDone = lv===2;
+  setTimeout(()=>{
+    say(worldDone?"¡Encontraste todos los juguetes! ¡Gruñi está feliz!":"¡Muy bien! ¡Lo lograste!");
+    const v = worldDone?"assets/v_gruni.mp4": (lv===0?"assets/v_maxi.mp4":"assets/v_rex.mp4");
+    setTimeout(()=>playVideo(v,()=>{
+      if(worldDone){ renderMap(); show("map");
+        const nxt=WORLDS[cur.wi+1]; if(nxt) setTimeout(()=>say(`¡Se abrió ${nxt.name}!`),400) }
+      else startWorld(cur.wi,lv+1) }),1600);
+  },500);
+}
+
+function playVideo(src,done){
+  const box=$("vid"), v=$("video"); v.src=src; box.classList.add("on"); v.currentTime=0;
+  let fin=()=>{ v.onended=null; v.pause(); box.classList.remove("on"); done&&done(); fin=()=>{} };
+  v.onended=()=>fin(); $("skip").onclick=()=>fin(); v.onerror=()=>fin();
+  const p=v.play(); if(p&&p.catch) p.catch(()=>{ v.muted=true; v.play().catch(()=>fin()) });
+}
+
+// ---------- confeti ----------
+function confetti(){
+  const c=$("confetti"), st=$("stage"); c.width=st.clientWidth; c.height=st.clientHeight; const x=c.getContext("2d");
+  const cols=["#ff595e","#ffca3a","#8ac926","#1982c4","#6a4c93","#ff9f1c"];
+  const ps=Array.from({length:140},()=>({x:Math.random()*c.width,y:-Math.random()*c.height*.5,vy:2+Math.random()*4,vx:-2+Math.random()*4,r:Math.random()*6,s:5+Math.random()*8,c:cols[Math.random()*6|0],a:Math.random()*6}));
+  let t=0; (function f(){ x.clearRect(0,0,c.width,c.height); ps.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; p.a+=.1;
+    x.save(); x.translate(p.x,p.y); x.rotate(p.a); x.fillStyle=p.c; x.fillRect(-p.s/2,-p.s/4,p.s,p.s/2); x.restore() });
+    if(++t<150) requestAnimationFrame(f); else x.clearRect(0,0,c.width,c.height) })();
+}
+
+// precarga
+WORLDS.forEach(W=>{ new Image().src=W.bg }); TOYS.forEach(t=>{ new Image().src=`assets/t_${t[0]}.png` });
+if("serviceWorker" in navigator){ try{ navigator.serviceWorker.register("sw.js").catch(()=>{}) }catch(e){} }
+// modo prueba: ?debug muestra los escondites
+if(location.search.includes("debug")) document.head.insertAdjacentHTML("beforeend","<style>.spot{outline:3px dashed red;background:rgba(255,0,0,.15)}</style>");
+</script>
+</body>
+</html>

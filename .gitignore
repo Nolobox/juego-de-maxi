@@ -1,0 +1,3 @@
+node_modules/
+tools/_tmp*/
+__pycache__/

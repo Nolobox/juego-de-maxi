@@ -1,0 +1,425 @@
+[
+ {
+  "id": "intro",
+  "text": "¡Gruñi escondió los juguetes! ¿Me ayudas a encontrarlos?",
+  "file": "intro.mp3",
+  "seconds": 3.52,
+  "accuracy": 0.875,
+  "heard": "Gruny escondió los juguetes. ¿Me ayudas a encontrarlos?",
+  "passed": false
+ },
+ {
+  "id": "nivel_tres",
+  "text": "¡Busca los tres juguetes que escondió Gruñi!",
+  "file": "nivel_tres.mp3",
+  "seconds": 2.64,
+  "accuracy": 0.857,
+  "heard": "Busca los tres juguetes que escondió Gruny.",
+  "passed": false
+ },
+ {
+  "id": "nivel_cuatro",
+  "text": "¡Ahora son cuatro los juguetes escondidos!",
+  "file": "nivel_cuatro.mp3",
+  "seconds": 2.64,
+  "accuracy": 1.0,
+  "heard": "Ahora son cuatro los juguetes escondidos.",
+  "passed": true
+ },
+ {
+  "id": "nivel_cinco",
+  "text": "¡Ahora son cinco los juguetes escondidos!",
+  "file": "nivel_cinco.mp3",
+  "seconds": 2.4,
+  "accuracy": 1.0,
+  "heard": "Ahora son 5 los juguetes escondidos.",
+  "passed": true
+ },
+ {
+  "id": "no_1",
+  "text": "Aquí no está.",
+  "file": "no_1.mp3",
+  "seconds": 0.96,
+  "accuracy": 1.0,
+  "heard": "Aquí no está.",
+  "passed": true
+ },
+ {
+  "id": "no_2",
+  "text": "Mmm, aquí no hay nada.",
+  "file": "no_2.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "Mmm, aquí no hay nada.",
+  "passed": true
+ },
+ {
+  "id": "no_3",
+  "text": "¡Busca en otro sitio!",
+  "file": "no_3.mp3",
+  "seconds": 1.28,
+  "accuracy": 1.0,
+  "heard": "Busca en otro sitio.",
+  "passed": true
+ },
+ {
+  "id": "pista",
+  "text": "¡Mira, algo brilla!",
+  "file": "pista.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Mira, algo brilla.",
+  "passed": true
+ },
+ {
+  "id": "enc_pelota_1",
+  "text": "¡Encontraste la pelota!",
+  "file": "enc_pelota_1.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "¡Encontraste la pelota!",
+  "passed": true
+ },
+ {
+  "id": "enc_pelota_2",
+  "text": "¡Muy bien, ahí estaba la pelota!",
+  "file": "enc_pelota_2.mp3",
+  "seconds": 2.48,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba la pelota.",
+  "passed": true
+ },
+ {
+  "id": "enc_pelota_3",
+  "text": "¡Bravo, apareció la pelota!",
+  "file": "enc_pelota_3.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! Apareció la pelota.",
+  "passed": true
+ },
+ {
+  "id": "enc_osito_1",
+  "text": "¡Encontraste el osito!",
+  "file": "enc_osito_1.mp3",
+  "seconds": 1.2,
+  "accuracy": 1.0,
+  "heard": "Encontraste el osito.",
+  "passed": true
+ },
+ {
+  "id": "enc_osito_2",
+  "text": "¡Muy bien, ahí estaba el osito!",
+  "file": "enc_osito_2.mp3",
+  "seconds": 2.08,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba el osito.",
+  "passed": true
+ },
+ {
+  "id": "enc_osito_3",
+  "text": "¡Bravo, apareció el osito!",
+  "file": "enc_osito_3.mp3",
+  "seconds": 2.32,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! Apareció el osito.",
+  "passed": true
+ },
+ {
+  "id": "enc_autito_1",
+  "text": "¡Encontraste el autito!",
+  "file": "enc_autito_1.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Encontraste el autito.",
+  "passed": true
+ },
+ {
+  "id": "enc_autito_2",
+  "text": "¡Muy bien, ahí estaba el autito!",
+  "file": "enc_autito_2.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba el autito.",
+  "passed": true
+ },
+ {
+  "id": "enc_autito_3",
+  "text": "¡Bravo, apareció el autito!",
+  "file": "enc_autito_3.mp3",
+  "seconds": 2.32,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! Apareció el autito.",
+  "passed": true
+ },
+ {
+  "id": "enc_cubo_1",
+  "text": "¡Encontraste el cubo!",
+  "file": "enc_cubo_1.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Encontraste el cubo.",
+  "passed": true
+ },
+ {
+  "id": "enc_cubo_2",
+  "text": "¡Muy bien, ahí estaba el cubo!",
+  "file": "enc_cubo_2.mp3",
+  "seconds": 2.56,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba el cubo.",
+  "passed": true
+ },
+ {
+  "id": "enc_cubo_3",
+  "text": "¡Bravo, apareció el cubo!",
+  "file": "enc_cubo_3.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! ¡Apareció el cubo!",
+  "passed": true
+ },
+ {
+  "id": "enc_trompo_1",
+  "text": "¡Encontraste el trompo!",
+  "file": "enc_trompo_1.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Encontraste el trompo.",
+  "passed": true
+ },
+ {
+  "id": "enc_trompo_2",
+  "text": "¡Muy bien, ahí estaba el trompo!",
+  "file": "enc_trompo_2.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba el trompo.",
+  "passed": true
+ },
+ {
+  "id": "enc_trompo_3",
+  "text": "¡Bravo, apareció el trompo!",
+  "file": "enc_trompo_3.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! ¡Apareció el trompo!",
+  "passed": true
+ },
+ {
+  "id": "enc_patito_1",
+  "text": "¡Encontraste el patito!",
+  "file": "enc_patito_1.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "¿Encontraste el patito?",
+  "passed": true
+ },
+ {
+  "id": "enc_patito_2",
+  "text": "¡Muy bien, ahí estaba el patito!",
+  "file": "enc_patito_2.mp3",
+  "seconds": 2.32,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba el patito.",
+  "passed": true
+ },
+ {
+  "id": "enc_patito_3",
+  "text": "¡Bravo, apareció el patito!",
+  "file": "enc_patito_3.mp3",
+  "seconds": 2.32,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! Apareció el patito.",
+  "passed": true
+ },
+ {
+  "id": "enc_dino_1",
+  "text": "¡Encontraste el dinosaurio!",
+  "file": "enc_dino_1.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "¿Encontraste el dinosaurio?",
+  "passed": true
+ },
+ {
+  "id": "enc_dino_2",
+  "text": "¡Muy bien, ahí estaba el dinosaurio!",
+  "file": "enc_dino_2.mp3",
+  "seconds": 2.64,
+  "accuracy": 1.0,
+  "heard": "¡Muy bien! ¡Ahí estaba el dinosaurio!",
+  "passed": true
+ },
+ {
+  "id": "enc_dino_3",
+  "text": "¡Bravo, apareció el dinosaurio!",
+  "file": "enc_dino_3.mp3",
+  "seconds": 2.56,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! ¡Apareció el dinosaurio!",
+  "passed": true
+ },
+ {
+  "id": "enc_cohete_1",
+  "text": "¡Encontraste el cohete!",
+  "file": "enc_cohete_1.mp3",
+  "seconds": 1.36,
+  "accuracy": 1.0,
+  "heard": "Encontraste el cohete.",
+  "passed": true
+ },
+ {
+  "id": "enc_cohete_2",
+  "text": "¡Muy bien, ahí estaba el cohete!",
+  "file": "enc_cohete_2.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba el cohete.",
+  "passed": true
+ },
+ {
+  "id": "enc_cohete_3",
+  "text": "¡Bravo, apareció el cohete!",
+  "file": "enc_cohete_3.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! Apareció el cohete.",
+  "passed": true
+ },
+ {
+  "id": "enc_tambor_1",
+  "text": "¡Encontraste el tambor!",
+  "file": "enc_tambor_1.mp3",
+  "seconds": 1.2,
+  "accuracy": 1.0,
+  "heard": "Encontraste el tambor.",
+  "passed": true
+ },
+ {
+  "id": "enc_tambor_2",
+  "text": "¡Muy bien, ahí estaba el tambor!",
+  "file": "enc_tambor_2.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba el tambor.",
+  "passed": true
+ },
+ {
+  "id": "enc_tambor_3",
+  "text": "¡Bravo, apareció el tambor!",
+  "file": "enc_tambor_3.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "Bravo, apareció el tambor.",
+  "passed": true
+ },
+ {
+  "id": "enc_globo_1",
+  "text": "¡Encontraste el globo!",
+  "file": "enc_globo_1.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Encontraste el globo.",
+  "passed": true
+ },
+ {
+  "id": "enc_globo_2",
+  "text": "¡Muy bien, ahí estaba el globo!",
+  "file": "enc_globo_2.mp3",
+  "seconds": 2.48,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahí estaba el globo.",
+  "passed": true
+ },
+ {
+  "id": "enc_globo_3",
+  "text": "¡Bravo, apareció el globo!",
+  "file": "enc_globo_3.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! Apareció el globo.",
+  "passed": true
+ },
+ {
+  "id": "nivel_ok_1",
+  "text": "¡Muy bien! ¡Lo lograste!",
+  "file": "nivel_ok_1.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "Muy bien, lo lograste.",
+  "passed": true
+ },
+ {
+  "id": "nivel_ok_2",
+  "text": "¡Qué bien buscas! ¡Los encontraste todos!",
+  "file": "nivel_ok_2.mp3",
+  "seconds": 2.8,
+  "accuracy": 1.0,
+  "heard": "¡Qué bien buscas! ¡Los encontraste todos!",
+  "passed": true
+ },
+ {
+  "id": "nivel_ok_3",
+  "text": "¡Bravo! ¡Eres un gran buscador!",
+  "file": "nivel_ok_3.mp3",
+  "seconds": 2.56,
+  "accuracy": 1.0,
+  "heard": "¡Bravo! ¡Eres un gran buscador!",
+  "passed": true
+ },
+ {
+  "id": "mundo_ok",
+  "text": "¡Encontraste todos los juguetes! ¡Gruñi está feliz!",
+  "file": "mundo_ok.mp3",
+  "seconds": 3.2,
+  "accuracy": 0.857,
+  "heard": "Encontraste todos los juguetes. ¡Gruny está feliz!",
+  "passed": false
+ },
+ {
+  "id": "abre_parque",
+  "text": "¡Se abrió el parque, ya podemos entrar a jugar!",
+  "file": "abre_parque.mp3",
+  "seconds": 3.2,
+  "accuracy": 1.0,
+  "heard": "Se abrió el parque, ya podemos entrar a jugar.",
+  "passed": true
+ },
+ {
+  "id": "abre_valle",
+  "text": "¡Se abrió el Valle de Rex, ya podemos entrar a jugar!",
+  "file": "abre_valle.mp3",
+  "seconds": 3.28,
+  "accuracy": 1.0,
+  "heard": "Se abrió el Valle de Rex. Ya podemos entrar a jugar.",
+  "passed": true
+ },
+ {
+  "id": "abre_playa",
+  "text": "¡Se abrió la playa, ya podemos entrar a jugar!",
+  "file": "abre_playa.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Se abrió la playa, ya podemos entrar a jugar.",
+  "passed": true
+ },
+ {
+  "id": "abre_taller",
+  "text": "¡Se abrió el Taller de Bip, ya podemos entrar a jugar!",
+  "file": "abre_taller.mp3",
+  "seconds": 3.44,
+  "accuracy": 0.909,
+  "heard": "Se abrió el taller de VIP. Ya podemos entrar a jugar.",
+  "passed": true
+ },
+ {
+  "id": "bloqueado",
+  "text": "Primero vamos a terminar este otro mundo.",
+  "file": "bloqueado.mp3",
+  "seconds": 2.4,
+  "accuracy": 1.0,
+  "heard": "Primero vamos a terminar este otro mundo.",
+  "passed": true
+ }
+]
