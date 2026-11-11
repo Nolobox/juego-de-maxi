@@ -62,11 +62,11 @@
 
   function arrastrar(e,i,resize){
     e.preventDefault(); e.stopPropagation(); sel=i;
-    const box=$("edLayer").getBoundingClientRect(), r=W().spots[i], ini=r.slice(), x0=e.clientX, y0=e.clientY;
+    const L=$("edLayer"), box={width:L.offsetWidth,height:L.offsetHeight}, r=W().spots[i], ini=r.slice(), x0=e.clientX, y0=e.clientY;
     const el=e.currentTarget; el.setPointerCapture(e.pointerId);
     [...$("edLayer").children].forEach((c,k)=>c.classList.toggle("sel",k===i));
     el.onpointermove=ev=>{
-      const dx=(ev.clientX-x0)/box.width*100, dy=(ev.clientY-y0)/box.height*100;
+      const [mx,my]=aJuego(ev.clientX-x0, ev.clientY-y0), dx=mx/box.width*100, dy=my/box.height*100;
       if(resize){ r[2]=Math.max(4,Math.min(100-r[0],ini[2]+dx)); r[3]=Math.max(4,Math.min(100-r[1],ini[3]+dy)) }
       else{ r[0]=Math.max(0,Math.min(100-r[2],ini[0]+dx)); r[1]=Math.max(0,Math.min(100-r[3],ini[1]+dy)) }
       Object.assign(el.style,{left:r[0]+"%",top:r[1]+"%",width:r[2]+"%",height:r[3]+"%"});
@@ -79,6 +79,6 @@
   const vuelta=document.createElement("button"); vuelta.className="round"; vuelta.textContent="✏️";
   vuelta.style.cssText="top:2%;right:9%;z-index:8"; vuelta.onclick=abrir; $("game").appendChild(vuelta);
 
-  function abrir(){ clearTimeout(hintT); cur=null; show("editor"); pintar() }
+  function abrir(){ pistaJ.parar(); cur=null; show("editor"); pintar() }
   abrir();
 })();

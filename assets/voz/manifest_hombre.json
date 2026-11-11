@@ -367,5 +367,14 @@
   "accuracy": 1.0,
   "heard": "Vamos a jugar con los colores.",
   "passed": true
+ },
+ {
+  "id": "col_anima",
+  "text": "¿Cuál será? ¡Toca uno, tú puedes!",
+  "file": "col_anima.mp3",
+  "seconds": 2.56,
+  "accuracy": 1.0,
+  "heard": "¿Cuál será? Toca uno. ¡Tú puedes!",
+  "passed": true
  }
 ]

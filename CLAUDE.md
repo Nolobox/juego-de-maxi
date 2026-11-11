@@ -13,8 +13,9 @@ Los personajes, escenarios, juguetes y videos se generaron en Google Flow y est�
 - Hay 5 mundos (casa, parque, valle, playa y taller) con 3 niveles cada uno, de 3, 4 y 5 juguetes.
 - Los escondites son zonas táctiles definidas en `WORLDS[].spots` (en `js/minijuegos/juguetes.js`) como `[x, y, ancho, alto]`, en % del escenario 16:9.
 - Los juguetes se reparten al azar. Al encontrar uno, salta, la voz lo nombra (una de 3 frases al azar) y vuela a la bandeja.
-- Si pasan 12 segundos sin encontrar nada, el escondite con un juguete brilla como pista.
+- **La pista se gana buscando** (`crearPista` en `nucleo.js`, compartida): esperar sin tocar no revela nada; a los 15 s la narradora solo anima a buscar. Con 2 toques vacíos brilla suave una zona amplia alrededor del juguete; con 4, brilla el escondite exacto. (Antes era por tiempo y el niño aprendió a esperar la luz.)
 - En el nivel 3, al encontrar el segundo juguete, Gruñi baja volando, saca un juguete, se ríe y lo lleva a otro escondite.
+- Gruñi descansa a la izquierda o a la derecha de la bandeja (`lugarGruni`), nunca encima.
 - Videos de premio (versiones `_720.mp4`): `v_maxi` al pasar el nivel 1, `v_rex` al pasar el nivel 2 y `v_gruni` al terminar el mundo.
 - Música de fondo generada con Web Audio, botón 🎵/🔇 arriba a la derecha.
 - El progreso se guarda en localStorage con la clave `dej_prog` y la configuración (música, volumen) en `dej_cfg`. Terminar un mundo desbloquea el siguiente.
@@ -26,7 +27,7 @@ Los personajes, escenarios, juguetes y videos se generaron en Google Flow y est�
 - Aparecen 3 objetos grandes de colores distintos; solo uno es del color pedido.
 - Acierto: el objeto salta, Bip dice "¡Sí, la manzana es roja!", pone cara feliz, se enciende una de las 5 luces y el brillo de la antena crece.
 - Error: sonido "uy" suave (`sfx.uy`), el objeto se sacude y Bip dice "Mmm, ese es azul. ¡Busca el rojo!". No se pierde nunca.
-- 10 s sin tocar nada: el objeto correcto brilla y Bip dice "¡Mira, algo brilla!".
+- Pista que se gana buscando (`COLORES_CFG.pista`): 15 s sin tocar -> Bip anima ("¿Cuál será? ¡Toca uno!"); 1 error -> el correcto se mueve un poco; 2 errores -> brilla y Bip dice "¡Mira, algo brilla!".
 - 5 aciertos: antena encendida, confeti, "¡Mi antena está encendida!" y el video `v_bip_720.mp4`; luego vuelve al menú. `prog.colores` cuenta las veces completadas.
 - Cada ronda sortea un color distinto al anterior y objetos que no estuvieron en la ronda anterior.
 - Configuración en `COLORES_CFG` (aciertos, opciones, pista, video). Lo específico de los colores está en `MODOS_BIP.colores` (categorías, objetos, imagen, ids de voz y textos de respaldo). Para formas o números del 1 al 5 se agrega otro modo (`dibujar(o, el)` permite mostrar, por ejemplo, n copias de un objeto) y se elige en `COLORES_CFG.modo`.
@@ -57,7 +58,7 @@ Un minijuego nuevo va en `js/minijuegos/<nombre>.js` (y su `<script>` en `index.
 ## Reglas de diseño (no romper)
 - Pensado para 3 años: no se puede perder, no hay tiempo límite, no hay textos que haya que leer y no hay nada que asuste.
 - Zonas táctiles grandes, de al menos 10 % del ancho. Las respuestas al tocar son inmediatas: sonido y animación.
-- Siempre en horizontal. Probar en el celular y la tablet reales.
+- Siempre en horizontal. iOS no deja bloquear la orientación: si el teléfono queda vertical, `ajustarGiro()` (nucleo.js) gira el juego por dentro para que siga sobre el lado largo. Por eso **todas las medidas dentro del escenario van en `cqw`/% y no en `vw`**, y los desplazamientos medidos en pantalla se pasan por `aJuego(dx, dy)`. Probar en el celular y la tablet reales.
 - Sin dependencias pesadas. Phaser solo si un minijuego futuro necesita física.
 - Todo el texto y la voz en español (Chile).
 

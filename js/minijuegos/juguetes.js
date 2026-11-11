@@ -41,7 +41,7 @@ WORLDS.slice(1).forEach(W=>FRASES[`abre_${W.id}`]=`¡Se abrió ${W.name}, ya pod
 
 // ---------- mapa ----------
 $("mapHome").onclick=()=>{ sfx.tap(); callar(); irAlMenu() };
-$("gameBack").onclick=()=>{ sfx.tap(); clearTimeout(hintT); cur=null; callar(); renderMap(); show("map") };
+$("gameBack").onclick=()=>{ sfx.tap(); pistaJ.parar(); cur=null; callar(); renderMap(); show("map") };
 
 function renderMap(){
   const w=$("worlds"); w.innerHTML="";
@@ -60,7 +60,17 @@ function renderMap(){
 }
 
 // ---------- juego ----------
-let cur=null, hintT=null;
+let cur=null;
+// Pista: 15 s sin tocar -> la narradora anima a buscar; 2 toques vacíos -> brilla la zona; 4 -> brilla el escondite.
+const pistaJ = crearPista({ animarMs:15000, suave:2, fuerte:4,
+  animar(){ if(cur&&!cur.busy&&$("game").classList.contains("on")) say(Math.random()<.5?"anima_buscar":"anima_buscar_2") },
+  mostrar(n){ if(!cur||cur.busy) return; const k=Object.keys(cur.hidden)[0]; if(k===undefined) return;
+    if(n===1){ const [x,y]=centro(cur.wi,+k); quitarPistas(); const z=document.createElement("div"); z.className="zona-pista";
+      z.style.left=x+"%"; z.style.top=y+"%"; $("spots").appendChild(z) }
+    else { $("spots").children[k].classList.add("hint"); say("pista") } } });
+function quitarPistas(){ document.querySelectorAll(".spot.hint").forEach(s=>s.classList.remove("hint")); document.querySelectorAll(".zona-pista").forEach(z=>z.remove()) }
+// Gruñi descansa a la izquierda o a la derecha de la bandeja de juguetes, nunca encima (left en %, mide 13 %)
+const lugarGruni=()=>Math.random()<.5 ? 8.5+Math.random()*10 : 67.5+Math.random()*11;
 
 function startWorld(wi, level){
   const W=WORLDS[wi], n=LEVEL_TOYS[level];
@@ -77,15 +87,13 @@ function startWorld(wi, level){
     d.onpointerdown=e=>{ e.preventDefault(); tapSpot(i,d) }; sp.appendChild(d) });
   // Gruñi flota arriba en los niveles 2 y 3; en el nivel 3 además cambia un juguete de escondite (gruniTravesura)
   if(level>0){ const g=document.createElement("img"); g.src=PERSONAJES.gruni.recorte; g.className="gruni";
-    g.style.cssText+=`left:${10+Math.random()*70}%;top:4%`; sp.appendChild(g); cur.gruni=g }
-  show("game"); resetHint();
+    g.style.cssText+=`left:${lugarGruni()}%;top:4%`; sp.appendChild(g); cur.gruni=g }
+  show("game"); quitarPistas(); pistaJ.reiniciar();
   precargar(videoPremio(level)); if(WORLDS[wi+1]) precargar(WORLDS[wi+1].bg);
   setTimeout(()=>say(["nivel_tres","nivel_cuatro","nivel_cinco"][level]),300);
 }
 
-function resetHint(){ clearTimeout(hintT); document.querySelectorAll(".spot.hint").forEach(s=>s.classList.remove("hint"));
-  hintT=setTimeout(()=>{ if(!cur) return; const k=Object.keys(cur.hidden)[0]; if(k===undefined) return;
-    $("spots").children[k].classList.add("hint"); say("pista") }, 12000) }
+
 
 function puff(x,y,ch){ const p=document.createElement("div"); p.className="puff"; p.textContent=ch;
   p.style.left=x+"%"; p.style.top=y+"%"; $("game").appendChild(p); setTimeout(()=>p.remove(),900) }
@@ -95,9 +103,9 @@ function tapSpot(i,el){
   el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
   const r=WORLDS[cur.wi].spots[i], cx=r[0]+r[2]/2, cy=r[1]+r[3]/2;
   const t=cur.hidden[i];
-  if(!t){ sfx.boing(); puff(cx-2,cy-4,["💨","🍃","✨"][Math.random()*3|0]);
+  if(!t){ sfx.boing(); puff(cx-2,cy-4,["💨","🍃","✨"][Math.random()*3|0]); pistaJ.fallo();
     if(Math.random()<.4) say("no"); return }
-  delete cur.hidden[i]; cur.busy=true; resetHint(); el.classList.remove("hint");
+  delete cur.hidden[i]; cur.busy=true; pistaJ.parar(); quitarPistas();
   sfx.pop(); puff(cx-2,cy-6,"⭐");
   const toy=document.createElement("img"); toy.src=`assets/t_${t[0]}.png`; toy.className="toy";
   toy.style.left=(cx-5.5)+"%"; toy.style.top=(cy-8)+"%"; $("game").appendChild(toy);
@@ -105,10 +113,10 @@ function tapSpot(i,el){
   toy.animate([{transform:"translateY(40%) scale(0)"},{transform:"translateY(-60%) scale(1.25)",offset:.6},{transform:"translateY(-40%) scale(1)"}],{duration:650,easing:"cubic-bezier(.3,1.6,.5,1)",fill:"forwards"});
   say(`enc_${t[0]}`);
   setTimeout(()=>{
-    const st=$("stage").getBoundingClientRect(), a=toy.getBoundingClientRect(), b=slot.getBoundingClientRect();
-    const dx=b.left+b.width/2-(a.left+a.width/2), dy=b.top+b.height/2-(a.top+a.height/2);
-    toy.animate([{transform:"translateY(-40%) scale(1)"},{transform:`translate(${dx}px,${dy}px) scale(.35)`}],{duration:600,easing:"ease-in",fill:"forwards"}).onfinish=()=>{
-      toy.remove(); slot.classList.add("got"); sfx.tap(); cur.found++; cur.busy=false;
+    const a=toy.getBoundingClientRect(), b=slot.getBoundingClientRect();
+    const [dx,dy]=aJuego(b.left+b.width/2-(a.left+a.width/2), b.top+b.height/2-(a.top+a.height/2));   // por si el juego está girado
+    toy.animate([{transform:"translateY(-40%) scale(1)"},{transform:`translateY(-40%) translate(${dx}px,${dy}px) scale(.35)`}],{duration:600,easing:"ease-in",fill:"forwards"}).onfinish=()=>{
+      toy.remove(); slot.classList.add("got"); sfx.tap(); cur.found++; cur.busy=false; pistaJ.reiniciar();
       if(cur.found===cur.toys.length) levelDone();
       else if(cur.level===2 && cur.found===2 && !cur.travesura) gruniTravesura() };
   },1300);
@@ -130,8 +138,7 @@ async function gruniTravesura(){
   const W=WORLDS[c.wi], llenos=Object.keys(c.hidden).map(Number);
   const vacios=W.spots.map((_,i)=>i).filter(i=>!(i in c.hidden));
   if(!llenos.length||!vacios.length) return;
-  c.travesura=true; c.busy=true; clearTimeout(hintT);
-  document.querySelectorAll(".spot.hint").forEach(s=>s.classList.remove("hint"));
+  c.travesura=true; c.busy=true; pistaJ.parar(); quitarPistas();
   const vivo=()=>cur===c;                     // si el niño sale del nivel, se corta la escena
   await espera(500); if(!vivo()) return;
   const de=llenos[Math.random()*llenos.length|0], [x0,y0]=centro(c.wi,de);
@@ -139,7 +146,7 @@ async function gruniTravesura(){
   const dist=i=>{ const [x,y]=centro(c.wi,i); return (x-x0)**2+(y-y0)**2 };
   vacios.sort((p,q)=>dist(q)-dist(p));
   const a=vacios[Math.random()*Math.min(2,vacios.length)|0], [x1,y1]=centro(c.wi,a);
-  const st=$("stage").getBoundingClientRect(), gw=g.offsetWidth/st.width*100, gh=g.offsetHeight/st.height*100;
+  const st=$("stage"), gw=g.offsetWidth/st.offsetWidth*100, gh=g.offsetHeight/st.offsetHeight*100;   // offset*: no cambian si está girado
   const gx=parseFloat(g.style.left)+gw/2, gy=parseFloat(g.style.top)+gh*.8;
   const spotEl=i=>$("spots").children[i], sacudir=el=>{ el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake") };
   // 1) baja hasta el escondite
@@ -163,12 +170,12 @@ async function gruniTravesura(){
   toy.remove(); sacudir(spotEl(a)); puff(x1-2,y1-4,"💨"); sfx.boing();
   await risa; if(!vivo()) return;
   // 5) vuelve arriba y la narradora avisa
-  sfx.whoosh(900); volar(g,[[x1,y1-4],[10+gw/2+Math.random()*70,4+gh*.8]],900,gw/2,gh*.8);
-  c.busy=false; resetHint(); say("gruni_cambio");
+  sfx.whoosh(900); volar(g,[[x1,y1-4],[lugarGruni()+gw/2,4+gh*.8]],900,gw/2,gh*.8);
+  c.busy=false; pistaJ.reiniciar(); say("gruni_cambio");
 }
 
 function levelDone(){
-  clearTimeout(hintT); const W=WORLDS[cur.wi]; const lv=cur.level;
+  pistaJ.parar(); quitarPistas(); const W=WORLDS[cur.wi]; const lv=cur.level;
   prog[W.id]=Math.max(stars(W.id),lv+1); save();
   sfx.win(); confetti();
   const worldDone = lv===2;
@@ -185,11 +192,12 @@ function levelDone(){
 // precarga: juguetes, Gruñi y el primer escenario (los demás se precargan al jugar y se ven en el mapa)
 TOYS.forEach(t=>precargar(`assets/t_${t[0]}.png`)); precargar(PERSONAJES.gruni.recorte); precargar(WORLDS[0].bg);
 
-registrarFrases({ menu_juguetes:"¡Vamos a buscar los juguetes!" });
+registrarFrases({ menu_juguetes:"¡Vamos a buscar los juguetes!", anima_buscar:"¡Toca donde quieras para buscar!",
+  anima_buscar_2:"¿Dónde estará? ¡Busca tocando, tú puedes!" });
 registrarMinijuego({
   id:"juguetes", nombre:"¿Dónde está el juguete?", icono:PERSONAJES.maxi.img, iconoCubre:true, color:"#ffd166", frase:"menu_juguetes",
   abrir(){ say("intro"); renderMap(); show("map") },
-  pausar(){ clearTimeout(hintT) },
-  reanudar(){ if(cur&&$("game").classList.contains("on")) resetHint() },
+  pausar(){ pistaJ.parar() },
+  reanudar(){ if(cur&&!cur.busy&&$("game").classList.contains("on")) pistaJ.reanudar() },
   progresoCambio(){ renderMap() },
 });

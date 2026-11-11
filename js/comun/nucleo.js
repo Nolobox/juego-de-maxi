@@ -38,9 +38,47 @@ function irAlMenu(){
   show("menu");
 }
 
-// Pista por inactividad, compartida: crearPista(ms, mostrar) -> {reiniciar(), parar()}
-function crearPista(ms,mostrar){ let t=null;
-  return { reiniciar(){ clearTimeout(t); t=setTimeout(mostrar,ms) }, parar(){ clearTimeout(t) } } }
+// ---------- pista (compartida) ----------
+// La pista se gana buscando: esperar sin tocar nada no revela la respuesta.
+//   - animarMs sin tocar nada  -> animar(): la voz anima a buscar, sin decir dónde (se repite)
+//   - "suave" toques fallidos  -> mostrar(1): señal suave (zona amplia / movimiento leve)
+//   - "fuerte" toques fallidos -> mostrar(2): brillo en el lugar exacto
+// reiniciar() al empezar a buscar algo nuevo; fallo() en cada toque equivocado; tocar() en cualquier toque.
+function crearPista({animarMs=15000, suave=2, fuerte=4, mostrar, animar}={}){
+  let t=null, fallos=0, nivel=0, activa=false;
+  const armar=()=>{ clearTimeout(t); if(activa) t=setTimeout(()=>{ if(animar) animar(); armar() },animarMs) };
+  return {
+    reiniciar(){ activa=true; fallos=0; nivel=0; armar() },
+    tocar(){ armar() },
+    fallo(){ fallos++; armar(); const n=fallos>=fuerte?2:fallos>=suave?1:0; if(n>nivel){ nivel=n; if(mostrar) mostrar(n) } },
+    parar(){ activa=false; clearTimeout(t) },
+    reanudar(){ activa=true; armar() },           // después del rincón de los papás, sin perder los fallos
+  };
+}
+
+// ---------- siempre en horizontal ----------
+// iOS no deja bloquear la orientación. Si el teléfono queda vertical, el juego se gira por dentro
+// para seguir sobre el lado largo, hacia el mismo lado en que se tenía en horizontal.
+let giro=0, ultimoHorizontal=90;
+function anguloPantalla(){
+  const a=(screen.orientation&&typeof screen.orientation.angle==="number")?screen.orientation.angle:(window.orientation||0);
+  return ((a%360)+360)%360;
+}
+function ajustarGiro(){
+  const W=innerWidth, H=innerHeight, vertical=H>W, a=anguloPantalla();
+  if(a===90||a===270) ultimoHorizontal=a;
+  // 90 = girado a la izquierda (la parte de arriba del teléfono queda a la izquierda)
+  giro=vertical?(ultimoHorizontal===270?-90:90):0;
+  const raiz=document.documentElement;
+  raiz.style.setProperty("--W",(vertical?H:W)+"px"); raiz.style.setProperty("--H",(vertical?W:H)+"px");
+  raiz.classList.toggle("girado",vertical);
+  $("app").style.transform=vertical?`translate(-50%,-50%) rotate(${giro}deg)`:"";
+}
+// Convierte un desplazamiento medido en pantalla (px) a las coordenadas del juego (por si está girado)
+function aJuego(dx,dy){ const t=-giro*Math.PI/180, c=Math.cos(t), s=Math.sin(t); return [dx*c-dy*s, dx*s+dy*c] }
+addEventListener("resize",ajustarGiro);
+addEventListener("orientationchange",()=>{ ajustarGiro(); setTimeout(ajustarGiro,250) });
+ajustarGiro();
 
 function playVideo(src,done){
   const box=$("vid"), v=$("video"); v.src=src; box.classList.add("on"); v.currentTime=0; musicaPausa(true);

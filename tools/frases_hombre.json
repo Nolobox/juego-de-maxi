@@ -39,5 +39,6 @@
   {"id": "col_no_verde_amarillo", "text": "Mmm, ese es verde. ¡Busca el amarillo!"},
   {"id": "col_pista", "text": "¡Mira, algo brilla!"},
   {"id": "col_final", "text": "¡Mi antena está encendida! ¡Gracias, amigo!"},
-  {"id": "menu_colores", "text": "¡Vamos a jugar con los colores!"}
+  {"id": "menu_colores", "text": "¡Vamos a jugar con los colores!"},
+  {"id": "col_anima", "text": "¿Cuál será? ¡Toca uno, tú puedes!"}
 ]}

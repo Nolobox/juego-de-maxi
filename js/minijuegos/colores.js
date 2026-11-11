@@ -10,7 +10,8 @@ const COLORES_CFG = {
   modo: "colores",     // modo de MODOS_BIP
   aciertos: 5,         // luces de la antena
   opciones: 3,         // objetos por ronda (de categorías distintas; solo uno es el correcto)
-  pistaMs: 10000,      // sin tocar nada, el correcto brilla
+  // pista que se gana buscando (ver crearPista): 15 s sin tocar -> Bip anima; 1 error -> el correcto se mueve; 2 -> brilla
+  pista: { animarMs:15000, suave:1, fuerte:2 },
   video: "assets/v_bip_720.mp4",
 };
 
@@ -33,11 +34,11 @@ const MODOS_BIP = {
       pedir:        c=>`col_pide_${c}`,        // "¡Ahora busca algo azul!"
       acierto:      o=>`col_si_${o.id}`,       // "¡Sí, la manzana es roja!"
       error:    (o,c)=>`col_no_${o.cat}_${c}`, // "Mmm, ese es azul. ¡Busca el rojo!"
-      pista: "col_pista", final: "col_final",
+      pista: "col_pista", final: "col_final", animar: "col_anima",
     },
     // textos de respaldo si falta un mp3
     frases(){
-      const f={ col_pista:"¡Mira, algo brilla!", col_final:"¡Mi antena está encendida! ¡Gracias, amigo!" };
+      const f={ col_pista:"¡Mira, algo brilla!", col_final:"¡Mi antena está encendida! ¡Gracias, amigo!", col_anima:"¿Cuál será? ¡Toca uno, tú puedes!" };
       this.categorias.forEach(c=>{ f[`col_pide1_${c}`]=`¿Me ayudas a encender mi antena? ¡Busca algo ${c}!`; f[`col_pide_${c}`]=`¡Ahora busca algo ${c}!`;
         this.categorias.forEach(p=>{ if(p!==c) f[`col_no_${c}_${p}`]=`Mmm, ese es ${c}. ¡Busca el ${p}!` }) });
       this.objetos.forEach(o=>f[`col_si_${o.id}`]=`¡Sí, ${o.nombre} es ${COLOR_ADJ[o.cat][o.f]}!`);
@@ -60,11 +61,11 @@ registrarFrases({ menu_colores:"¡Vamos a jugar con los colores!" });
 
 // ---------- juego ----------
 let colEst=null;
-const colPista = crearPista(COLORES_CFG.pistaMs, ()=>{
-  const e=colEst; if(!e||e.ocupado) return;
-  const k=e.opciones.findIndex(o=>o.cat===e.pedido); const el=$("colOpc").children[k];
-  if(el){ el.classList.add("brilla"); say(e.modo.voz.pista) }
-});
+const colPista = crearPista({ ...COLORES_CFG.pista,
+  animar(){ const e=colEst; if(e&&!e.ocupado&&$("colores").classList.contains("on")) say(e.modo.voz.animar) },
+  mostrar(n){ const e=colEst; if(!e||e.ocupado) return;
+    const el=$("colOpc").children[e.opciones.findIndex(o=>o.cat===e.pedido)]; if(!el) return;
+    if(n===1) el.classList.add("tiembla"); else { el.classList.remove("tiembla"); el.classList.add("brilla"); say(e.modo.voz.pista) } } });
 
 function colPose(p){
   const P=BIP_POSES[p], img=$("colBipImg"), b=$("colBrillo");
@@ -109,15 +110,14 @@ function colRonda(primera){
 async function colTocar(o,el){
   const e=colEst; if(!e||e.ocupado) return; actx();
   const sigue=()=>colEst===e;                      // si sale del juego, se corta todo
-  colPista.reiniciar();
   if(o.cat!==e.pedido){                            // error: sonido chistoso, se sacude y Bip vuelve a pedir
-    sfx.uy(); el.classList.remove("sacude","brilla"); void el.offsetWidth; el.classList.add("sacude");
+    sfx.uy(); el.classList.remove("sacude"); void el.offsetWidth; el.classList.add("sacude");
     if(e.aciertos>0) colPose("pensando");
-    say(e.modo.voz.error(o,e.pedido)); return;
+    say(e.modo.voz.error(o,e.pedido)); colPista.fallo(); return;
   }
   // acierto
   e.ocupado=true; colPista.parar();
-  [...$("colOpc").children].forEach(b=>{ b.classList.remove("brilla"); if(b!==el) b.classList.add("listo") });
+  [...$("colOpc").children].forEach(b=>{ b.classList.remove("brilla","tiembla"); if(b!==el) b.classList.add("listo") });
   el.classList.remove("sacude"); void el.offsetWidth; el.classList.add("salta");
   sfx.pop(); e.aciertos++; colLuces(); setTimeout(()=>sfx.luz(e.aciertos),250);
   colPose("feliz"); const bip=$("colBip"); bip.classList.remove("contento"); void bip.offsetWidth; bip.classList.add("contento");
@@ -146,5 +146,5 @@ registrarMinijuego({
     colIniciar();
   },
   pausar(){ colPista.parar() },
-  reanudar(){ if(colEst&&!colEst.ocupado&&$("colores").classList.contains("on")) colPista.reiniciar() },
+  reanudar(){ if(colEst&&!colEst.ocupado&&$("colores").classList.contains("on")) colPista.reanudar() },
 });
