@@ -745,5 +745,176 @@
   "accuracy": 1.0,
   "heard": "Buenas noches, gruñi. Que tengas lindos sueños.",
   "passed": true
+ },
+ {
+  "id": "menu_memoria",
+  "text": "¡Vamos a jugar a la memoria con Rex!",
+  "file": "menu_memoria.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "Vamos a jugar a la memoria con Rex.",
+  "passed": true
+ },
+ {
+  "id": "mem_intro",
+  "text": "¡Busca las cartas iguales!",
+  "file": "mem_intro.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Busca las cartas iguales.",
+  "passed": true
+ },
+ {
+  "id": "mem_mira",
+  "text": "¡Mira bien las cartas!",
+  "file": "mem_mira.mp3",
+  "seconds": 1.36,
+  "accuracy": 1.0,
+  "heard": "Mira bien las cartas.",
+  "passed": true
+ },
+ {
+  "id": "mem_muy_bien",
+  "text": "¡Muy bien!",
+  "file": "mem_muy_bien.mp3",
+  "seconds": 0.96,
+  "accuracy": 1.0,
+  "heard": "¡Muy bien!",
+  "passed": true
+ },
+ {
+  "id": "mem_final",
+  "text": "¡Lo lograste! ¡Encontraste todos los pares! ¡Rex está feliz!",
+  "file": "mem_final.mp3",
+  "seconds": 4.64,
+  "accuracy": 1.0,
+  "heard": "Lo lograste. Encontraste todos los pares. Rex está feliz.",
+  "passed": true
+ },
+ {
+  "id": "mem_bloqueado",
+  "text": "¡Primero juguemos el nivel anterior!",
+  "file": "mem_bloqueado.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "Primero juguemos el nivel anterior.",
+  "passed": true
+ },
+ {
+  "id": "mem_nuevo_nivel",
+  "text": "¡Se abrió un nivel nuevo!",
+  "file": "mem_nuevo_nivel.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Se abrió un nivel nuevo.",
+  "passed": true
+ },
+ {
+  "id": "mem_par_triceratops",
+  "text": "¡Dos triceratops!",
+  "file": "mem_par_triceratops.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Dos Triceratops.",
+  "passed": true
+ },
+ {
+  "id": "mem_par_estegosaurio",
+  "text": "¡Dos estegosaurios!",
+  "file": "mem_par_estegosaurio.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Dos estegosaurios.",
+  "passed": true
+ },
+ {
+  "id": "mem_par_braquiosaurio",
+  "text": "¡Dos braquiosaurios!",
+  "file": "mem_par_braquiosaurio.mp3",
+  "seconds": 2.88,
+  "accuracy": 0.5,
+  "heard": "Dos brachiosaurios.",
+  "passed": false
+ },
+ {
+  "id": "mem_par_pterodactilo",
+  "text": "¡Dos pterodáctilos!",
+  "file": "mem_par_pterodactilo.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "Dos pterodáctilos.",
+  "passed": true
+ },
+ {
+  "id": "mem_par_anquilosaurio",
+  "text": "¡Dos anquilosaurios!",
+  "file": "mem_par_anquilosaurio.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "¡Dos anquilosaurios!",
+  "passed": true
+ },
+ {
+  "id": "mem_par_huevo",
+  "text": "¡Dos huevos!",
+  "file": "mem_par_huevo.mp3",
+  "seconds": 1.04,
+  "accuracy": 1.0,
+  "heard": "Dos huevos.",
+  "passed": true
+ },
+ {
+  "id": "mem_par_volcan",
+  "text": "¡Dos volcanes!",
+  "file": "mem_par_volcan.mp3",
+  "seconds": 1.28,
+  "accuracy": 1.0,
+  "heard": "Dos volcanes.",
+  "passed": true
+ },
+ {
+  "id": "mem_par_hueso",
+  "text": "¡Dos huesos!",
+  "file": "mem_par_hueso.mp3",
+  "seconds": 1.28,
+  "accuracy": 1.0,
+  "heard": "Dos huesos.",
+  "passed": true
+ },
+ {
+  "id": "mem_par_huella",
+  "text": "¡Dos huellas!",
+  "file": "mem_par_huella.mp3",
+  "seconds": 1.28,
+  "accuracy": 1.0,
+  "heard": "Dos huellas.",
+  "passed": true
+ },
+ {
+  "id": "mem_par_palmera",
+  "text": "¡Dos palmeras!",
+  "file": "mem_par_palmera.mp3",
+  "seconds": 1.28,
+  "accuracy": 1.0,
+  "heard": "¡Dos palmeras!",
+  "passed": true
+ },
+ {
+  "id": "mem_no_1",
+  "text": "¡Uy, no son iguales!",
+  "file": "mem_no_1.mp3",
+  "seconds": 1.92,
+  "accuracy": 1.0,
+  "heard": "¡Uy! ¡No son iguales!",
+  "passed": true
+ },
+ {
+  "id": "mem_no_2",
+  "text": "¡Uy, no son iguales! ¡Prueba otra vez!",
+  "file": "mem_no_2.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Uy, no son iguales. Prueba otra vez.",
+  "passed": true
  }
 ]

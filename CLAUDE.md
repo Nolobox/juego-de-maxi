@@ -7,7 +7,7 @@ Los personajes, escenarios, juguetes y videos se generaron en Google Flow y est�
 
 **Personajes:** Maxi (protagonista), Rex (bebé dinosaurio amigo), Bip (robot ayudante) y Gruñi (nube traviesa que esconde los juguetes, nunca da miedo).
 
-**Menú principal:** ¡Jugar! abre un menú con un botón grande por minijuego (hoy son 3; se arma solo con `registrarMinijuego`). Al tocar uno, dice su frase y lo abre.
+**Menú principal:** ¡Jugar! abre un menú con un botón grande por minijuego (hoy son 4; se arma solo con `registrarMinijuego`). Al tocar uno, dice su frase y lo abre.
 
 **Videos únicos:** cada minijuego (y cada mundo de "¡Que no llueva!") tiene su propio video de victoria. No reutilizar un video en otro mundo ni en otro minijuego.
 
@@ -50,6 +50,26 @@ Darle cosas a Gruñi y ver cómo cambian su ánimo y el clima. Las cosas están 
 - Imágenes en `assets/lluvia/` (`gruni-<estado>.webp`, `regalo-*`, `comida-*`, `dulce-*`, `manana-*`, `tarde-*`, `noche-*`), recortadas con `tools/recortar_lluvia.py` desde `Referencias/alegra-a-gruñi/`. Voces `llu_*` con `juego-mujer` (narradora) y `llg_*` con `juego-hombre` (Gruñi, a velocidad 1.12).
 - `?llu=23` abre directo el mundo 2, nivel 3 (para revisar escenas).
 
+### Minijuego 4: La memoria de Rex (`js/minijuegos/memoria.js`)
+Cartas boca abajo con la carita de Rex. Se dan vuelta de a dos (giro 3D y sonido suave) para encontrar los pares. Las caras se sortean en cada partida entre 10 dibujos: triceratops, estegosaurio, braquiosaurio, pterodáctilo, anquilosaurio, huevo, volcán, hueso, huella y palmera.
+- Niveles (`MEM_CFG.niveles`). Es **celular** si el lado más corto de la pantalla mide menos de 600 px; si no, es tablet:
+
+  | Nivel | Celular | Tablet | Ayuda |
+  |---|---|---|---|
+  | 1 | 3 pares | 3 pares | Todas a la vista 3 s al inicio |
+  | 2 | 4 | 4 | Todas a la vista 2 s |
+  | 3 | 5 | 6 | — |
+  | 4 | 6 | 8 | — |
+  | 5 | 7 | 10 | — |
+
+- La cuadrícula se calcula sola (`memCuadricula`): prueba todas las cantidades de columnas y elige la que deja las cartas más grandes en el espacio a la derecha de Rex, con separación entre ellas. La última fila incompleta queda centrada.
+- Par: Rex celebra, la voz lo nombra ("¡Dos triceratops!") y las cartas quedan boca arriba con brillo. No par: Rex pone cara chistosa ("¡Uy, no son iguales!"), 1 s y vuelven a girar. Solo se pueden dar vuelta 2 cartas a la vez; mientras se resuelven, las demás no responden. Sin tiempo y sin límite de intentos.
+- Pista: después de 4 intentos seguidos sin acierto, brilla suave una carta de un par pendiente. Sin tocar nada, Rex queda en la esquina pensando.
+- Nivel completo: Rex celebra, confeti, "¡Muy bien!" y sigue el nivel siguiente. Al terminar el 5 se ve el video `v_rex_memoria_720.mp4` (exclusivo de este minijuego) y se vuelve al mapa de niveles.
+- `prog.memoria` = niveles completados. En el mapa de niveles (los mismos botones que Bip) se puede volver a jugar cualquier nivel ya abierto.
+- Imágenes en `assets/memoria/` (`rex-pensando|celebra|chistoso.webp`, `reverso.webp` y una por dibujo), recortadas con `tools/recortar_memoria.py` desde `Referencias/la-memoria-de-rex/`. Voces `mem_*` con `juego-mujer`.
+- `?mem=5` abre directo el nivel 5; `?mem=5a` además da vuelta todas las cartas (para revisar la cuadrícula).
+
 ## Estructura
 ```
 index.html                 pantallas (HTML) y carga de scripts en orden
@@ -63,6 +83,7 @@ js/comun/papas.js          rincón de los papás
 js/minijuegos/juguetes.js  ¿Dónde está el juguete? (mundos, mapa, niveles, Gruñi)
 js/minijuegos/colores.js   Los colores de Bip (modos y rondas configurables)
 js/minijuegos/lluvia.js    ¡Que no llueva! (3 mundos con motores, bandeja para tocar o arrastrar)
+js/minijuegos/memoria.js   La memoria de Rex (cartas, cuadrícula según pantalla)
 js/main.js                 botón ¡Jugar!, service worker, ?debug y ?editor
 js/editor.js               editor de escondites (solo con ?editor)
 sw.js                      caché sin internet (la lista la genera tools/actualizar_sw.py)
@@ -71,6 +92,7 @@ assets/voz/                frases grabadas (<id>.mp3) y manifest*.json de la gen
 assets/icons/              íconos de la PWA
 assets/colores/            Bip y objetos de colores, sin fondo
 assets/lluvia/             Gruñi (11 estados) y objetos de ¡Que no llueva!, sin fondo
+assets/memoria/            Rex, reverso y caras de las cartas
 ```
 Un minijuego nuevo va en `js/minijuegos/<nombre>.js` (y su `<script>` en `index.html`, antes de `main.js`), registra sus frases con `registrarFrases()` y se registra con `registrarMinijuego({id, nombre, icono, color, frase, abrir, pausar, reanudar, progresoCambio})`. Guarda su progreso dentro de `prog` con su propio prefijo. Los estilos nuevos usan `cqw` (1 % del ancho del escenario) en vez de `vw`.
 
@@ -101,7 +123,7 @@ Un minijuego nuevo va en `js/minijuegos/<nombre>.js` (y su `<script>` en `index.
 Desde el mapa se podrá elegir entre más minijuegos con los mismos personajes:
 1. ✅ **Los colores de Bip** (hecho, con 5 niveles: colores y números del 1 al 5). Pendiente: formas (necesita imágenes).
 2. **El paseo de Rex:** Rex camina solo y el niño toca la pantalla para saltar charcos y recoger frutas, sin poder perder.
-3. ✅ **¡Que no llueva!** (hecho, con 3 mundos).
+3. ✅ **¡Que no llueva!** (hecho, con 3 mundos). ✅ **La memoria de Rex** (hecho, con 5 niveles).
 4. **Vestir a Maxi:** elegir ropa según el clima.
 5. **Cuento interactivo:** elegir qué pasa en la historia, con videos de Flow.
 
