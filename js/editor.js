@@ -77,7 +77,7 @@
 
   // Botón para volver al editor desde el juego
   const vuelta=document.createElement("button"); vuelta.className="round"; vuelta.textContent="✏️";
-  vuelta.style.cssText="top:2%;right:1.5%;z-index:8"; vuelta.onclick=abrir; $("game").appendChild(vuelta);
+  vuelta.style.cssText="top:2%;right:9%;z-index:8"; vuelta.onclick=abrir; $("game").appendChild(vuelta);
 
   function abrir(){ clearTimeout(hintT); cur=null; show("editor"); pintar() }
   abrir();

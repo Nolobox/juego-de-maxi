@@ -61,6 +61,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"B
 #vid.on{display:block}
 #vid .skip{position:absolute;bottom:3%;right:2%}
 #confetti{position:absolute;inset:0;pointer-events:none;z-index:15}
+#mute.off{opacity:.6}
 #rotate{display:none;position:fixed;inset:0;background:#ffc971;color:#4a3a7a;font-size:6vw;font-weight:800;align-items:center;justify-content:center;text-align:center;z-index:99;padding:5vw}
 @media (orientation:portrait) and (max-width:900px){#rotate{display:flex}}
 </style>
@@ -90,6 +91,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"B
     <div class="lvl" id="lvl"></div>
   </section>
 
+  <button class="round" id="mute" style="top:2%;right:1.5%;z-index:9" aria-label="Música">🎵</button>
   <canvas id="confetti"></canvas>
   <div id="vid"><video id="video" playsinline preload="auto"></video><button class="round skip" id="skip">⏭</button></div>
 </div></div>
@@ -116,6 +118,10 @@ const LEVEL_TOYS = [3,4,5];
 let prog = {};
 try{ prog = JSON.parse(localStorage.getItem("dej_prog")||"{}") }catch(e){}
 function save(){ try{ localStorage.setItem("dej_prog",JSON.stringify(prog)) }catch(e){} }
+// configuración: música encendida y volumen general (0..1)
+let cfg = {musica:true, vol:1};
+try{ Object.assign(cfg, JSON.parse(localStorage.getItem("dej_cfg")||"{}")) }catch(e){}
+function saveCfg(){ try{ localStorage.setItem("dej_cfg",JSON.stringify(cfg)) }catch(e){} }
 const stars = id => prog[id]||0;           // niveles completados 0..3
 const unlocked = i => i===0 || stars(WORLDS[i-1].id)>=3;
 
@@ -126,6 +132,7 @@ function actx(){
   if(!ac){ try{ ac=new (window.AudioContext||window.webkitAudioContext)();
     bus.master=ac.createGain(); bus.master.connect(ac.destination);
     ["sfx","voz","musica"].forEach(k=>{ bus[k]=ac.createGain(); bus[k].connect(bus.master) });
+    bus.master.gain.value=cfg.vol; bus.musica.gain.value=0;
   }catch(e){} }
   if(ac&&ac.state==="suspended") ac.resume(); return ac }
 function tone(f,t=0.15,type="sine",delay=0,vol=.25){ const a=actx(); if(!a) return;
@@ -147,6 +154,41 @@ const sfx = {
     const g=a.createGain(); g.gain.setValueAtTime(.001,t); g.gain.exponentialRampToValueAtTime(.18,t+d*.4); g.gain.exponentialRampToValueAtTime(.001,t+d);
     n.connect(f).connect(g).connect(bus.sfx); n.start(t); n.stop(t+d) }
 };
+
+// ---------- música de fondo ----------
+// Melodía de cajita de música sobre un bajo suave (Do - La menor - Fa - Sol), 8 compases en loop.
+const MEL=[72,0,76,0,79,0,76,0, 76,0,72,0,69,0,72,0, 77,0,76,0,72,0,69,0, 71,0,74,0,79,0,74,0,
+           76,79,81,0,79,0,76,0, 72,0,76,0,74,72,69,0, 69,0,72,0,77,0,76,0, 74,0,71,0,67,0,0,0];
+const BAJO=[48,45,41,43,48,45,41,43];
+const CORCHEA=60/88/2;                       // 88 pulsos por minuto
+const MUSICA_VOL=.5, MUSICA_BAJA=.2;         // volumen normal y mientras habla la voz
+const hz=m=>440*Math.pow(2,(m-69)/12);
+function nota(m,t,dur,vol,type){ const a=ac, o=a.createOscillator(), g=a.createGain();
+  o.type=type; o.frequency.value=hz(m); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.015);
+  g.gain.exponentialRampToValueAtTime(.0001,t+dur); o.connect(g).connect(bus.musica); o.start(t); o.stop(t+dur+.05) }
+let musT=null, musPaso=0, musProx=0, musPausa=false;
+function musicaTick(){
+  while(musProx<ac.currentTime+.3){
+    const i=musPaso%MEL.length, m=MEL[i];
+    if(m){ nota(m,musProx,.9,.09,"sine"); nota(m+12,musProx,.35,.02,"triangle") }
+    if(i%8===0) nota(BAJO[i/8],musProx,CORCHEA*3.5,.08,"sine");
+    if(i%8===4) nota(BAJO[(i-4)/8]+7,musProx,CORCHEA*3,.05,"sine");
+    musPaso++; musProx+=CORCHEA;
+  }
+}
+function musicaVolumen(){ if(!ac) return; const v=(cfg.musica&&!musPausa)?(vozSrc||("speechSynthesis" in window&&speechSynthesis.speaking)?MUSICA_BAJA:MUSICA_VOL):0;
+  bus.musica.gain.setTargetAtTime(v,ac.currentTime,.25) }
+function musicaIniciar(){ if(!actx()||musT) return; musProx=ac.currentTime+.1; musT=setInterval(musicaTick,100); musicaVolumen() }
+function musicaPausa(p){ musPausa=p; musicaVolumen() }
+function pintarMute(){ $("mute").textContent=cfg.musica?"🎵":"🔇"; $("mute").classList.toggle("off",!cfg.musica) }
+
+// iOS Safari: el audio solo se habilita dentro de un toque; al primer toque se reproduce un sonido vacío.
+function desbloquear(){ const a=actx(); if(!a) return;
+  const b=a.createBuffer(1,1,22050), s=a.createBufferSource(); s.buffer=b; s.connect(a.destination); s.start(0);
+  if(a.state==="running"){ ["pointerdown","touchend","click"].forEach(t=>document.removeEventListener(t,desbloquear,true)) } }
+["pointerdown","touchend","click"].forEach(t=>document.addEventListener(t,desbloquear,true));
+// en segundo plano no suena nada
+document.addEventListener("visibilitychange",()=>{ if(!ac) return; if(document.hidden) ac.suspend(); else ac.resume() });
 
 // ---------- voz ----------
 // Cada frase tiene un id = nombre del archivo en assets/voz/<id>.mp3 (generados con tools/generar_voces.py).
@@ -189,7 +231,7 @@ if("speechSynthesis" in window){ pickVoice(); speechSynthesis.onvoiceschanged=pi
 function callar(){ if(vozSrc){ try{ vozSrc.stop() }catch(e){} vozSrc=null } if("speechSynthesis" in window) speechSynthesis.cancel() }
 function vozSistema(txt,fin){ if(!txt||!("speechSynthesis" in window)) return fin();
   const u=new SpeechSynthesisUtterance(txt); u.lang=sysVoice?sysVoice.lang:"es-ES"; if(sysVoice) u.voice=sysVoice; u.rate=.95; u.pitch=1.25;
-  u.onend=u.onerror=()=>fin(); speechSynthesis.speak(u) }
+  u.onend=u.onerror=()=>{ musicaVolumen(); fin() }; speechSynthesis.speak(u); setTimeout(musicaVolumen,50) }
 // say("pista") dice una frase; si el id tiene variantes (say("enc_pelota")) elige una al azar.
 // Devuelve una promesa que se cumple cuando termina de hablar (o si otra frase la interrumpe).
 let vozTurno=0;
@@ -201,7 +243,7 @@ function say(id){ return new Promise(fin=>{
   cargarVoz(id).then(buf=>{ if(turno!==vozTurno) return fin();      // ya se pidió otra frase
     if(!buf) return vozSistema(txt,fin);
     const s=a.createBufferSource(); s.buffer=buf; s.playbackRate.value=VELOCIDAD[id]||1;
-    s.connect(bus.voz); s.onended=()=>fin(); s.start(); vozSrc=s });
+    s.connect(bus.voz); s.onended=()=>{ if(vozSrc===s) vozSrc=null; musicaVolumen(); fin() }; s.start(); vozSrc=s; musicaVolumen() });
 }) }
 function precargarVoces(){ Object.keys(FRASES).forEach(cargarVoz) }
 
@@ -210,7 +252,9 @@ const $=id=>document.getElementById(id);
 function show(id){ document.querySelectorAll(".screen").forEach(s=>s.classList.toggle("on",s.id===id)) }
 function goFull(){ const d=document.documentElement; try{ (d.requestFullscreen||d.webkitRequestFullscreen||(()=>{})).call(d) }catch(e){} }
 
-$("play").onclick=()=>{ actx(); sfx.tap(); goFull(); precargarVoces(); say("intro"); renderMap(); show("map") };
+$("play").onclick=()=>{ actx(); sfx.tap(); goFull(); precargarVoces(); musicaIniciar(); say("intro"); renderMap(); show("map") };
+$("mute").onclick=()=>{ cfg.musica=!cfg.musica; saveCfg(); pintarMute(); musicaIniciar(); musicaVolumen(); sfx.tap() };
+pintarMute();
 $("mapHome").onclick=()=>{ sfx.tap(); show("home") };
 $("gameBack").onclick=()=>{ sfx.tap(); clearTimeout(hintT); cur=null; callar(); renderMap(); show("map") };
 
@@ -353,8 +397,9 @@ function levelDone(){
 }
 
 function playVideo(src,done){
-  const box=$("vid"), v=$("video"); v.src=src; box.classList.add("on"); v.currentTime=0;
-  let fin=()=>{ v.onended=null; v.pause(); box.classList.remove("on"); done&&done(); fin=()=>{} };
+  const box=$("vid"), v=$("video"); v.src=src; box.classList.add("on"); v.currentTime=0; musicaPausa(true);
+  v.volume=cfg.vol;
+  let fin=()=>{ v.onended=null; v.pause(); box.classList.remove("on"); musicaPausa(false); done&&done(); fin=()=>{} };
   v.onended=()=>fin(); $("skip").onclick=()=>fin(); v.onerror=()=>fin();
   const p=v.play(); if(p&&p.catch) p.catch(()=>{ v.muted=true; v.play().catch(()=>fin()) });
 }
