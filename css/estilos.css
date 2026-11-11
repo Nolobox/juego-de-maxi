@@ -93,7 +93,7 @@ html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"B
 /* ---------- menú principal ---------- */
 /* cqw = 1 % del ancho del escenario (no de la ventana) */
 #menu{background:linear-gradient(#bfe8ff,#fff1c9)}
-.menu-juegos{position:absolute;top:13%;bottom:9%;left:7%;right:7%;display:flex;gap:5cqw;justify-content:center;align-items:stretch}
+.menu-juegos{position:absolute;top:13%;bottom:9%;left:4%;right:4%;display:flex;gap:3cqw;justify-content:center;align-items:stretch}
 .menu-j{flex:1;max-width:40cqw;position:relative;border:.7cqw solid #fff;border-radius:3cqw;background:var(--c);box-shadow:0 .8cqw 0 rgba(0,0,0,.15);
   padding:0;overflow:hidden;cursor:pointer;font-family:inherit;animation:bob 2.6s ease-in-out infinite}
 .menu-j img{position:absolute;inset:0 0 16% 0;width:100%;height:84%;object-fit:contain}
@@ -154,3 +154,105 @@ html,body{margin:0;height:100%;overflow:hidden;background:#2b2140;font-family:"B
 .cnt-3{grid-template:repeat(3,1fr)/1fr}
 .cnt-4{grid-template:repeat(2,1fr)/repeat(2,1fr)}
 .cnt-5{grid-template:repeat(3,1fr)/repeat(2,1fr)}.cnt-5 img:last-child{grid-column:1/3;width:50%}
+
+/* ---------- ¡Que no llueva! ---------- */
+#lluMapa{background:linear-gradient(#cfe3ff,#f1e9ff)}
+.llu-mundos{position:absolute;top:12%;bottom:8%;left:8%;right:8%;display:flex;gap:3cqw}
+.llu-mundo{flex:1;position:relative;border:.6cqw solid #fff;border-radius:3cqw;background:var(--c);box-shadow:0 .7cqw 0 rgba(60,40,120,.18);
+  cursor:pointer;padding:0;overflow:hidden;font-family:inherit;animation:entra .45s cubic-bezier(.3,1.6,.5,1) backwards}
+.llu-mundo:nth-child(2){animation-delay:.1s}.llu-mundo:nth-child(3){animation-delay:.2s}
+.llu-mundo img{position:absolute;left:8%;top:15%;width:84%;height:60%;object-fit:contain;animation:bob 2.8s ease-in-out infinite;filter:drop-shadow(0 1cqw .8cqw rgba(60,40,120,.2))}
+.llu-mundo .llu-est{position:absolute;top:3%;left:0;right:0;text-align:center;font-size:3cqw;filter:drop-shadow(0 .2cqw 0 rgba(0,0,0,.3))}
+.llu-mundo .lbl{position:absolute;left:0;right:0;bottom:0;padding:1cqw .5cqw;background:rgba(255,255,255,.9);font-size:2.1cqw;font-weight:800;color:#4a3a7a}
+.llu-mundo.locked img{filter:grayscale(1) brightness(.85);opacity:.5}
+.llu-mundo.locked::after{content:"🔒";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:6cqw}
+.llu-mundo.nuevo{animation:salto .7s cubic-bezier(.3,1.6,.5,1) 3}
+
+/* cielo según el mundo y la hora (data-cielo lo pone lluCielo) */
+#lluvia{background:linear-gradient(#a9d4ff,#e6f4ff);transition:background .8s}
+#lluvia[data-cielo=merienda]{background:linear-gradient(#bfe6ff 0,#eaf8ff 52%,#a6e08f 52%,#7cc96b 100%)}
+#lluvia[data-cielo=manana]{background:linear-gradient(#ffb7a8 0,#ffd9a0 55%,#fff1cf 100%)}
+#lluvia[data-cielo=tarde]{background:linear-gradient(#72c2ff 0,#c9ecff 60%,#b9e59a 60%,#94d27a 100%)}
+#lluvia[data-cielo=noche]{background:linear-gradient(#0f1b48 0,#26387a 70%,#33457f 100%)}
+.llu-nublado{position:absolute;inset:0;background:#55607a;opacity:0;transition:opacity 1.2s,background 1.2s;pointer-events:none}
+#lluvia.apagada .llu-nublado{opacity:.5!important;background:#050a20}
+.llu-sol{position:absolute;right:9%;top:5%;width:13cqw;height:13cqw;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle at 40% 40%,#fff6b0,#ffd23f 55%,#ffad1f);box-shadow:0 0 4cqw 1.5cqw rgba(255,210,60,.6);
+  opacity:0;transition:opacity 1s,transform 1.4s cubic-bezier(.3,1.3,.5,1)}
+/* arcoíris: anillos de color alrededor del centro de abajo (72cqw de ancho = 36cqw de radio) */
+.llu-arco{position:absolute;left:14%;width:72%;top:3%;aspect-ratio:2/1;pointer-events:none;opacity:0;transform:scale(.6);transform-origin:50% 100%;
+  background:radial-gradient(circle at 50% 100%,transparent 22cqw,#8f5bd6 22cqw 24.3cqw,#3f7fe0 24.3cqw 26.6cqw,#3cc06b 26.6cqw 28.9cqw,
+    #ffd23f 28.9cqw 31.2cqw,#ff9f1c 31.2cqw 33.5cqw,#ff595e 33.5cqw 35.8cqw,transparent 35.8cqw);
+  transition:opacity 1.2s,transform 1.4s cubic-bezier(.3,1.3,.5,1)}
+.llu-arco.on{opacity:.85;transform:none}
+.llu-estrellas{position:absolute;inset:0;pointer-events:none}
+.llu-estrellas i{position:absolute;border-radius:50%;background:#fff6c8;box-shadow:0 0 1.2cqw .3cqw rgba(255,246,190,.8);opacity:0;
+  animation:aparece 2s ease forwards,titila 2.6s ease-in-out infinite alternate}
+@keyframes aparece{to{opacity:1}}
+@keyframes titila{from{transform:scale(.7)}to{transform:scale(1.25)}}
+
+/* personajes */
+.llu-escena{position:absolute;inset:0}
+.llu-nube{position:absolute;aspect-ratio:1;pointer-events:none;animation:bob 3s ease-in-out infinite}
+.llu-nube>img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 1cqw .8cqw rgba(40,30,90,.2));transition:filter .4s}
+.llu-nube.contento{animation:salto .6s cubic-bezier(.3,1.6,.5,1)}
+.llu-nube.cosquillas{animation:cosquillas .9s}
+@keyframes cosquillas{10%,30%,50%,70%{transform:rotate(-5deg) scale(1.03)}20%,40%,60%,80%{transform:rotate(5deg) scale(1.03)}}
+.llu-nube.nam{animation:nam .7s}
+@keyframes nam{20%{transform:scale(1.1,.88)}40%{transform:scale(.94,1.08)}60%{transform:scale(1.06,.94)}}
+.llu-nube.brillo>img{filter:drop-shadow(0 0 2.5cqw rgba(255,230,90,.95))}
+.llu-gotas{position:absolute;left:20%;right:20%;top:70%;height:65%;opacity:0;transition:opacity 1s;overflow:hidden}
+.llu-gotas i{position:absolute;top:-10%;width:.8cqw;height:2cqw;border-radius:50% 50% 50% 50%/70% 70% 40% 40%;background:#5b9cf0;animation:cae .9s linear infinite}
+@keyframes cae{from{transform:translateY(0);opacity:.9}to{transform:translateY(20cqw);opacity:0}}
+/* globito de lo que pide */
+.llu-globo{position:absolute;right:-24%;top:-6%;width:40%;aspect-ratio:1;border-radius:50%;background:#fff;box-shadow:0 .5cqw 0 rgba(0,0,0,.12);
+  display:none;align-items:center;justify-content:center;z-index:2}
+.llu-globo::after{content:"";position:absolute;left:2%;bottom:0;width:20%;height:20%;border-radius:50%;background:#fff}
+.llu-globo.on{display:flex;animation:pop .5s}
+.llu-globo img{width:74%;height:74%;object-fit:contain}
+.llu-globo .mancha{width:62%;height:62%;border-radius:50%;box-shadow:inset 0 -.5cqw 0 rgba(0,0,0,.15)}
+/* picnic: los amigos en fila, con el globito encima */
+.llu-nube.amigo{animation-duration:3.4s}
+.llu-nube.amigo>img{border-radius:50%;border:.6cqw solid #fff;object-fit:cover;background:#fff;box-shadow:0 .6cqw 0 rgba(0,0,0,.15)}
+.llu-nube.amigo.bip>img,.llu-nube.amigo.gruni>img{object-fit:contain;object-position:50% 50%;background:rgba(255,255,255,.85);padding:6%}
+.llu-nube.amigo .llu-globo{right:auto;left:30%;top:-44%}
+.llu-nube.amigo .llu-globo::after{left:40%;bottom:-8%}
+/* plato del nivel 2 de la merienda */
+.llu-plato{position:absolute;left:56%;top:36%;width:32%;height:24%;border-radius:50%;box-shadow:0 .8cqw 0 rgba(0,0,0,.12);
+  background:radial-gradient(ellipse at 50% 45%,#fff 0 55%,#e6eaf3 56% 70%,#fff 71%);display:flex;align-items:center;justify-content:center;gap:.6cqw;padding:0 3cqw}
+.llu-plato i{width:8cqw;height:8cqw;display:flex;align-items:center;justify-content:center}
+.llu-plato img{max-width:100%;max-height:100%;object-fit:contain;animation:pop .4s}
+/* lámpara de la noche */
+.llu-lampara{position:absolute;left:66%;top:10%;width:16%;height:44%;border:none;background:none;padding:0;cursor:pointer;border-radius:3cqw}
+.llu-lampara::before{content:"";position:absolute;left:-45%;right:-45%;top:-30%;bottom:5%;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(255,226,130,.6),rgba(255,226,130,0));transition:opacity 1s}
+.llu-lampara img{position:relative;width:100%;height:100%;object-fit:contain;transition:filter 1s;pointer-events:none}
+.llu-lampara.apagada::before{opacity:0}
+.llu-lampara.apagada img{filter:brightness(.45) saturate(.6)}
+.llu-lampara.brilla{animation:glow 1.2s ease-in-out infinite}
+.llu-lampara.sacude{animation:shake .45s}
+
+/* progreso y bandeja */
+.llu-luces{position:absolute;left:9%;top:3%;display:flex;gap:1.1cqw;padding:.9cqw 1.4cqw;background:rgba(255,255,255,.7);border-radius:4cqw;z-index:3}
+.llu-luces:empty{display:none}
+.llu-luces .col-luz{width:3.6cqw;height:3.6cqw}
+.llu-bandeja{position:absolute;left:4%;right:4%;bottom:3%;height:27%;display:flex;gap:2cqw;justify-content:center;z-index:4}
+.llu-obj{flex:0 1 16cqw;height:100%;position:relative;border:none;border-radius:3cqw;background:rgba(255,255,255,.8);box-shadow:0 .7cqw 0 rgba(60,40,120,.18);
+  display:flex;align-items:center;justify-content:center;padding:0;cursor:pointer;touch-action:none;transition:opacity .3s;
+  animation:entra .45s cubic-bezier(.3,1.6,.5,1) backwards}
+.llu-obj img{width:82%;height:82%;object-fit:contain;pointer-events:none}
+.llu-obj.agarra{transform:scale(1.06)}
+.llu-obj.arrastra{z-index:10;animation:none;box-shadow:0 1.5cqw 1.5cqw rgba(0,0,0,.2)}
+.llu-obj.dado{opacity:0;transition:none}
+.llu-obj.sacude{animation:shake .45s}
+.llu-obj.tiembla{animation:tiembla 1.4s ease-in-out infinite}
+.llu-obj.brilla{animation:glow 1.2s ease-in-out infinite}
+#lluvia[data-cielo=noche] .llu-obj{background:rgba(255,255,255,.25)}
+/* efectos */
+.llu-capa{position:absolute;inset:0;pointer-events:none;z-index:6;overflow:hidden}
+.llu-vuela{position:absolute;object-fit:contain;filter:drop-shadow(0 .6cqw .5cqw rgba(0,0,0,.25))}
+.llu-chispa{position:absolute;font-size:3.4cqw;opacity:0;animation:sube-chispa 1.6s ease-out forwards}
+@keyframes sube-chispa{0%{opacity:0;transform:translateY(0) scale(.5)}15%{opacity:1}100%{opacity:0;transform:translateY(-14cqw) scale(1.2)}}
+.llu-sube{position:absolute;animation:globo-sube 3s ease-in forwards}
+@keyframes globo-sube{30%{transform:translate(2cqw,-8cqw) rotate(6deg)}60%{transform:translate(-2cqw,-22cqw) rotate(-6deg)}100%{transform:translate(1cqw,-45cqw) rotate(4deg)}}
+

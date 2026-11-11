@@ -150,9 +150,6 @@ const colPista = crearPista({ ...BIP_CFG.pista,
     const k=e.opciones.findIndex(o=>o.ok&&!o.hecho), el=$("colOpc").children[k]; if(!el) return;
     if(n===1) el.classList.add("tiembla"); else { el.classList.remove("tiembla"); el.classList.add("brilla"); say("col_pista") } } });
 
-// dice uno o varios ids seguidos
-async function decir(ids){ for(const id of [].concat(ids)){ await Promise.race([say(id),espera(5000)]) } }
-
 function colPose(p){
   const P=BIP_POSES[p], img=$("colBipImg"), b=$("colBrillo");
   if(!img.src.endsWith(P.img)) img.src=P.img;

@@ -36,4 +36,6 @@ function say(id){ return new Promise(fin=>{
     const s=a.createBufferSource(); s.buffer=buf; s.playbackRate.value=VELOCIDAD[id]||1;
     s.connect(bus.voz); s.onended=()=>{ if(vozSrc===s) vozSrc=null; musicaVolumen(); fin() }; s.start(); vozSrc=s; musicaVolumen() });
 }) }
+// decir("a") o decir(["a","b"]): dice uno o varios ids seguidos (cada uno espera como máximo 5 s)
+async function decir(ids){ for(const id of [].concat(ids||[])){ await Promise.race([say(id),espera(5000)]) } }
 function precargarVoces(){ Object.keys(FRASES).forEach(cargarVoz) }

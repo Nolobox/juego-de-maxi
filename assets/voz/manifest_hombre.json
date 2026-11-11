@@ -1168,5 +1168,698 @@
   "accuracy": 1.0,
   "heard": "¡Vamos a jugar con Bip!",
   "passed": true
+ },
+ {
+  "id": "llg_r_pluma",
+  "text": "¡Jijiji! ¡Me hace cosquillas!",
+  "file": "llg_r_pluma.mp3",
+  "seconds": 2.32,
+  "accuracy": 1.0,
+  "heard": "¡Jijiji! ¡Me hace cosquillas!",
+  "passed": true
+ },
+ {
+  "id": "llg_r_globo",
+  "text": "¡Uuuh! ¡Un globo que vuela!",
+  "file": "llg_r_globo.mp3",
+  "seconds": 1.92,
+  "accuracy": 0.8,
+  "heard": "¡Uh! ¡Un globo que vuela!",
+  "passed": false
+ },
+ {
+  "id": "llg_r_flor",
+  "text": "¡Qué flor tan linda! ¡Huele rico!",
+  "file": "llg_r_flor.mp3",
+  "seconds": 2.16,
+  "accuracy": 1.0,
+  "heard": "¡Qué flor tan linda! ¡Huele rico!",
+  "passed": true
+ },
+ {
+  "id": "llg_r_nota",
+  "text": "¡La, la, la! ¡Qué linda música!",
+  "file": "llg_r_nota.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "La la la, que linda música.",
+  "passed": true
+ },
+ {
+  "id": "llg_r_caramelo",
+  "text": "¡Ñam, ñam! ¡Qué rico caramelo!",
+  "file": "llg_r_caramelo.mp3",
+  "seconds": 2.8,
+  "accuracy": 0.8,
+  "heard": "¡Niam, ñam! ¡Qué rico caramelo!",
+  "passed": false
+ },
+ {
+  "id": "llg_pide_nota",
+  "text": "¡Quiero algo que suene!",
+  "file": "llg_pide_nota.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Quiero algo que suene.",
+  "passed": true
+ },
+ {
+  "id": "llg_pide_pluma",
+  "text": "¡Quiero algo que haga cosquillas!",
+  "file": "llg_pide_pluma.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Quiero algo que haga cosquillas.",
+  "passed": true
+ },
+ {
+  "id": "llg_pide_flor",
+  "text": "¡Quiero algo que huela rico!",
+  "file": "llg_pide_flor.mp3",
+  "seconds": 1.2,
+  "accuracy": 1.0,
+  "heard": "Quiero algo que huela rico.",
+  "passed": true
+ },
+ {
+  "id": "llg_pide_caramelo",
+  "text": "¡Quiero algo dulce!",
+  "file": "llg_pide_caramelo.mp3",
+  "seconds": 1.04,
+  "accuracy": 1.0,
+  "heard": "Quiero algo dulce.",
+  "passed": true
+ },
+ {
+  "id": "llg_pide_globo",
+  "text": "¡Quiero algo que vuele!",
+  "file": "llg_pide_globo.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "Quiero algo que vuele.",
+  "passed": true
+ },
+ {
+  "id": "llg_no_nota",
+  "text": "¡Jiji, eso no suena! ¡Quiero algo que suene!",
+  "file": "llg_no_nota.mp3",
+  "seconds": 3.28,
+  "accuracy": 0.875,
+  "heard": "¡Hishi! ¡Eso no suena! ¡Quiero algo que suene!",
+  "passed": false
+ },
+ {
+  "id": "llg_no_pluma",
+  "text": "¡Jiji, eso no hace cosquillas! ¡Quiero algo que haga cosquillas!",
+  "file": "llg_no_pluma.mp3",
+  "seconds": 4.4,
+  "accuracy": 0.9,
+  "heard": "Hishi. Eso no hace cosquillas. Quiero algo que haga cosquillas.",
+  "passed": true
+ },
+ {
+  "id": "llg_no_flor",
+  "text": "¡Jiji, eso no tiene olor! ¡Quiero algo que huela rico!",
+  "file": "llg_no_flor.mp3",
+  "seconds": 3.28,
+  "accuracy": 1.0,
+  "heard": "¡Jiji! ¡Eso no tiene olor! ¡Quiero algo que huela rico!",
+  "passed": true
+ },
+ {
+  "id": "llg_no_caramelo",
+  "text": "¡Jiji, eso no se come! ¡Quiero algo dulce!",
+  "file": "llg_no_caramelo.mp3",
+  "seconds": 3.28,
+  "accuracy": 1.0,
+  "heard": "Jiji, eso no se come. Quiero algo dulce.",
+  "passed": true
+ },
+ {
+  "id": "llg_no_globo",
+  "text": "¡Jiji, eso no vuela! ¡Quiero algo que vuele!",
+  "file": "llg_no_globo.mp3",
+  "seconds": 3.12,
+  "accuracy": 0.875,
+  "heard": "Hishi, eso no vuela. Quiero algo que vuele.",
+  "passed": false
+ },
+ {
+  "id": "llg_come_manzana",
+  "text": "¡Ñam! ¡Qué rica la manzana!",
+  "file": "llg_come_manzana.mp3",
+  "seconds": 2.08,
+  "accuracy": 0.8,
+  "heard": "¡Nyam! ¡Qué rica la manzana!",
+  "passed": false
+ },
+ {
+  "id": "llg_come_platano",
+  "text": "¡Ñam! ¡Qué rico el plátano!",
+  "file": "llg_come_platano.mp3",
+  "seconds": 1.92,
+  "accuracy": 0.8,
+  "heard": "¡Niam! ¡Qué rico el plátano!",
+  "passed": false
+ },
+ {
+  "id": "llg_come_zanahoria",
+  "text": "¡Crunch, crunch! ¡Qué rica la zanahoria!",
+  "file": "llg_come_zanahoria.mp3",
+  "seconds": 3.04,
+  "accuracy": 1.0,
+  "heard": "¡Crunch! ¡Crunch! ¡Qué rica la zanahoria!",
+  "passed": true
+ },
+ {
+  "id": "llg_come_brocoli",
+  "text": "¡Ñam! ¡Qué rico el brócoli!",
+  "file": "llg_come_brocoli.mp3",
+  "seconds": 1.92,
+  "accuracy": 0.8,
+  "heard": "¡Niam! ¡Qué rico el brócoli!",
+  "passed": false
+ },
+ {
+  "id": "llg_come_leche",
+  "text": "¡Glu, glu! ¡Qué rica la leche!",
+  "file": "llg_come_leche.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "¡Glú, glú! ¡Qué rica la leche!",
+  "passed": true
+ },
+ {
+  "id": "llg_come_agua",
+  "text": "¡Glu, glu! ¡Qué rica el agua!",
+  "file": "llg_come_agua.mp3",
+  "seconds": 3.04,
+  "accuracy": 1.0,
+  "heard": "¡Glú! ¡Glú! ¡Qué rica el agua!",
+  "passed": true
+ },
+ {
+  "id": "llg_come_pan",
+  "text": "¡Ñam! ¡Qué rico el pan!",
+  "file": "llg_come_pan.mp3",
+  "seconds": 1.84,
+  "accuracy": 0.8,
+  "heard": "¡Niam! ¡Qué rico el pan!",
+  "passed": false
+ },
+ {
+  "id": "llg_come_uvas",
+  "text": "¡Ñam! ¡Qué ricas las uvas!",
+  "file": "llg_come_uvas.mp3",
+  "seconds": 2.08,
+  "accuracy": 0.8,
+  "heard": "¡Niam! ¡Qué ricas las uvas!",
+  "passed": false
+ },
+ {
+  "id": "llg_dulce_torta",
+  "text": "¡Mmm, qué rica la torta!",
+  "file": "llg_dulce_torta.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "¡Mmm! ¡Qué rica la torta!",
+  "passed": true
+ },
+ {
+  "id": "llg_dulce_chupete",
+  "text": "¡Mmm, qué rico el chupete!",
+  "file": "llg_dulce_chupete.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "¡Mmm, qué rico el chupete!",
+  "passed": true
+ },
+ {
+  "id": "llg_dulce_papas",
+  "text": "¡Mmm, qué ricas las papas fritas!",
+  "file": "llg_dulce_papas.mp3",
+  "seconds": 2.88,
+  "accuracy": 1.0,
+  "heard": "¡Mmm! ¡Qué ricas las papas fritas!",
+  "passed": true
+ },
+ {
+  "id": "llg_dulce_bebida",
+  "text": "¡Mmm, qué rica la bebida!",
+  "file": "llg_dulce_bebida.mp3",
+  "seconds": 2.0,
+  "accuracy": 1.0,
+  "heard": "¡Mmm! ¡Qué rica la bebida!",
+  "passed": true
+ },
+ {
+  "id": "llg_dulce_helado",
+  "text": "¡Mmm, qué rico el helado!",
+  "file": "llg_dulce_helado.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "¡Mmm! ¡Qué rico el helado!",
+  "passed": true
+ },
+ {
+  "id": "llg_dulce_dona",
+  "text": "¡Mmm, qué rica la dona!",
+  "file": "llg_dulce_dona.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "¡Mmm! ¡Qué rica la dona!",
+  "passed": true
+ },
+ {
+  "id": "llg_guatita",
+  "text": "¡Uy, me duele un poquito la guatita! ¿Me das agua o una fruta?",
+  "file": "llg_guatita.mp3",
+  "seconds": 4.16,
+  "accuracy": 1.0,
+  "heard": "¡Uy! Me duele un poquito la guatita. ¿Me das agua o una fruta?",
+  "passed": true
+ },
+ {
+  "id": "llg_mejor",
+  "text": "¡Ahh, ya me siento mejor! ¡Gracias!",
+  "file": "llg_mejor.mp3",
+  "seconds": 3.28,
+  "accuracy": 0.833,
+  "heard": "¡Ah! ¡Ya me siento mejor! ¡Gracias!",
+  "passed": false
+ },
+ {
+  "id": "llg_guatita_no",
+  "text": "Mmm, mejor un poquito de agua o una fruta.",
+  "file": "llg_guatita_no.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Mmm, mejor un poquito de agua o una fruta.",
+  "passed": true
+ },
+ {
+  "id": "llg_plato",
+  "text": "¡Qué plato tan rico! ¡Ñam, ñam!",
+  "file": "llg_plato.mp3",
+  "seconds": 2.24,
+  "accuracy": 0.667,
+  "heard": "¡Qué plato tan rico! ¡Nham, nham!",
+  "passed": false
+ },
+ {
+  "id": "llg_m2_fin",
+  "text": "¡Qué rica merienda! ¡Salió el sol!",
+  "file": "llg_m2_fin.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "¡Qué rica merienda! ¡Salió el sol!",
+  "passed": true
+ },
+ {
+  "id": "llg_picnic_fin",
+  "text": "¡Qué rico picnic! ¡Gracias, amigos!",
+  "file": "llg_picnic_fin.mp3",
+  "seconds": 2.16,
+  "accuracy": 1.0,
+  "heard": "¡Qué rico picnic! Gracias, amigos.",
+  "passed": true
+ },
+ {
+  "id": "llg_q_desayuno",
+  "text": "¡Tengo hambre! ¿Qué tomo de desayuno?",
+  "file": "llg_q_desayuno.mp3",
+  "seconds": 2.24,
+  "accuracy": 1.0,
+  "heard": "Tengo hambre. ¿Qué tomo de desayuno?",
+  "passed": true
+ },
+ {
+  "id": "llg_q_dientes",
+  "text": "¡Ahora quiero lavarme los dientes!",
+  "file": "llg_q_dientes.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Ahora quiero lavarme los dientes.",
+  "passed": true
+ },
+ {
+  "id": "llg_q_jugar",
+  "text": "¡Quiero jugar!",
+  "file": "llg_q_jugar.mp3",
+  "seconds": 0.88,
+  "accuracy": 1.0,
+  "heard": "¡Quiero jugar!",
+  "passed": true
+ },
+ {
+  "id": "llg_q_agua",
+  "text": "¡Uf, qué cansado! Tengo sed.",
+  "file": "llg_q_agua.mp3",
+  "seconds": 2.72,
+  "accuracy": 1.0,
+  "heard": "¡Uf! ¡Qué cansado! ¡Tengo sed!",
+  "passed": true
+ },
+ {
+  "id": "llg_q_fruta",
+  "text": "¡Tengo hambre! Quiero una fruta.",
+  "file": "llg_q_fruta.mp3",
+  "seconds": 2.08,
+  "accuracy": 1.0,
+  "heard": "Tengo hambre. Quiero una fruta.",
+  "passed": true
+ },
+ {
+  "id": "llg_q_bano",
+  "text": "¡Hora del baño!",
+  "file": "llg_q_bano.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "¡Hora del baño!",
+  "passed": true
+ },
+ {
+  "id": "llg_q_pijama",
+  "text": "¡Ahora el pijama!",
+  "file": "llg_q_pijama.mp3",
+  "seconds": 0.96,
+  "accuracy": 1.0,
+  "heard": "Ahora el pijama.",
+  "passed": true
+ },
+ {
+  "id": "llg_q_cuento",
+  "text": "¡Léeme un cuento, por favor!",
+  "file": "llg_q_cuento.mp3",
+  "seconds": 1.68,
+  "accuracy": 1.0,
+  "heard": "Léeme un cuento, por favor.",
+  "passed": true
+ },
+ {
+  "id": "llg_q_almohada",
+  "text": "¡Tengo sueño! ¿Dónde está mi almohada?",
+  "file": "llg_q_almohada.mp3",
+  "seconds": 2.48,
+  "accuracy": 1.0,
+  "heard": "Tengo sueño. ¿Dónde está mi almohada?",
+  "passed": true
+ },
+ {
+  "id": "llg_s_desayuno",
+  "text": "¡Ñam! ¡Qué rico el cereal!",
+  "file": "llg_s_desayuno.mp3",
+  "seconds": 2.08,
+  "accuracy": 0.8,
+  "heard": "¡Nham! ¡Qué rico el cereal!",
+  "passed": false
+ },
+ {
+  "id": "llg_s_dientes",
+  "text": "¡Cepillo, cepillo! ¡Dientes limpios!",
+  "file": "llg_s_dientes.mp3",
+  "seconds": 2.72,
+  "accuracy": 1.0,
+  "heard": "Cepillo, cepillo. Dientes limpios.",
+  "passed": true
+ },
+ {
+  "id": "llg_s_jugar",
+  "text": "¡Qué divertido jugar a la pelota!",
+  "file": "llg_s_jugar.mp3",
+  "seconds": 1.6,
+  "accuracy": 1.0,
+  "heard": "¡Qué divertido jugar a la pelota!",
+  "passed": true
+ },
+ {
+  "id": "llg_s_agua",
+  "text": "¡Glu, glu! ¡Qué rica el agua!",
+  "file": "llg_s_agua.mp3",
+  "seconds": 2.08,
+  "accuracy": 1.0,
+  "heard": "¡Glu, glu! ¡Qué rica el agua!",
+  "passed": true
+ },
+ {
+  "id": "llg_s_fruta",
+  "text": "¡Ñam! ¡Qué rica la manzana!",
+  "file": "llg_s_fruta.mp3",
+  "seconds": 1.84,
+  "accuracy": 0.8,
+  "heard": "¡Nyam! ¡Qué rica la manzana!",
+  "passed": false
+ },
+ {
+  "id": "llg_s_bano",
+  "text": "¡Splash! ¡Qué rico el baño con el patito!",
+  "file": "llg_s_bano.mp3",
+  "seconds": 2.48,
+  "accuracy": 1.0,
+  "heard": "¡Splash! ¡Qué rico el baño con el patito!",
+  "passed": true
+ },
+ {
+  "id": "llg_s_pijama",
+  "text": "¡Qué suavecito mi pijama!",
+  "file": "llg_s_pijama.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "¡Qué suavecito mi pijama!",
+  "passed": true
+ },
+ {
+  "id": "llg_s_cuento",
+  "text": "¡Qué lindo cuento!",
+  "file": "llg_s_cuento.mp3",
+  "seconds": 0.88,
+  "accuracy": 1.0,
+  "heard": "¡Qué lindo cuento!",
+  "passed": true
+ },
+ {
+  "id": "llg_s_almohada",
+  "text": "¡Qué cómoda mi almohada!",
+  "file": "llg_s_almohada.mp3",
+  "seconds": 1.12,
+  "accuracy": 1.0,
+  "heard": "¡Qué cómoda mi almohada!",
+  "passed": true
+ },
+ {
+  "id": "llg_j_peineta_desayunar",
+  "text": "¡Jiji, la peineta no sirve para desayunar!",
+  "file": "llg_j_peineta_desayunar.mp3",
+  "seconds": 2.72,
+  "accuracy": 0.923,
+  "heard": "La peineta no sirve para desayunar.",
+  "passed": true
+ },
+ {
+  "id": "llg_j_mochila_desayunar",
+  "text": "¡Jiji, la mochila no sirve para desayunar!",
+  "file": "llg_j_mochila_desayunar.mp3",
+  "seconds": 2.64,
+  "accuracy": 0.923,
+  "heard": "La mochila no sirve para desayunar.",
+  "passed": true
+ },
+ {
+  "id": "llg_j_pelota_desayunar",
+  "text": "¡Jiji, la pelota no sirve para desayunar!",
+  "file": "llg_j_pelota_desayunar.mp3",
+  "seconds": 2.72,
+  "accuracy": 1.0,
+  "heard": "Jiji, la pelota no sirve para desayunar.",
+  "passed": true
+ },
+ {
+  "id": "llg_j_peineta_dientes",
+  "text": "¡Jiji, la peineta no sirve para lavarse los dientes!",
+  "file": "llg_j_peineta_dientes.mp3",
+  "seconds": 3.2,
+  "accuracy": 0.889,
+  "heard": "Hishi, la peineta no sirve para lavarse los dientes.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_mochila_dientes",
+  "text": "¡Jiji, la mochila no sirve para lavarse los dientes!",
+  "file": "llg_j_mochila_dientes.mp3",
+  "seconds": 3.2,
+  "accuracy": 0.941,
+  "heard": "La mochila no sirve para lavarse los dientes.",
+  "passed": true
+ },
+ {
+  "id": "llg_j_balde_dientes",
+  "text": "¡Jiji, el balde no sirve para lavarse los dientes!",
+  "file": "llg_j_balde_dientes.mp3",
+  "seconds": 3.2,
+  "accuracy": 0.889,
+  "heard": "Hishi. El balde no sirve para lavarse los dientes.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_cepillo_jugar",
+  "text": "¡Jiji, el cepillo no sirve para jugar!",
+  "file": "llg_j_cepillo_jugar.mp3",
+  "seconds": 2.4,
+  "accuracy": 0.857,
+  "heard": "Hishi, el cepillo no sirve para jugar.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_almohada_jugar",
+  "text": "¡Jiji, la almohada no sirve para jugar!",
+  "file": "llg_j_almohada_jugar.mp3",
+  "seconds": 2.88,
+  "accuracy": 0.857,
+  "heard": "Hishi, la almohada no sirve para jugar.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_pijama_jugar",
+  "text": "¡Jiji, el pijama no sirve para jugar!",
+  "file": "llg_j_pijama_jugar.mp3",
+  "seconds": 2.56,
+  "accuracy": 1.0,
+  "heard": "Jiji, el pijama no sirve para jugar.",
+  "passed": true
+ },
+ {
+  "id": "llg_j_pelota_tomar",
+  "text": "¡Jiji, la pelota no sirve para tomar agua!",
+  "file": "llg_j_pelota_tomar.mp3",
+  "seconds": 2.64,
+  "accuracy": 0.875,
+  "heard": "Hishi, la pelota no sirve para tomar agua.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_peineta_tomar",
+  "text": "¡Jiji, la peineta no sirve para tomar agua!",
+  "file": "llg_j_peineta_tomar.mp3",
+  "seconds": 2.88,
+  "accuracy": 0.875,
+  "heard": "Hishi, la peineta no sirve para tomar agua.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_mochila_tomar",
+  "text": "¡Jiji, la mochila no sirve para tomar agua!",
+  "file": "llg_j_mochila_tomar.mp3",
+  "seconds": 2.88,
+  "accuracy": 0.875,
+  "heard": "Hishi, la mochila no sirve para tomar agua.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_pelota_comer",
+  "text": "¡Jiji, la pelota no sirve para comer!",
+  "file": "llg_j_pelota_comer.mp3",
+  "seconds": 2.8,
+  "accuracy": 0.857,
+  "heard": "¡Hishi! La pelota no sirve para comer.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_balde_comer",
+  "text": "¡Jiji, el balde no sirve para comer!",
+  "file": "llg_j_balde_comer.mp3",
+  "seconds": 2.64,
+  "accuracy": 0.857,
+  "heard": "Hishi, el balde no sirve para comer.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_peineta_comer",
+  "text": "¡Jiji, la peineta no sirve para comer!",
+  "file": "llg_j_peineta_comer.mp3",
+  "seconds": 2.48,
+  "accuracy": 0.857,
+  "heard": "Hishi, la peineta no sirve para comer.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_pelota_banarse",
+  "text": "¡Jiji, la pelota no sirve para bañarse!",
+  "file": "llg_j_pelota_banarse.mp3",
+  "seconds": 2.96,
+  "accuracy": 0.857,
+  "heard": "Hishi, la pelota no sirve para bañarse.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_mochila_banarse",
+  "text": "¡Jiji, la mochila no sirve para bañarse!",
+  "file": "llg_j_mochila_banarse.mp3",
+  "seconds": 3.84,
+  "accuracy": 0.857,
+  "heard": "¡Hishí! La mochila no sirve para bañarse.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_peineta_banarse",
+  "text": "¡Jiji, la peineta no sirve para bañarse!",
+  "file": "llg_j_peineta_banarse.mp3",
+  "seconds": 2.96,
+  "accuracy": 0.857,
+  "heard": "Hishi, la peineta no sirve para bañarse.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_pelota_dormir",
+  "text": "¡Jiji, la pelota no sirve para dormir!",
+  "file": "llg_j_pelota_dormir.mp3",
+  "seconds": 2.56,
+  "accuracy": 0.857,
+  "heard": "Jishi. La pelota no sirve para dormir.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_balde_dormir",
+  "text": "¡Jiji, el balde no sirve para dormir!",
+  "file": "llg_j_balde_dormir.mp3",
+  "seconds": 2.32,
+  "accuracy": 0.857,
+  "heard": "Hishi, el balde no sirve para dormir.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_mochila_dormir",
+  "text": "¡Jiji, la mochila no sirve para dormir!",
+  "file": "llg_j_mochila_dormir.mp3",
+  "seconds": 3.52,
+  "accuracy": 0.923,
+  "heard": "La mochila no sirve para dormir.",
+  "passed": true
+ },
+ {
+  "id": "llg_j_pelota_leer",
+  "text": "¡Jiji, la pelota no sirve para leer un cuento!",
+  "file": "llg_j_pelota_leer.mp3",
+  "seconds": 3.04,
+  "accuracy": 0.889,
+  "heard": "Hishi, la pelota no sirve para leer un cuento.",
+  "passed": false
+ },
+ {
+  "id": "llg_j_cereal_leer",
+  "text": "¡Jiji, el cereal no sirve para leer un cuento!",
+  "file": "llg_j_cereal_leer.mp3",
+  "seconds": 2.48,
+  "accuracy": 1.0,
+  "heard": "Jiji, el cereal no sirve para leer un cuento.",
+  "passed": true
+ },
+ {
+  "id": "llg_j_balde_leer",
+  "text": "¡Jiji, el balde no sirve para leer un cuento!",
+  "file": "llg_j_balde_leer.mp3",
+  "seconds": 2.48,
+  "accuracy": 1.0,
+  "heard": "¡Jiji! El balde no sirve para leer un cuento.",
+  "passed": true
  }
 ]

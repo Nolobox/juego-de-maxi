@@ -8,14 +8,12 @@ Crea en assets/colores/:
     <color>-<objeto>.webp   (16 objetos, 4 por hoja)
 Los originales no se modifican.
 
-Cómo quita el fondo: toma como fondo la zona clara conectada con el borde de la imagen
-(relleno desde la esquina) y la vuelve transparente con un borde suave. Lo claro que está
-dentro del objeto (ojos, agujeros del botón) no se toca. La sombra suave queda translúcida.
+Cómo quita el fondo: ver tools/recorte.py.
 """
 import sys
 from pathlib import Path
-import numpy as np
-from PIL import Image, ImageDraw, ImageFilter
+from PIL import Image
+from recorte import quitar_fondo, recortar, guardar as _guardar
 
 raiz = Path(__file__).resolve().parent.parent
 ref = Path(sys.argv[1]) if len(sys.argv) > 1 else raiz.parent / "Referencias" / "colores-bip"
@@ -37,43 +35,7 @@ def buscar(prefijo):
     return f[0]
 
 
-def quitar_fondo(im, bajo=10, alto=55):
-    """Devuelve RGBA. 'bajo'/'alto': cuánto se aleja del blanco del fondo para ser transparente/opaco."""
-    a = np.asarray(im.convert("RGB")).astype(np.float32)
-    h, w, _ = a.shape
-    # color de fondo: promedio del borde (no siempre es blanco puro)
-    borde = np.concatenate([a[0], a[-1], a[:, 0], a[:, -1]])
-    fondo = np.median(borde, axis=0)
-    d = np.abs(a - fondo).max(axis=2)                       # distancia al fondo
-    cand = Image.fromarray(((d < alto) * 255).astype(np.uint8)).copy()   # copy: si no, el relleno no se guarda
-    for semilla in [(0, 0), (w - 1, 0), (0, h - 1), (w - 1, h - 1)]:
-        if cand.getpixel(semilla) == 255:
-            ImageDraw.floodfill(cand, semilla, 128)
-    conectado = np.asarray(cand) == 128                      # fondo alcanzable desde el borde
-    alfa = np.ones((h, w), np.float32)
-    alfa[conectado] = np.clip((d[conectado] - bajo) / (alto - bajo), 0, 1)
-    # suaviza el borde un pelo para que no se vea serrucho
-    alfa_img = Image.fromarray((alfa * 255).astype(np.uint8)).filter(ImageFilter.GaussianBlur(0.6))
-    alfa = np.asarray(alfa_img).astype(np.float32) / 255
-    # quita el halo blanco: des-mezcla el color del fondo en los bordes semitransparentes
-    seguro = np.maximum(alfa, 1e-3)[..., None]
-    rgb = np.clip((a - fondo * (1 - alfa[..., None])) / seguro, 0, 255)
-    rgb = np.where(alfa[..., None] > 0.02, rgb, 0)
-    return Image.fromarray(np.dstack([rgb, alfa * 255]).astype(np.uint8), "RGBA"), d
-
-
-def recortar(rgba, margen=12):
-    caja = rgba.getchannel("A").point(lambda v: 255 if v > 40 else 0).getbbox()
-    x0, y0, x1, y1 = caja
-    W, H = rgba.size
-    return rgba.crop((max(0, x0 - margen), max(0, y0 - margen), min(W, x1 + margen), min(H, y1 + margen)))
-
-
-def guardar(im, nombre, lado):
-    im = im.copy()
-    im.thumbnail((lado, lado), Image.LANCZOS)
-    im.save(out / f"{nombre}.webp", quality=88, method=6)
-    return im.size
+def guardar(im, nombre, lado): return _guardar(im, out, nombre, lado)
 
 
 # Bip: una imagen por pose

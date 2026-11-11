@@ -457,5 +457,293 @@
   "accuracy": 1.0,
   "heard": "¿Dónde estará? Busca tocando, tú puedes.",
   "passed": true
+ },
+ {
+  "id": "menu_lluvia",
+  "text": "¡Vamos a alegrar a Gruñi!",
+  "file": "menu_lluvia.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Vamos a alegrar a gruñi.",
+  "passed": true
+ },
+ {
+  "id": "llu_nuevo_mundo",
+  "text": "¡Se abrió un mundo nuevo!",
+  "file": "llu_nuevo_mundo.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Se abrió un mundo nuevo.",
+  "passed": true
+ },
+ {
+  "id": "llu_m1_intro",
+  "text": "Gruñi está triste. ¿Lo ayudamos a sonreír?",
+  "file": "llu_m1_intro.mp3",
+  "seconds": 3.36,
+  "accuracy": 0.857,
+  "heard": "Gruñe, está triste. ¿Lo ayudamos a sonreír?",
+  "passed": false
+ },
+ {
+  "id": "llu_regalo",
+  "text": "¡Toca un regalo o llévalo hasta Gruñi!",
+  "file": "llu_regalo.mp3",
+  "seconds": 2.32,
+  "accuracy": 1.0,
+  "heard": "Toca un regalo o llévalo hasta Gruñi.",
+  "passed": true
+ },
+ {
+  "id": "llu_m1_dos",
+  "text": "¡Oh, hay dos nubes tristes! ¿Alegramos a las dos?",
+  "file": "llu_m1_dos.mp3",
+  "seconds": 3.68,
+  "accuracy": 1.0,
+  "heard": "Oh, hay dos nubes tristes. ¿Alegramos a las dos?",
+  "passed": true
+ },
+ {
+  "id": "llu_otra_nube",
+  "text": "¡Muy bien! ¡Ahora la otra nube!",
+  "file": "llu_otra_nube.mp3",
+  "seconds": 2.16,
+  "accuracy": 1.0,
+  "heard": "Muy bien, ahora la otra nube.",
+  "passed": true
+ },
+ {
+  "id": "llu_anima_regalo",
+  "text": "¡Dale un regalo a Gruñi!",
+  "file": "llu_anima_regalo.mp3",
+  "seconds": 1.84,
+  "accuracy": 0.8,
+  "heard": "Dale un regalo a Gruny.",
+  "passed": false
+ },
+ {
+  "id": "llu_m1_fin",
+  "text": "¡Salió el arcoíris! ¡Gruñi está feliz!",
+  "file": "llu_m1_fin.mp3",
+  "seconds": 2.72,
+  "accuracy": 0.615,
+  "heard": "Salió el arco iris. ¡Gruny está feliz!",
+  "passed": false
+ },
+ {
+  "id": "llu_m1_fin2",
+  "text": "¡Salió el arcoíris! ¡Las dos nubes están felices!",
+  "file": "llu_m1_fin2.mp3",
+  "seconds": 3.84,
+  "accuracy": 0.824,
+  "heard": "Salió el arco iris. Las dos nubes están felices.",
+  "passed": false
+ },
+ {
+  "id": "llu_m2_intro",
+  "text": "¡Es la hora de la merienda! ¿Qué le damos a Gruñi?",
+  "file": "llu_m2_intro.mp3",
+  "seconds": 3.36,
+  "accuracy": 0.909,
+  "heard": "Es la hora de la merienda. ¿Qué le damos a Gruny?",
+  "passed": true
+ },
+ {
+  "id": "llu_m2_plato",
+  "text": "¡Armemos un plato con tres cosas ricas para Gruñi!",
+  "file": "llu_m2_plato.mp3",
+  "seconds": 3.12,
+  "accuracy": 1.0,
+  "heard": "Armemos un plato con tres cosas ricas para gruñi.",
+  "passed": true
+ },
+ {
+  "id": "llu_m2_picnic",
+  "text": "¡Vamos de picnic con los amigos! Cada uno quiere algo.",
+  "file": "llu_m2_picnic.mp3",
+  "seconds": 3.6,
+  "accuracy": 1.0,
+  "heard": "Vamos de picnic con los amigos. Cada uno quiere algo.",
+  "passed": true
+ },
+ {
+  "id": "llu_anima_comida",
+  "text": "¿Qué le damos a Gruñi?",
+  "file": "llu_anima_comida.mp3",
+  "seconds": 1.04,
+  "accuracy": 1.0,
+  "heard": "¿Qué le damos a Gruñi?",
+  "passed": true
+ },
+ {
+  "id": "llu_pic_rex",
+  "text": "¡Rex quiere algo verde!",
+  "file": "llu_pic_rex.mp3",
+  "seconds": 1.44,
+  "accuracy": 1.0,
+  "heard": "Rex quiere algo verde.",
+  "passed": true
+ },
+ {
+  "id": "llu_pic_maxi",
+  "text": "¡Maxi quiere algo rojo!",
+  "file": "llu_pic_maxi.mp3",
+  "seconds": 2.16,
+  "accuracy": 1.0,
+  "heard": "Maxi quiere algo rojo.",
+  "passed": true
+ },
+ {
+  "id": "llu_pic_bip",
+  "text": "¡Bip quiere algo amarillo!",
+  "file": "llu_pic_bip.mp3",
+  "seconds": 1.52,
+  "accuracy": 1.0,
+  "heard": "Bip quiere algo amarillo.",
+  "passed": true
+ },
+ {
+  "id": "llu_pic_gruni",
+  "text": "¡Gruñi quiere algo morado!",
+  "file": "llu_pic_gruni.mp3",
+  "seconds": 1.84,
+  "accuracy": 1.0,
+  "heard": "Gruñi quiere algo morado.",
+  "passed": true
+ },
+ {
+  "id": "llu_picno_rex",
+  "text": "Mmm, eso no es verde. ¡Rex quiere algo verde!",
+  "file": "llu_picno_rex.mp3",
+  "seconds": 3.68,
+  "accuracy": 1.0,
+  "heard": "Mmm, eso no es verde. Rex quiere algo verde.",
+  "passed": true
+ },
+ {
+  "id": "llu_picno_maxi",
+  "text": "Mmm, eso no es rojo. ¡Maxi quiere algo rojo!",
+  "file": "llu_picno_maxi.mp3",
+  "seconds": 4.8,
+  "accuracy": 1.0,
+  "heard": "Mmm, eso no es rojo. Maxi quiere algo rojo.",
+  "passed": true
+ },
+ {
+  "id": "llu_picno_bip",
+  "text": "Mmm, eso no es amarillo. ¡Bip quiere algo amarillo!",
+  "file": "llu_picno_bip.mp3",
+  "seconds": 3.84,
+  "accuracy": 1.0,
+  "heard": "Mmm, eso no es amarillo. Bip quiere algo amarillo.",
+  "passed": true
+ },
+ {
+  "id": "llu_picno_gruni",
+  "text": "Mmm, eso no es morado. ¡Gruñi quiere algo morado!",
+  "file": "llu_picno_gruni.mp3",
+  "seconds": 4.08,
+  "accuracy": 0.889,
+  "heard": "Mmm, eso no es morado. Gruny quiere algo morado.",
+  "passed": false
+ },
+ {
+  "id": "llu_picsi_rex",
+  "text": "¡Sí! ¡El brócoli es verde! ¡Rex está feliz!",
+  "file": "llu_picsi_rex.mp3",
+  "seconds": 3.68,
+  "accuracy": 1.0,
+  "heard": "¡Sí! El brócoli es verde. Rex está feliz.",
+  "passed": true
+ },
+ {
+  "id": "llu_picsi_maxi",
+  "text": "¡Sí! ¡La manzana es roja! ¡Maxi está feliz!",
+  "file": "llu_picsi_maxi.mp3",
+  "seconds": 4.32,
+  "accuracy": 1.0,
+  "heard": "Sí, la manzana es roja. Maxi está feliz.",
+  "passed": true
+ },
+ {
+  "id": "llu_picsi_bip",
+  "text": "¡Sí! ¡El plátano es amarillo! ¡Bip está feliz!",
+  "file": "llu_picsi_bip.mp3",
+  "seconds": 3.52,
+  "accuracy": 1.0,
+  "heard": "¡Sí! El plátano es amarillo. Bip está feliz.",
+  "passed": true
+ },
+ {
+  "id": "llu_picsi_gruni",
+  "text": "¡Sí! ¡Las uvas son moradas! ¡Gruñi está feliz!",
+  "file": "llu_picsi_gruni.mp3",
+  "seconds": 3.84,
+  "accuracy": 0.875,
+  "heard": "¡Sí! Las uvas son moradas. Gruny está feliz.",
+  "passed": false
+ },
+ {
+  "id": "llu_m3_manana",
+  "text": "¡Buenos días! Gruñi se está despertando. ¿Lo ayudamos?",
+  "file": "llu_m3_manana.mp3",
+  "seconds": 4.32,
+  "accuracy": 1.0,
+  "heard": "Buenos días, Gruñi se está despertando. ¿Lo ayudamos?",
+  "passed": true
+ },
+ {
+  "id": "llu_m3_tarde",
+  "text": "¡Qué linda tarde! ¿Qué quiere hacer Gruñi?",
+  "file": "llu_m3_tarde.mp3",
+  "seconds": 3.44,
+  "accuracy": 0.857,
+  "heard": "¡Qué linda tarde! ¿Qué quiere hacer Gruny?",
+  "passed": false
+ },
+ {
+  "id": "llu_m3_noche",
+  "text": "Ya es de noche. Gruñi se prepara para dormir.",
+  "file": "llu_m3_noche.mp3",
+  "seconds": 3.2,
+  "accuracy": 0.889,
+  "heard": "Ya es de noche. Gruny se prepara para dormir.",
+  "passed": false
+ },
+ {
+  "id": "llu_m3_f_manana",
+  "text": "¡Salió el sol! ¡Gruñi está listo para el día!",
+  "file": "llu_m3_f_manana.mp3",
+  "seconds": 3.2,
+  "accuracy": 0.889,
+  "heard": "Salió el sol. Gruñe está listo para el día.",
+  "passed": false
+ },
+ {
+  "id": "llu_m3_f_tarde",
+  "text": "¡Muy bien! Gruñi jugó, tomó agua y comió fruta.",
+  "file": "llu_m3_f_tarde.mp3",
+  "seconds": 3.84,
+  "accuracy": 0.889,
+  "heard": "Muy bien. Gruny jugó, tomó agua y comió fruta.",
+  "passed": false
+ },
+ {
+  "id": "llu_lampara",
+  "text": "Ahora, apaga la lámpara.",
+  "file": "llu_lampara.mp3",
+  "seconds": 1.76,
+  "accuracy": 1.0,
+  "heard": "Ahora, apaga la lámpara.",
+  "passed": true
+ },
+ {
+  "id": "llu_m3_fin",
+  "text": "Buenas noches, Gruñi. Que tengas lindos sueños.",
+  "file": "llu_m3_fin.mp3",
+  "seconds": 3.6,
+  "accuracy": 1.0,
+  "heard": "Buenas noches, gruñi. Que tengas lindos sueños.",
+  "passed": true
  }
 ]

@@ -48,20 +48,22 @@ const hz=m=>440*Math.pow(2,(m-69)/12);
 function nota(m,t,dur,vol,type){ const a=ac, o=a.createOscillator(), g=a.createGain();
   o.type=type; o.frequency.value=hz(m); g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(vol,t+.015);
   g.gain.exponentialRampToValueAtTime(.0001,t+dur); o.connect(g).connect(bus.musica); o.start(t); o.stop(t+dur+.05) }
-let musT=null, musPaso=0, musProx=0, musPausa=false;
+let musT=null, musPaso=0, musProx=0, musPausa=false, musSuave=false;
 function musicaTick(){
   while(musProx<ac.currentTime+.3){
     const i=musPaso%MEL.length, m=MEL[i];
-    if(m){ nota(m,musProx,.9,.09,"sine"); nota(m+12,musProx,.35,.02,"triangle") }
+    if(m){ nota(m,musProx,musSuave?1.3:.9,.09,"sine"); if(!musSuave) nota(m+12,musProx,.35,.02,"triangle") }
     if(i%8===0) nota(BAJO[i/8],musProx,CORCHEA*3.5,.08,"sine");
     if(i%8===4) nota(BAJO[(i-4)/8]+7,musProx,CORCHEA*3,.05,"sine");
-    musPaso++; musProx+=CORCHEA;
+    musPaso++; musProx+=CORCHEA*(musSuave?1.45:1);
   }
 }
-function musicaVolumen(){ if(!ac) return; const v=(cfg.musica&&!musPausa)?(vozSrc||("speechSynthesis" in window&&speechSynthesis.speaking)?MUSICA_BAJA:MUSICA_VOL):0;
+function musicaVolumen(){ if(!ac) return; const v=(cfg.musica&&!musPausa)?(vozSrc||("speechSynthesis" in window&&speechSynthesis.speaking)?MUSICA_BAJA:MUSICA_VOL*(musSuave?.6:1)):0;
   bus.musica.gain.setTargetAtTime(v,ac.currentTime,.25) }
 function musicaIniciar(){ if(!actx()||musT) return; musProx=ac.currentTime+.1; musT=setInterval(musicaTick,100); musicaVolumen() }
 function musicaPausa(p){ musPausa=p; musicaVolumen() }
+// música suave (más lenta, más baja y sin brillo): para escenas tranquilas como la noche
+function musicaSuave(s){ musSuave=!!s; musicaVolumen() }
 function pintarMute(){ $("mute").textContent=cfg.musica?"🎵":"🔇"; $("mute").classList.toggle("off",!cfg.musica) }
 
 // iOS Safari: el audio solo se habilita dentro de un toque; al primer toque se reproduce un sonido vacío.
