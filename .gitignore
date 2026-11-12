@@ -1,3 +1,11 @@
 node_modules/
 tools/_tmp*/
 __pycache__/
+
+# Material que no es del juego: making-of, video de LinkedIn y referencias de Flow (viven en ../Referencias)
+Referencias/
+*making-of*
+*making_of*
+*linkedin*
+*.zip
+*.mov
