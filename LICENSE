@@ -1,0 +1,35 @@
+Los juegos de Maxi
+Copyright (c) 2026 Nolobox (https://github.com/Nolobox/juego-de-maxi)
+
+Este proyecto tiene dos licencias, una para el código y otra para el material
+creativo. Ninguna de las dos permite el uso comercial: no se puede vender, ni
+cobrar por él, ni usarlo para generar ingresos de ninguna forma.
+
+1. CÓDIGO: PolyForm Noncommercial License 1.0.0
+   Texto completo: LICENSE-CODIGO.md
+   https://polyformproject.org/licenses/noncommercial/1.0.0
+
+   Cubre: index.html, manifest.json, serve.json, sw.js, la carpeta css/,
+   la carpeta js/ y los scripts de tools/ (*.py, *.bat).
+
+   Required Notice: Copyright (c) 2026 Nolobox (https://github.com/Nolobox/juego-de-maxi)
+
+2. MATERIAL CREATIVO: Creative Commons Atribución-NoComercial-CompartirIgual 4.0
+   Internacional (CC BY-NC-SA 4.0)
+   Texto completo: LICENSE-ASSETS.txt
+   https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es
+
+   Cubre: todo lo que está en la carpeta assets/ (personajes, escenarios,
+   objetos, íconos, videos y voces), los guiones de las voces
+   (tools/frases.json y tools/frases_hombre.json), tools/icono_servidor.ico,
+   los personajes Maxi, Rex, Bip y Gruñi, y la documentación
+   (README.md y CLAUDE.md).
+
+   Crédito sugerido: "Los juegos de Maxi", por Nolobox
+   (https://github.com/Nolobox/juego-de-maxi), CC BY-NC-SA 4.0.
+
+Si un archivo no aparece en ninguna lista, se aplica la licencia del código si
+es un programa y la del material creativo en cualquier otro caso.
+
+Para cualquier uso comercial hay que pedir permiso por escrito al autor
+(https://github.com/Nolobox).
